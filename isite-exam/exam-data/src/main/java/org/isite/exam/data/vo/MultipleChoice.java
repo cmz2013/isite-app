@@ -1,0 +1,16 @@
+package org.isite.exam.data.vo;
+
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.Set;
+
+/**
+ * 多选题
+ *
+ * @author <font color='blue'>zhangcm</font>
+ */
+@Getter
+@Setter
+public class MultipleChoice extends ObjectiveQuestion<Set<Integer>> {
+}

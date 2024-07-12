@@ -1,0 +1,15 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.isite.exam.mapper.ExamRecordMapper">
+
+    <select id="selectLastExamRecord" resultType="ExamRecordPo">
+        select id, create_time, update_time, scene_id, paper_id, title, total_score,
+               exam_second, user_id, user_score, submit_time, tenant_id
+        from exam_record
+        where paper_id = #{paperId} and scene_id = #{sceneId} and user_id = #{userId}
+        <if test="tenantId != null">
+            and tenant_id = #{tenantId}
+        </if>
+        order by id desc
+        limit 1
+    </select>
+</mapper>

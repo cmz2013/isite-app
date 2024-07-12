@@ -1,0 +1,1 @@
+仓库管理也叫仓储管理，英文Warehouse Management，简称WM

@@ -1,0 +1,20 @@
+package org.isite.exam.data.dto;
+
+import lombok.Getter;
+import lombok.Setter;
+import org.isite.commons.web.data.TreeDto;
+
+import javax.validation.constraints.NotBlank;
+
+/**
+ * @author <font color='blue'>zhangcm</font>
+ */
+@Getter
+@Setter
+public class MajorDto extends TreeDto<Integer> {
+    /**
+     * 专业名称
+     */
+    @NotBlank
+    private String name;
+}
