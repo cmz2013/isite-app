@@ -4,9 +4,9 @@ import org.isite.commons.lang.data.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.isite.commons.web.data.op.Add;
 import org.isite.commons.web.data.op.Update;
+import org.isite.exam.data.dto.ExamSceneDto;
 import org.isite.exam.po.ExamScenePo;
 import org.isite.exam.service.ExamSceneService;
-import org.isite.exam.data.dto.ExamSceneDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +30,7 @@ public class ExamSceneController extends BaseController {
      */
     @PostMapping("/exam/scene")
     public Result<Integer> addExamScene(@Validated(Add.class) @RequestBody ExamSceneDto sceneDto) {
-        return handle(examSceneService.insert(convert(sceneDto, ExamScenePo::new)));
+        return toResult(examSceneService.insert(convert(sceneDto, ExamScenePo::new)));
     }
 
     /**
@@ -38,7 +38,7 @@ public class ExamSceneController extends BaseController {
      */
     @PutMapping("/exam/scene")
     public Result<Integer> updateExamScene(@Validated(Update.class) @RequestBody ExamSceneDto sceneDto) {
-        return handle(examSceneService.updateById(convert(sceneDto, ExamScenePo::new)));
+        return toResult(examSceneService.updateById(convert(sceneDto, ExamScenePo::new)));
     }
 
     @Autowired

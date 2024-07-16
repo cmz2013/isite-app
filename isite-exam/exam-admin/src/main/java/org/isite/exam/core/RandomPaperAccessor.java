@@ -65,9 +65,10 @@ public class RandomPaperAccessor extends ExamPaperAccessor {
      * 选题个数大于题目总数的规则排在前边
      */
     private List<QuestionRulePo> sortQuestionRules(
-            List<QuestionRulePo> questionRules, Map<Integer, Integer> bankTotals) {
+            List<QuestionRulePo> questionRules, Map<Integer, Integer> questionTotals) {
+        //comparingInt将QuestionRulePo转换为: 题目总数-选题个数，选题规则基于这个值进行排序
         return questionRules.stream().sorted(comparingInt(o ->
-                (bankTotals.get(o.getId()) - o.getNumber()))).collect(toList());
+                (questionTotals.get(o.getId()) - o.getNumber()))).collect(toList());
     }
 
     /**

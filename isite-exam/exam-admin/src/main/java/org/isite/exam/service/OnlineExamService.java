@@ -4,13 +4,13 @@ import org.isite.exam.converter.ExamRecordConverter;
 import org.isite.exam.core.ExamPaperAccessorFactory;
 import org.isite.exam.core.ScoreCalculator;
 import org.isite.exam.core.ScoreCalculatorFactory;
+import org.isite.exam.data.vo.ExamModule;
+import org.isite.exam.data.vo.ExamRecord;
+import org.isite.exam.data.vo.UserAnswer;
 import org.isite.exam.po.ExamDetailPo;
 import org.isite.exam.po.ExamPaperPo;
 import org.isite.exam.po.ExamRecordPo;
 import org.isite.exam.po.ExamScenePo;
-import org.isite.exam.data.vo.ExamModule;
-import org.isite.exam.data.vo.ExamRecord;
-import org.isite.exam.data.vo.UserAnswer;
 import org.isite.security.support.oauth.OauthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,7 +68,7 @@ public class OnlineExamService {
      * @param userAnswers 用户答题记录
      */
     @Transactional(rollbackFor = Exception.class)
-    public Integer submitExam(long examRecordId, List<UserAnswer> userAnswers) {
+    public int submitExam(long examRecordId, List<UserAnswer> userAnswers) {
         ExamDetailPo examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordId);
         List<ExamModule> examModules = parseArray(examDetailPo.getExamModules(), ExamModule.class);
         int userScore = ZERO;

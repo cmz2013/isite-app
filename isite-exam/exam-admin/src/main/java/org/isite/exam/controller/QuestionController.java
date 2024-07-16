@@ -8,12 +8,12 @@ import org.isite.commons.web.data.PageResult;
 import org.isite.commons.web.data.op.Add;
 import org.isite.commons.web.data.op.Update;
 import org.isite.exam.converter.QuestionConverterFactory;
-import org.isite.exam.po.QuestionPo;
-import org.isite.exam.service.QuestionService;
 import org.isite.exam.data.dto.MultipleChoiceDto;
 import org.isite.exam.data.dto.QuestionQuery;
 import org.isite.exam.data.dto.SingleChoiceDto;
 import org.isite.exam.data.vo.Question;
+import org.isite.exam.po.QuestionPo;
+import org.isite.exam.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,7 +41,7 @@ public class QuestionController extends BaseController {
     @PostMapping("/question/choice/multiple")
     public Result<Integer> addMultipleChoice(
             @Validated(Add.class) @RequestBody MultipleChoiceDto questionDto) {
-        return handle(questionService.insert(questionConverterFactory.get(questionDto.getQuestionType())
+        return toResult(questionService.insert(questionConverterFactory.get(questionDto.getQuestionType())
                 .toQuestionPo(questionDto)));
     }
 
@@ -51,7 +51,7 @@ public class QuestionController extends BaseController {
     @PutMapping("/question/choice/multiple")
     public Result<Integer> updateMultipleChoice(
             @Validated(Update.class) @RequestBody MultipleChoiceDto questionDto) {
-        return handle(questionService.updateById(questionConverterFactory.get(questionDto.getQuestionType())
+        return toResult(questionService.updateById(questionConverterFactory.get(questionDto.getQuestionType())
                 .toQuestionPo(questionDto)));
     }
 
@@ -60,7 +60,7 @@ public class QuestionController extends BaseController {
      */
     @PostMapping("/question/choice/single")
     public Result<Integer> addSingleChoice(@Validated(Add.class) @RequestBody SingleChoiceDto questionDto) {
-        return handle(questionService.insert(questionConverterFactory.get(
+        return toResult(questionService.insert(questionConverterFactory.get(
                 questionDto.getQuestionType()).toQuestionPo(questionDto)));
     }
 
@@ -70,7 +70,7 @@ public class QuestionController extends BaseController {
     @PutMapping("/question/choice/single")
     public Result<Integer> updateSingleChoice(
             @Validated(Update.class) @RequestBody SingleChoiceDto questionDto) {
-        return handle(questionService.updateById(questionConverterFactory.get(
+        return toResult(questionService.updateById(questionConverterFactory.get(
                 questionDto.getQuestionType()).toQuestionPo(questionDto)));
     }
 
@@ -80,7 +80,7 @@ public class QuestionController extends BaseController {
     @GetMapping("/question/list")
     public PageResult<Question> findQuestions(PageRequest<QuestionQuery> request) {
         Page<QuestionPo> page = questionService.findPage(toPageQuery(request, QuestionPo::new));
-        return handle(request, page.getResult().stream().map(po -> questionConverterFactory.get(
+        return toPageResult(request, page.getResult().stream().map(po -> questionConverterFactory.get(
                 po.getQuestionType()).toQuestion(po)).collect(toList()), page.getTotal());
     }
 
@@ -90,7 +90,7 @@ public class QuestionController extends BaseController {
     @GetMapping("/question/{id}")
     public Result<Question> getQuestion(@PathVariable("id") Long id) {
         QuestionPo questionPo = questionService.get(id);
-        return handle(questionConverterFactory.get(questionPo.getQuestionType()).toQuestion(questionPo));
+        return toResult(questionConverterFactory.get(questionPo.getQuestionType()).toQuestion(questionPo));
     }
 
     @Autowired

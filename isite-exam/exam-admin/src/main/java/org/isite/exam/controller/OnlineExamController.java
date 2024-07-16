@@ -4,11 +4,11 @@ import org.isite.commons.lang.data.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.isite.commons.web.data.op.Update;
 import org.isite.exam.converter.ExamSceneConverter;
-import org.isite.exam.service.ExamSceneService;
-import org.isite.exam.service.OnlineExamService;
 import org.isite.exam.data.dto.ExamRecordDto;
 import org.isite.exam.data.vo.ExamRecord;
 import org.isite.exam.data.vo.UserAnswer;
+import org.isite.exam.service.ExamSceneService;
+import org.isite.exam.service.OnlineExamService;
 import org.isite.misc.data.enums.ObjectType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -22,7 +22,7 @@ import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.security.support.utils.SecurityUtils.getOauthUser;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @RestController
 public class OnlineExamController extends BaseController {
@@ -36,7 +36,7 @@ public class OnlineExamController extends BaseController {
      */
     @PostMapping("/my/exam/scene/{sceneId}")
     public Result<ExamRecord> applyExam(@PathVariable("sceneId") Integer sceneId) {
-        return handle(onlineExamService.applyExam(examSceneService.get(sceneId), getOauthUser()));
+        return toResult(onlineExamService.applyExam(examSceneService.get(sceneId), getOauthUser()));
     }
 
     /**
@@ -46,7 +46,7 @@ public class OnlineExamController extends BaseController {
     @PostMapping("/my/exam/object/{objectType}/{objectValue}")
     public Result<ExamRecord> applyExam(
             @PathVariable("objectType") ObjectType objectType, @PathVariable("objectValue") String objectValue) {
-        return handle(onlineExamService.applyExam(
+        return toResult(onlineExamService.applyExam(
                 examSceneService.findOne(ExamSceneConverter.toExamScenePo(objectType, objectValue)), getOauthUser()));
     }
 
@@ -55,7 +55,7 @@ public class OnlineExamController extends BaseController {
      */
     @PutMapping("/exam/submit")
     public Result<Integer> submitExam(@RequestBody @Validated(Update.class) ExamRecordDto examRecordDto) {
-        return handle(onlineExamService.submitExam(examRecordDto.getId(),
+        return toResult(onlineExamService.submitExam(examRecordDto.getId(),
                 convert(examRecordDto.getAnswerRecords(), UserAnswer::new)));
     }
 

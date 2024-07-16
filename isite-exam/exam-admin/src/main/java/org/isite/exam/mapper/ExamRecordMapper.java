@@ -6,10 +6,10 @@ import org.isite.mybatis.mapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Repository
-public interface ExamRecordMapper extends ModelMapper<ExamRecordPo> {
+public interface ExamRecordMapper extends ModelMapper<ExamRecordPo, Long> {
 
     /**
      * 查询最近一次的考试记录

@@ -9,6 +9,7 @@ import org.isite.security.support.oauth.OauthEmployee;
 import org.isite.security.support.oauth.OauthUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -17,7 +18,7 @@ import static org.isite.commons.lang.data.Constants.THOUSAND;
 import static org.isite.commons.lang.data.Constants.ZERO;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Service
 public class ExamRecordService extends ModelService<ExamRecordPo, Long> {
@@ -63,6 +64,7 @@ public class ExamRecordService extends ModelService<ExamRecordPo, Long> {
     /**
      * 保存考试记录
      */
+    @Transactional(rollbackFor = Exception.class)
     public ExamRecordPo saveExamRecord(ExamScenePo scenePo, ExamPaperPo paperPo, OauthUser user) {
         ExamRecordPo examRecordPo = new ExamRecordPo();
         examRecordPo.setPaperId(paperPo.getId());
@@ -74,13 +76,14 @@ public class ExamRecordService extends ModelService<ExamRecordPo, Long> {
         }
         examRecordPo.setTotalScore(paperPo.getTotalScore());
         examRecordPo.setUserId(user.getUserId());
-        insert(examRecordPo);
+        this.insert(examRecordPo);
         return examRecordPo;
     }
 
     /**
      * 更新用户分数
      */
+    @Transactional(rollbackFor = Exception.class)
     public void updateUserScore(Long examRecordId, Integer userScore) {
         ExamRecordPo examRecordPo = new ExamRecordPo();
         examRecordPo.setId(examRecordId);
