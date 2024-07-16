@@ -13,6 +13,6 @@ class BiAdminApplicationTest {
 
     @Test
     void testIndexCost() {
-        indexCostService.runProjectCost(1, 3, 1);
+        indexCostService.computeCost(1, 3, 1);
     }
 }

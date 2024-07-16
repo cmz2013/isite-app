@@ -36,7 +36,7 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, CostSubj
     }
 
     @Override
-    public void runProjectCost(Collection<CostSubjectPo> subjectPos) {
+    public void saveProjectCost(Collection<CostSubjectPo> subjectPos) {
         costRecordService.addCostRecord(subjectPos);
     }
 

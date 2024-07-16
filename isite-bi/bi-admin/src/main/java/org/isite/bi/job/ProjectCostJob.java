@@ -26,14 +26,14 @@ public class ProjectCostJob {
      * 10个执行器的集群来处理10w条数据，每台机器只需要处理1w条数据，耗时降低10倍
      */
     @XxlJob("projectCostJobHandler")
-    public ReturnT<String> runProjectCost(String params) {
+    public ReturnT<String> execute(String params) {
         int shardIndex = getShardIndex();
         int shardTotal = getShardTotal();
         log("项目费用计算任务：当前分片序号(分片序号从0开始) = {}, 总分片数 = {}", shardIndex, shardTotal);
 
         int maxCostId = projectCostService.getMaxCostId();
         int curCostId = shardIndex + ONE;
-        projectCostService.runProjectCost(curCostId, shardTotal, maxCostId);
+        projectCostService.computeCost(curCostId, shardTotal, maxCostId);
         return SUCCESS;
     }
 

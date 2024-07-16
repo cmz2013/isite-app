@@ -6,6 +6,7 @@ import org.isite.bi.po.CostSubjectPo;
 import org.isite.bi.po.ItemCostRecordPo;
 import org.isite.mybatis.service.ModelService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -21,6 +22,7 @@ public class ItemCostRecordService extends ModelService<ItemCostRecordPo, Long> 
         super(mapper);
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public void addCostRecord(Collection<CostSubjectPo> subjectPos) {
         //TODO
     }

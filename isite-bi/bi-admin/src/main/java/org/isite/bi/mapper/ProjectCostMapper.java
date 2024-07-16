@@ -5,8 +5,8 @@ import org.isite.mybatis.mapper.ModelMapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Repository
-public interface ProjectCostMapper extends ModelMapper<ProjectCostPo> {
+public interface ProjectCostMapper extends ModelMapper<ProjectCostPo, Integer> {
 }

@@ -43,30 +43,30 @@ public abstract class CostArithmetic<S extends CostSubject, C> {
             }
             costs.add(cost);
         }
-        runProjectCost(costs);
+        saveProjectCost(costs);
     }
 
     /**
      * 先从规则树叶子节点到根节点逐层汇总费用，再计算费用指标
      */
-    public void sumCostPair(List<CostPair> costPairs, List<CostRule> rules) {
+    public void sumCostPair(List<CostRulePair> costRulePairs, List<CostRule> rules) {
         //key: 规则ID, value: 费用数据
         Map<Integer, C> costMap = new HashMap<>();
         //key: 层级, value: 层节点Map
         Map<Integer, List<Map<String, Object>>> layerMap = new HashMap<>();
         int level = ONE;
 
-        for (CostPair costPair : costPairs) {
+        for (CostRulePair costRulePair : costRulePairs) {
             //汇总费用科目到规则树的叶子节点
-            C cost = sumLeafNode((S) costPair.getSubject(), costMap.get(costPair.getRule().getId()), costPair.getRule());
+            C cost = sumLeafNode((S) costRulePair.getSubject(), costMap.get(costRulePair.getRule().getId()), costRulePair.getRule());
             if (null == cost) {
                 return;
             }
-            costMap.put(costPair.getRule().getId(), cost);
+            costMap.put(costRulePair.getRule().getId(), cost);
             //封装叶子层的汇总数据
-            initLayerNode(costPair.getLevel(), costPair.getRule(), costMap, layerMap);
-            if (level < costPair.getLevel()) {
-                level = costPair.getLevel();
+            initLayerNode(costRulePair.getLevel(), costRulePair.getRule(), costMap, layerMap);
+            if (level < costRulePair.getLevel()) {
+                level = costRulePair.getLevel();
             }
         }
 
@@ -93,7 +93,7 @@ public abstract class CostArithmetic<S extends CostSubject, C> {
             }
             level--;
         }
-        runProjectCost(costMap.values());
+        saveProjectCost(costMap.values());
     }
 
     /**
@@ -125,7 +125,7 @@ public abstract class CostArithmetic<S extends CostSubject, C> {
     /**
      * 根据汇总数据计算费用指标，保存费用记录
      */
-    public abstract void runProjectCost(Collection<C> values);
+    public abstract void saveProjectCost(Collection<C> values);
 
     /**
      * 规则树叶子节点费用汇总。如果返回null，则终止费用汇总和指标计算。

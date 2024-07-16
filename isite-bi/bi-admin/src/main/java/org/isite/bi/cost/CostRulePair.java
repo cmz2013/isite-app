@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CostPair {
+public class CostRulePair {
     /**
      * 费用科目
      */
@@ -24,7 +24,7 @@ public class CostPair {
      */
     private int level;
 
-    public CostPair(Integer level, CostSubject subject, CostRule rule) {
+    public CostRulePair(Integer level, CostSubject subject, CostRule rule) {
         this.level = level;
         this.subject = subject;
         this.rule = rule;

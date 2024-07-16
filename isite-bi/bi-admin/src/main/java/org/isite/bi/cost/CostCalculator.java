@@ -47,9 +47,9 @@ public class CostCalculator {
             costArithmetic.sumCostSubject(subjects);
         } else {
             List<CostRule> rules = toTree(rulePos, po -> convert(po, CostRule::new));
-            List<CostPair> costPairs = costRuleService.matches(subjects, rules);
-            if(isNotEmpty(costPairs)) {
-                costArithmetic.sumCostPair(costPairs, rules);
+            List<CostRulePair> costRulePairs = costRuleService.matches(subjects, rules);
+            if(isNotEmpty(costRulePairs)) {
+                costArithmetic.sumCostPair(costRulePairs, rules);
             }
         }
     }

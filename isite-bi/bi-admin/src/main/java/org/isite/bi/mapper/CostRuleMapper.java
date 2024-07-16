@@ -5,8 +5,8 @@ import org.isite.mybatis.mapper.TreeModelMapper;
 import org.springframework.stereotype.Repository;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Repository
-public interface CostRuleMapper extends TreeModelMapper<CostRulePo> {
+public interface CostRuleMapper extends TreeModelMapper<CostRulePo, Integer> {
 }

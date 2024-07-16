@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * @author <font color='blue'>zhangcm</font>
  */
 @Repository
-public interface ItemCostRecordMapper extends ModelMapper<ItemCostRecordPo> {
+public interface ItemCostRecordMapper extends ModelMapper<ItemCostRecordPo, Long> {
 }

@@ -1,7 +1,7 @@
 package org.isite.bi.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.isite.bi.cost.CostPair;
+import org.isite.bi.cost.CostRulePair;
 import org.isite.bi.mapper.CostRuleMapper;
 import org.isite.bi.po.CostRulePo;
 import org.isite.bi.data.enums.CostType;
@@ -56,26 +56,26 @@ public class CostRuleService extends TreeModelService<CostRulePo, Integer> {
     /**
      * 匹配规则，过滤掉不需要参与计算的科目
      */
-    public List<CostPair> matches(List<? extends CostSubject> subjects, List<CostRule> rules) {
-        List<CostPair> costPairs = new ArrayList<>();
+    public List<CostRulePair> matches(List<? extends CostSubject> subjects, List<CostRule> rules) {
+        List<CostRulePair> costRulePairs = new ArrayList<>();
         subjects.forEach(subject -> {
             //从规则树根节点到叶子节点逐层匹配
-            CostPair costPair = matches(ONE, subject, rules);
-            if (null != costPair) {
-                costPairs.add(costPair);
+            CostRulePair costRulePair = matches(ONE, subject, rules);
+            if (null != costRulePair) {
+                costRulePairs.add(costRulePair);
             }
         });
-        return costPairs;
+        return costRulePairs;
     }
 
     /**
      * 匹配规则树列表
      */
-    private CostPair matches(Integer level, CostSubject subject, List<CostRule> rules) {
+    private CostRulePair matches(Integer level, CostSubject subject, List<CostRule> rules) {
         for (CostRule rule : rules) {
-            CostPair costPair = matches(level, subject, rule);
-            if (null != costPair) {
-                return costPair;
+            CostRulePair costRulePair = matches(level, subject, rule);
+            if (null != costRulePair) {
+                return costRulePair;
             }
         }
         return null;
@@ -84,14 +84,14 @@ public class CostRuleService extends TreeModelService<CostRulePo, Integer> {
     /**
      * 从规则树父节点到叶子节点逐层匹配
      */
-    private CostPair matches(Integer level, CostSubject subject, CostRule rule) {
+    private CostRulePair matches(Integer level, CostSubject subject, CostRule rule) {
         if (isNotBlank(rule.getExpressions()) && !parseExpression(subject, rule.getExpressions())) {
             return null;
         }
         if (null != rule.getChildren() && !rule.getChildren().isEmpty()) {
             return matches(++level, subject, rule.getChildren());
         }
-        return new CostPair(level, subject, rule);
+        return new CostRulePair(level, subject, rule);
     }
 
     /**
