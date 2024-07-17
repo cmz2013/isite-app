@@ -26,15 +26,15 @@ spring:
         file-extension: yml
         extension-configs:
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-web.yml
+            data-id: cloud.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-security-oauth.yml
+            data-id: security-oauth.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-jetcache.yml
+            data-id: jetcache.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-sentinel-web.yml
+            data-id: sentinel-web.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-mybatis.yml
+            data-id: mybatis.yml
 ---
 spring:
   profiles: test
@@ -54,15 +54,15 @@ spring:
         file-extension: yml
         extension-configs:
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-web.yml
+            data-id: cloud.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-security-oauth.yml
+            data-id: security-oauth.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-jetcache.yml
+            data-id: jetcache.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-sentinel-web.yml
+            data-id: sentinel-web.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-mybatis.yml
+            data-id: mybatis.yml
 ---
 spring:
   profiles: pro
@@ -83,12 +83,12 @@ spring:
         file-extension: yml
         extension-configs:
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-web.yml
+            data-id: cloud.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-security-oauth.yml
+            data-id: security-oauth.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-jetcache.yml
+            data-id: jetcache.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-sentinel-web.yml
+            data-id: sentinel-web.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: isite-mybatis.yml
+            data-id: mybatis.yml
