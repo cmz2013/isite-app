@@ -21,7 +21,7 @@ import static org.springframework.boot.SpringApplication.run;
 @EnableMethodCache(basePackages = "org.isite.shop")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
-@MapperScan(basePackages = {"org.isite.shop.admin.mapper"})
+@MapperScan(basePackages = {"org.isite.shop.mapper"})
 @SpringBootApplication
 public class ShopApplication {
 

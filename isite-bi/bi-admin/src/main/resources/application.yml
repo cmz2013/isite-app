@@ -1,7 +1,7 @@
 #定义mybatis在项目中的配置，其他属性在mybatis公共配置文件中已定义
 mybatis:
   #数据对象扫描路径
-  type-aliases-package: org.isite.bi.admin.po
+  type-aliases-package: org.isite.bi.po
 
 xxl:
   job:

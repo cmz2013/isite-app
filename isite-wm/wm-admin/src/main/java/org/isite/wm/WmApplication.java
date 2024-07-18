@@ -21,7 +21,7 @@ import static org.springframework.boot.SpringApplication.run;
 @EnableMethodCache(basePackages = "org.isite.wm")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
-@MapperScan(basePackages = {"org.isite.wm.admin.mapper"})
+@MapperScan(basePackages = {"org.isite.wm.mapper"})
 @SpringBootApplication
 public class WmApplication {
 

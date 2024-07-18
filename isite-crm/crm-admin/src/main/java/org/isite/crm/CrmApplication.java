@@ -21,7 +21,7 @@ import static org.springframework.boot.SpringApplication.run;
 @EnableMethodCache(basePackages = "org.isite.crm")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
-@MapperScan(basePackages = {"org.isite.crm.admin.mapper"})
+@MapperScan(basePackages = {"org.isite.crm.mapper"})
 @SpringBootApplication
 public class CrmApplication {
 

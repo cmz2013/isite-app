@@ -20,7 +20,7 @@ import static org.springframework.boot.SpringApplication.run;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
 @EnableMethodCache(basePackages = "org.isite.project")
-@MapperScan(basePackages = {"org.isite.project.admin.mapper"})
+@MapperScan(basePackages = {"org.isite.project.mapper"})
 @SpringBootApplication
 public class ProjectApplication {
 

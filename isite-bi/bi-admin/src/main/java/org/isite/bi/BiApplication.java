@@ -20,7 +20,7 @@ import static org.springframework.boot.SpringApplication.run;
 @EnableFeignClients
 @EnableMethodCache(basePackages = "org.isite.bi")
 @EnableDiscoveryClient
-@MapperScan(basePackages = {"org.isite.bi.admin.mapper"})
+@MapperScan(basePackages = {"org.isite.bi.mapper"})
 @SpringBootApplication
 public class BiApplication {
 

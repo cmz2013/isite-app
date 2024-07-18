@@ -21,7 +21,7 @@ import static org.springframework.boot.SpringApplication.run;
 @EnableMethodCache(basePackages = "org.isite.exam")
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableTransactionManagement
-@MapperScan(basePackages = {"org.isite.exam.admin.mapper"})
+@MapperScan(basePackages = {"org.isite.exam.mapper"})
 @SpringBootApplication
 public class ExamApplication {
 
