@@ -7,7 +7,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Set;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

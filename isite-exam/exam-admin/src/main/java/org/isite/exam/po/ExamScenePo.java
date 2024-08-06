@@ -10,7 +10,7 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Table;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

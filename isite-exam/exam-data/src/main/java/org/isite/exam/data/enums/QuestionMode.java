@@ -6,8 +6,8 @@ import static org.isite.commons.lang.data.Constants.ONE;
 import static org.isite.commons.lang.data.Constants.ZERO;
 
 /**
- * 选题方式
- * @author <font color='blue'>zhangcm</font>
+ * @Description 选题方式
+ * @Author <font color='blue'>zhangcm</font>
  */
 public enum QuestionMode implements Enumerable<Integer> {
     /**

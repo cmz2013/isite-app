@@ -10,8 +10,8 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Table;
 
 /**
- * 随机选题规则
- * @author <font color='blue'>zhangcm</font>
+ * @Description 随机选题规则
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

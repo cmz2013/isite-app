@@ -11,11 +11,10 @@ import org.isite.project.data.vo.DemoVo;
 import org.springframework.stereotype.Component;
 
 import static org.isite.commons.cloud.data.Converter.convert;
-import static org.springframework.http.HttpStatus.EXPECTATION_FAILED;
 import static org.springframework.http.HttpStatus.OK;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Slf4j
 @Component
@@ -24,14 +23,9 @@ public class DemoHandler extends JsonHandler<DemoDto, DemoVo> {
     public DemoHandler() {
         super(reqData -> {
             DemoResult result = new DemoResult();
-            try {
-                reqData.setBody("ACK");
-                result.setData(convert(reqData, DemoVo::new));
-                result.setCode(OK.value());
-            } catch (Exception e) {
-                result.setCode(EXPECTATION_FAILED.value());
-                log.error(e.getMessage(), e);
-            }
+            reqData.setBody("ACK");
+            result.setData(convert(reqData, DemoVo::new));
+            result.setCode(OK.value());
             return result;
         });
     }

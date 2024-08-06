@@ -8,8 +8,8 @@ import javax.validation.Valid;
 import java.util.List;
 
 /**
- * 考试记录DTO
- * @author <font color='blue'>zhangcm</font>
+ * @Description 考试记录DTO
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

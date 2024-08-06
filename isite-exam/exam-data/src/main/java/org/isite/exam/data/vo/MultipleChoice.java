@@ -6,9 +6,8 @@ import lombok.Setter;
 import java.util.Set;
 
 /**
- * 多选题
- *
- * @author <font color='blue'>zhangcm</font>
+ * @Description 多选题
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

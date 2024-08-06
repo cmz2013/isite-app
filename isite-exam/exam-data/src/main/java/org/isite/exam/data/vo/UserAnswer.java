@@ -6,9 +6,8 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * 用户答案
- *
- * @author <font color='blue'>zhangcm</font>
+ * @Description 用户答案
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

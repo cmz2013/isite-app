@@ -7,7 +7,7 @@ import org.isite.mybatis.data.TreeModel;
 import javax.persistence.Table;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

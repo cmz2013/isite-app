@@ -13,7 +13,7 @@ import static org.isite.commons.lang.json.Jackson.parseArray;
 import static org.isite.exam.data.constants.ExamConstants.QUESTION_MULTIPLE_CHOICE;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 @Key(values = QUESTION_MULTIPLE_CHOICE)

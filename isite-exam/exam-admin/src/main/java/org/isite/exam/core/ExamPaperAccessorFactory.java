@@ -5,7 +5,7 @@ import org.isite.exam.data.enums.QuestionMode;
 import org.springframework.stereotype.Component;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 public class ExamPaperAccessorFactory extends AbstractFactory<ExamPaperAccessor, QuestionMode, Integer> {

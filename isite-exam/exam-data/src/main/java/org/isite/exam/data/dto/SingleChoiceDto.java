@@ -8,7 +8,7 @@ import org.isite.commons.web.data.op.Update;
 import javax.validation.constraints.NotNull;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

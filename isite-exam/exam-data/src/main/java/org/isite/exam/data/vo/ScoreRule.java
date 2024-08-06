@@ -2,13 +2,13 @@ package org.isite.exam.data.vo;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.isite.commons.lang.data.Vo;
 import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.enums.ScoreAlgorithmType;
-import org.isite.commons.lang.data.Vo;
 
 /**
- * 评分规则。创建试卷的时候必须按题型设置评分规则
- * @author <font color='blue'>zhangcm</font>
+ * @Description 评分规则。创建试卷的时候必须按题型设置评分规则
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

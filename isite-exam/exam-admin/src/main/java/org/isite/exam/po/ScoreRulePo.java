@@ -11,8 +11,8 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Table;
 
 /**
- * 评分规则。创建试卷的时候必须按题型设置评分规则
- * @author <font color='blue'>zhangcm</font>
+ * @Description 评分规则。创建试卷的时候必须按题型设置评分规则
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

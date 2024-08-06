@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 单选题
- * @author <font color='blue'>zhangcm</font>
+ * @Description 单选题
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

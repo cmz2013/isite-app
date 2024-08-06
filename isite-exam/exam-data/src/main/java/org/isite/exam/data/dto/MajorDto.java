@@ -7,7 +7,7 @@ import org.isite.commons.web.data.TreeDto;
 import javax.validation.constraints.NotBlank;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

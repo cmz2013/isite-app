@@ -6,7 +6,7 @@ import org.isite.commons.web.data.Dto;
 import org.isite.exam.data.enums.QuestionType;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

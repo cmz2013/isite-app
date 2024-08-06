@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * 本地服务示例
- * @author <font color='blue'>zhangcm</font>
+ * @Description 本地服务示例
+ * @Author <font color='blue'>zhangcm</font>
  */
 @RestController
 public class DemoController {

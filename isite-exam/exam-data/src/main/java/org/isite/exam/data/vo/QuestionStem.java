@@ -6,8 +6,8 @@ import lombok.Setter;
 import java.io.Serializable;
 
 /**
- * 题干
- * @author <font color='blue'>zhangcm</font>
+ * @Description 题干
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

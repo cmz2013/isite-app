@@ -7,8 +7,8 @@ import org.isite.exam.data.enums.DifficultyLevel;
 import org.isite.exam.data.enums.QuestionType;
 
 /**
- * 题目
- * @author <font color='blue'>zhangcm</font>
+ * @Description 题目
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

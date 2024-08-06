@@ -11,7 +11,7 @@ import static org.isite.exam.data.constants.ExamConstants.QUESTION_JUDGMENT;
 import static org.isite.exam.data.constants.ExamConstants.QUESTION_SINGLE_CHOICE;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 @Key(values = {QUESTION_SINGLE_CHOICE, QUESTION_JUDGMENT})

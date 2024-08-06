@@ -10,8 +10,8 @@ import tk.mybatis.mapper.annotation.ColumnType;
 import javax.persistence.Table;
 
 /**
- * 考卷题目，用于手动组卷
- * @author <font color='blue'>zhangcm</font>
+ * @Description 考卷题目，用于手动组卷
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

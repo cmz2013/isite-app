@@ -10,8 +10,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 试卷组成模块
- * @author <font color='blue'>zhangcm</font>
+ * @Description 试卷组成模块
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

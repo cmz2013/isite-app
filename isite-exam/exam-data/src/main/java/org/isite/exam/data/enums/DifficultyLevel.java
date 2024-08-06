@@ -3,9 +3,8 @@ package org.isite.exam.data.enums;
 import org.isite.commons.lang.enums.Enumerable;
 
 /**
- * 问题难度
- *
- * @author <font color='blue'>zhangcm</font>
+ * @Description 题目难度等级
+ * @Author <font color='blue'>zhangcm</font>
  */
 public enum DifficultyLevel implements Enumerable<Integer> {
     /**

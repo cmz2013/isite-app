@@ -6,8 +6,8 @@ import lombok.Setter;
 import java.util.List;
 
 /**
- * 客观题
- * @author <font color='blue'>zhangcm</font>
+ * @Description 客观题
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter

@@ -4,9 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 选项
- *
- * @author <font color='blue'>zhangcm</font>
+ * @Description 客观题目的选项
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter
