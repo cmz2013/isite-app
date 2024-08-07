@@ -11,17 +11,17 @@ import java.util.Map;
 
 import static org.isite.commons.lang.data.Constants.ONE;
 import static org.isite.commons.lang.data.Constants.ZERO;
-import static org.isite.exam.data.constants.ExamConstants.TOTAL_SCORE_FUZZY;
+import static org.isite.exam.data.constants.ExamConstants.SCORE_ALGORITHM_FUZZY;
 
 /**
  * @Description 模糊匹配正确答案，计算用户得分时使用评分规则设置的题目总分。
- * 选题规则选取的考题得分 = 匹配系数 × 选题规则题目总分 ÷ 选题规则选取的题数 ÷ 考题系数
+ * 考题得分 = 匹配系数 × 题目总分 ÷ 题目总数 ÷ 题目系数
  * 注意：计算总分的时候，不能因为小数丢失精度，即使用户答题全对，也不能得满分
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = TOTAL_SCORE_FUZZY)
-public class TotalScoreFuzzyCalculator implements ScoreCalculator {
+@Key(values = SCORE_ALGORITHM_FUZZY)
+public class FuzzyCalculator implements ScoreCalculator {
 
 	private FuzzyMatcherFactory fuzzyMatcherFactory;
 

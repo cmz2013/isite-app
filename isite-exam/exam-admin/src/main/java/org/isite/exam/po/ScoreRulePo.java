@@ -28,7 +28,7 @@ public class ScoreRulePo extends Po<Integer> {
     @ColumnType(typeHandler = EnumTypeHandler.class)
     private QuestionType questionType;
     /**
-     * 每道题分数/题目总分，配合分数算法使用
+     * 题目总分
      */
     private Integer score;
     /**

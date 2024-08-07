@@ -18,7 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ExamModule implements Serializable {
     /**
-     * 题目分数/题目总分，配合考试分数算法使用
+     * 题目总分
      */
     private Integer score;
     /**

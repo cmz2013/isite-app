@@ -1,13 +1,14 @@
 package org.isite.exam.converter;
 
+import org.isite.exam.data.vo.ExamRecord;
 import org.isite.exam.po.ExamDetailPo;
 import org.isite.exam.po.ExamRecordPo;
-import org.isite.exam.data.vo.ExamRecord;
 
 import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.exam.converter.ExamDetailConverter.toExamDetail;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 public class ExamRecordConverter {
 
@@ -16,7 +17,7 @@ public class ExamRecordConverter {
 
     public static ExamRecord toExamRecord(ExamRecordPo examRecordPo, ExamDetailPo examDetailPo) {
         ExamRecord examRecord = convert(examRecordPo, ExamRecord::new);
-        examRecord.setExamDetail(ExamDetailConverter.toExamDetail(examDetailPo));
+        examRecord.setExamDetail(toExamDetail(examDetailPo));
         return examRecord;
     }
 }

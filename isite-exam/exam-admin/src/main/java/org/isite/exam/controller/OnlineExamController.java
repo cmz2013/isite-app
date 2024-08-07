@@ -3,7 +3,6 @@ package org.isite.exam.controller;
 import org.isite.commons.lang.data.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.isite.commons.web.data.op.Update;
-import org.isite.exam.converter.ExamSceneConverter;
 import org.isite.exam.data.dto.ExamRecordDto;
 import org.isite.exam.data.vo.ExamRecord;
 import org.isite.exam.data.vo.UserAnswer;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.exam.converter.ExamSceneConverter.toExamScenePo;
 import static org.isite.security.support.utils.SecurityUtils.getOauthUser;
 
 /**
@@ -47,7 +47,7 @@ public class OnlineExamController extends BaseController {
     public Result<ExamRecord> applyExam(
             @PathVariable("objectType") ObjectType objectType, @PathVariable("objectValue") String objectValue) {
         return toResult(onlineExamService.applyExam(
-                examSceneService.findOne(ExamSceneConverter.toExamScenePo(objectType, objectValue)), getOauthUser()));
+                examSceneService.findOne(toExamScenePo(objectType, objectValue)), getOauthUser()));
     }
 
     /**

@@ -22,12 +22,10 @@ public class ExamConstants {
     public static final String QUESTION_SHORT_ANSWER = "SHORT_ANSWER";
 
     /**
-     * 题目分数算法类型
+     * 考试分数算法
      */
-    public static final String SINGLE_SCORE_EXACT = "SINGLE_SCORE_EXACT";
-    public static final String TOTAL_SCORE_EXACT = "TOTAL_SCORE_EXACT";
-    public static final String TOTAL_SCORE_FUZZY = "TOTAL_SCORE_FUZZY";
-    public static final String SINGLE_SCORE_FUZZY = "SINGLE_SCORE_FUZZY";
+    public static final String SCORE_ALGORITHM_EXACT = "EXACT";
+    public static final String SCORE_ALGORITHM_FUZZY = "FUZZY";
 
     /**
      * 选题方式

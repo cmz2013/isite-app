@@ -10,18 +10,18 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 import static org.isite.commons.lang.data.Constants.ZERO;
-import static org.isite.exam.data.constants.ExamConstants.TOTAL_SCORE_EXACT;
+import static org.isite.exam.data.constants.ExamConstants.SCORE_ALGORITHM_EXACT;
 
 /**
  * @Description 精确匹配正确答案，计算用户得分时使用评分规则设置的题目总分。
- * 选题规则选取的考题得分 = 答对题数 × 选题规则题目总分 ÷ 选题规则选取的题数
+ * 考题得分 = 答对题数 × 题目总分 ÷ 题目总数
  * 1)计算总分的时候，不能预先计算出题目分数，因为如果是小数可能丢失精度，即使用户答题全对，也不能得满分
  * 2)如果是多选题型，少选得0分
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = TOTAL_SCORE_EXACT)
-public class TotalScoreExactCalculator implements ScoreCalculator {
+@Key(values = SCORE_ALGORITHM_EXACT)
+public class ExactCalculator implements ScoreCalculator {
 
 	private ExactMatcherFactory exactMatcherFactory;
 

@@ -1,6 +1,5 @@
 package org.isite.exam.service;
 
-import org.isite.exam.converter.ExamRecordConverter;
 import org.isite.exam.core.ExamAccessorFactory;
 import org.isite.exam.core.ScoreCalculator;
 import org.isite.exam.core.ScoreCalculatorFactory;
@@ -25,6 +24,7 @@ import static org.isite.commons.lang.Assert.notEmpty;
 import static org.isite.commons.lang.Assert.notNull;
 import static org.isite.commons.lang.data.Constants.ZERO;
 import static org.isite.commons.lang.json.Jackson.parseArray;
+import static org.isite.exam.converter.ExamRecordConverter.toExamRecord;
 
 /**
  * @Description 线上考试 Service
@@ -50,7 +50,7 @@ public class OnlineExamService {
             examRecordPo = examRecordService.findLastExamRecord(scenePo.getId(), scenePo.getPaperId(), user);
             if (null != examRecordPo && examRecordService.notFinished(examRecordPo)) {
                 examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordPo.getId());
-                return ExamRecordConverter.toExamRecord(examRecordPo, examDetailPo);
+                return toExamRecord(examRecordPo, examDetailPo);
             }
         }
         ExamPaperPo paperPo = examPaperService.get(scenePo.getPaperId());
@@ -60,7 +60,7 @@ public class OnlineExamService {
         notEmpty(examModules, "examModules is empty: " +  + scenePo.getPaperId());
         examRecordPo = examRecordService.saveExamRecord(scenePo, paperPo, user);
         examDetailPo = examDetailService.saveExamDetail(examRecordPo.getId(), examModules);
-        return ExamRecordConverter.toExamRecord(examRecordPo, examDetailPo);
+        return toExamRecord(examRecordPo, examDetailPo);
     }
 
     /**
