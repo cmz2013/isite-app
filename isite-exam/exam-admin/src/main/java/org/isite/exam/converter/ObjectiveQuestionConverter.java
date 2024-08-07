@@ -1,11 +1,11 @@
 package org.isite.exam.converter;
 
-import org.isite.commons.cloud.data.Converter;
-import org.isite.exam.po.QuestionPo;
 import org.isite.exam.data.dto.ObjectiveQuestionDto;
 import org.isite.exam.data.vo.ObjectiveQuestion;
 import org.isite.exam.data.vo.Option;
+import org.isite.exam.po.QuestionPo;
 
+import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.commons.lang.Reflection.getGenericParameter;
 import static org.isite.commons.lang.data.TypeUtils.cast;
 import static org.isite.commons.lang.json.Jackson.parseArray;
@@ -40,7 +40,7 @@ public abstract class ObjectiveQuestionConverter<V extends ObjectiveQuestion<T>,
      */
     @Override
     protected void toQuestionPo(D questionDto, QuestionPo questionPo) {
-        questionPo.setOptions(toJsonString(Converter.convert(questionDto.getOptions(), Option::new)));
+        questionPo.setOptions(toJsonString(convert(questionDto.getOptions(), Option::new)));
         questionPo.setRightAnswer(toRightAnswer(questionDto));
     }
 
