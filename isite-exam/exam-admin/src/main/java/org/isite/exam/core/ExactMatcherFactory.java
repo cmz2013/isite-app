@@ -6,9 +6,9 @@ import org.isite.exam.data.vo.Question;
 import org.springframework.stereotype.Component;
 
 /**
- * @Description 考题答案糊匹配接口工厂类
+ * @Description 题目答案精确匹配接口工厂类
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-public class AnswerFuzzyMatcherFactory extends AbstractFactory<AnswerFuzzyMatcher<Question>, QuestionType, Integer> {
+public class ExactMatcherFactory extends AbstractFactory<ExactMatcher<Question>, QuestionType, Integer> {
 }
