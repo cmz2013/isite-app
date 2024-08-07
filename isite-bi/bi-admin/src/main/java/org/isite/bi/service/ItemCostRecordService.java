@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.isite.bi.mapper.ItemCostRecordMapper;
 import org.isite.bi.po.CostSubjectPo;
 import org.isite.bi.po.ItemCostRecordPo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +16,7 @@ import java.util.Collection;
  */
 @Slf4j
 @Service
-public class ItemCostRecordService extends ModelService<ItemCostRecordPo, Long> {
+public class ItemCostRecordService extends PoService<ItemCostRecordPo, Long> {
 
     public ItemCostRecordService(ItemCostRecordMapper mapper) {
         super(mapper);

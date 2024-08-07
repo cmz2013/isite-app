@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.isite.commons.lang.data.Vo;
 import org.isite.exam.data.enums.QuestionType;
-import org.isite.exam.data.enums.ScoreAlgorithmType;
+import org.isite.exam.data.enums.ScoreAlgorithm;
 
 /**
  * @Description 评分规则。创建试卷的时候必须按题型设置评分规则
@@ -28,5 +28,5 @@ public class ScoreRule extends Vo<Integer> {
     /**
      * 考试分数算法类型
      */
-    private ScoreAlgorithmType scoreAlgorithmType;
+    private ScoreAlgorithm scoreAlgorithm;
 }

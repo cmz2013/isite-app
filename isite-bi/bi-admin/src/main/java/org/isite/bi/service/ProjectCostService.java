@@ -4,7 +4,7 @@ import org.isite.bi.cost.CostCalculator;
 import org.isite.bi.data.enums.CostType;
 import org.isite.bi.mapper.ProjectCostMapper;
 import org.isite.bi.po.ProjectCostPo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import static java.util.Comparator.comparingInt;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Service
-public class ProjectCostService extends ModelService<ProjectCostPo, Integer> {
+public class ProjectCostService extends PoService<ProjectCostPo, Integer> {
 
     private CostCalculator costCalculator;
 

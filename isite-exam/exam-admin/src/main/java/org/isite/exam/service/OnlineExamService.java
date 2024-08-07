@@ -1,7 +1,7 @@
 package org.isite.exam.service;
 
 import org.isite.exam.converter.ExamRecordConverter;
-import org.isite.exam.core.ExamPaperAccessorFactory;
+import org.isite.exam.core.ExamAccessorFactory;
 import org.isite.exam.core.ScoreCalculator;
 import org.isite.exam.core.ScoreCalculatorFactory;
 import org.isite.exam.data.vo.ExamModule;
@@ -37,7 +37,7 @@ public class OnlineExamService {
     private ExamPaperService examPaperService;
     private ExamDetailService examDetailService;
     private ExamRecordService examRecordService;
-    private ExamPaperAccessorFactory examPaperAccessorFactory;
+    private ExamAccessorFactory examAccessorFactory;
 
     /**
      * @Description 查询未结束的考试记录，不存在时创建考试记录，用于开始考试
@@ -55,7 +55,7 @@ public class OnlineExamService {
         }
         ExamPaperPo paperPo = examPaperService.get(scenePo.getPaperId());
         notNull(paperPo, "examPaper not found: " + scenePo.getPaperId());
-        List<ExamModule> examModules = examPaperAccessorFactory.get(paperPo.getQuestionMode())
+        List<ExamModule> examModules = examAccessorFactory.get(paperPo.getQuestionMode())
                 .getExamModules(scenePo.getPaperId());
         notEmpty(examModules, "examModules is empty: " +  + scenePo.getPaperId());
         examRecordPo = examRecordService.saveExamRecord(scenePo, paperPo, user);
@@ -74,7 +74,7 @@ public class OnlineExamService {
         int userScore = ZERO;
         Map<Long, UserAnswer> answerMap = toMap(userAnswers, UserAnswer::getQuestionId);
         for (ExamModule examModule : examModules) {
-            ScoreCalculator calculator = scoreCalculatorFactory.get(examModule.getScoreAlgorithmType());
+            ScoreCalculator calculator = scoreCalculatorFactory.get(examModule.getScoreAlgorithm());
             if (null != calculator) {
                 userScore += calculator.getUserScore(examModule, answerMap);
             }
@@ -100,8 +100,8 @@ public class OnlineExamService {
     }
 
     @Autowired
-    public void setExamPaperAccessorFactory(ExamPaperAccessorFactory examPaperAccessorFactory) {
-        this.examPaperAccessorFactory = examPaperAccessorFactory;
+    public void setExamAccessorFactory(ExamAccessorFactory examAccessorFactory) {
+        this.examAccessorFactory = examAccessorFactory;
     }
 
     @Autowired

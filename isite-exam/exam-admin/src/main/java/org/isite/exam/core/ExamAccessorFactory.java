@@ -8,5 +8,5 @@ import org.springframework.stereotype.Component;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-public class ExamPaperAccessorFactory extends AbstractFactory<ExamPaperAccessor, QuestionMode, Integer> {
+public class ExamAccessorFactory extends AbstractFactory<ExamAccessor, QuestionMode, Integer> {
 }

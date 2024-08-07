@@ -2,7 +2,7 @@ package org.isite.exam.po;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.mybatis.data.TreeModel;
+import org.isite.mybatis.data.TreePo;
 
 import javax.persistence.Table;
 
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "major")
-public class MajorPo extends TreeModel<Integer> {
+public class MajorPo extends TreePo<Integer> {
     /**
      * 专业名称
      */

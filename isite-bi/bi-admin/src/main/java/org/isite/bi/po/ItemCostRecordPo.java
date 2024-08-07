@@ -3,7 +3,7 @@ package org.isite.bi.po;
 import lombok.Getter;
 import lombok.Setter;
 import org.isite.bi.data.enums.CostType;
-import org.isite.mybatis.data.Model;
+import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "item_cost_record")
-public class ItemCostRecordPo extends Model<Long> {
+public class ItemCostRecordPo extends Po<Long> {
     /**
      * 项目ID
      */

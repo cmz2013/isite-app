@@ -2,7 +2,7 @@ package org.isite.exam.po;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.mybatis.data.Model;
+import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
 
@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "exam_pool")
-public class ExamPoolPo extends Model<Integer> {
+public class ExamPoolPo extends Po<Integer> {
     /**
      * 题库名称
      */

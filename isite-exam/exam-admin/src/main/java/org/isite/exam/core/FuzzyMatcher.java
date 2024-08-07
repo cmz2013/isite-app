@@ -7,7 +7,7 @@ import org.isite.exam.data.vo.UserAnswer;
  * @Description 考题模糊匹配接口
  * @Author <font color='blue'>zhangcm</font>
  */
-public interface AnswerFuzzyMatcher<Q extends Question> {
+public interface FuzzyMatcher<Q extends Question> {
     /**
      * 模糊匹配用户答案
      * @param question 题目

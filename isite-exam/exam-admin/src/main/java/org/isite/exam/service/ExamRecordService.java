@@ -4,7 +4,7 @@ import org.isite.exam.mapper.ExamRecordMapper;
 import org.isite.exam.po.ExamPaperPo;
 import org.isite.exam.po.ExamRecordPo;
 import org.isite.exam.po.ExamScenePo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.isite.security.support.oauth.OauthEmployee;
 import org.isite.security.support.oauth.OauthUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ import static org.isite.commons.lang.data.Constants.ZERO;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Service
-public class ExamRecordService extends ModelService<ExamRecordPo, Long> {
+public class ExamRecordService extends PoService<ExamRecordPo, Long> {
 
     @Autowired
     public ExamRecordService(ExamRecordMapper examRecordMapper) {

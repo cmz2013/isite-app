@@ -2,12 +2,12 @@ package org.isite.bi.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.isite.bi.cost.CostRulePair;
-import org.isite.bi.mapper.CostRuleMapper;
-import org.isite.bi.po.CostRulePo;
 import org.isite.bi.data.enums.CostType;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.CostSubject;
-import org.isite.mybatis.service.TreeModelService;
+import org.isite.bi.mapper.CostRuleMapper;
+import org.isite.bi.po.CostRulePo;
+import org.isite.mybatis.service.TreePoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ import static org.isite.commons.lang.data.Constants.ONE;
  */
 @Slf4j
 @Service
-public class CostRuleService extends TreeModelService<CostRulePo, Integer> {
+public class CostRuleService extends TreePoService<CostRulePo, Integer> {
     /**
      * JS脚本引擎
      */

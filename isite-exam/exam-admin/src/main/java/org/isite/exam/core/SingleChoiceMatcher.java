@@ -15,7 +15,7 @@ import static org.isite.exam.data.constants.ExamConstants.QUESTION_SINGLE_CHOICE
  */
 @Component
 @Key(values = {QUESTION_SINGLE_CHOICE, QUESTION_JUDGMENT})
-public class SingleChoiceExactMatcher implements AnswerExactMatcher<SingleChoice> {
+public class SingleChoiceMatcher implements ExactMatcher<SingleChoice> {
 
     @Override
     public boolean match(SingleChoice question, UserAnswer userAnswer) {

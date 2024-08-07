@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.isite.exam.data.enums.DifficultyLevel;
 import org.isite.exam.data.enums.QuestionType;
-import org.isite.mybatis.data.Model;
+import org.isite.mybatis.data.Po;
 import org.isite.mybatis.type.EnumTypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "question")
-public class QuestionPo extends Model<Long> {
+public class QuestionPo extends Po<Long> {
     /**
      * 专业ID
      */

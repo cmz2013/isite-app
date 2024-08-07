@@ -60,7 +60,7 @@ CREATE TABLE `score_rule` (
   `paper_id` int unsigned NOT NULL DEFAULT 0 COMMENT '试卷id',
   `question_type` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '题型',
   `score` int unsigned NOT NULL DEFAULT 0 COMMENT '每道题分数/题目总分，配合分数算法使用',
-  `score_algorithm_type` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '考试分数算法类型',
+  `score_algorithm` tinyint unsigned NOT NULL DEFAULT 0 COMMENT '考试分数算法',
   KEY `idx_scorerule_paperid`(`paper_id`),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='评分规则';

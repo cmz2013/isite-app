@@ -2,9 +2,9 @@ package org.isite.exam.po;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.mybatis.data.Model;
-import org.isite.mybatis.type.EnumTypeHandler;
 import org.isite.misc.data.enums.ObjectType;
+import org.isite.mybatis.data.Po;
+import org.isite.mybatis.type.EnumTypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Table;
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "exam_scene")
-public class ExamScenePo extends Model<Integer> {
+public class ExamScenePo extends Po<Integer> {
     /**
      * 考试名称
      */

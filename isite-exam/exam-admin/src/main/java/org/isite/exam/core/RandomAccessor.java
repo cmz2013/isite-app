@@ -31,7 +31,7 @@ import static org.isite.exam.data.constants.ExamConstants.EXAM_MODE_RANDOM;
  */
 @Component
 @Key(values = EXAM_MODE_RANDOM)
-public class RandomPaperAccessor extends ExamPaperAccessor {
+public class RandomAccessor extends ExamAccessor {
     private QuestionRuleService questionRuleService;
     private QuestionService questionService;
 
@@ -45,16 +45,17 @@ public class RandomPaperAccessor extends ExamPaperAccessor {
             //如果选取的题目数量小于当前选题规则设置的题数时，就把未选的题数累加到下一个选题规则的题数上，继续选题
             int number = offset + questionRule.getNumber();
             questionRule.setNumber(number + questionRule.getNumber() / TWO);
-            Page<QuestionPo> page = findQuestions(questionRule, questionTotals.get(questionRule.getId()));
-            if (isNotEmpty(page.getResult())) {
-                offset = number - page.size();
-                while (offset < ZERO) {
-                    page.remove(nextInt(page.getResult().size()));
-                    offset++;
+            try (Page<QuestionPo> page = findPage(questionRule, questionTotals.get(questionRule.getId()))) {
+                if (isNotEmpty(page.getResult())) {
+                    offset = number - page.size();
+                    while (offset < ZERO) {
+                        page.remove(nextInt(page.getResult().size()));
+                        offset++;
+                    }
+                    questionPos.addAll(page.getResult());
+                } else {
+                    offset = questionRule.getNumber();
                 }
-                questionPos.addAll(page.getResult());
-            } else {
-                offset = questionRule.getNumber();
             }
         }
         shuffle(questionPos);
@@ -85,7 +86,7 @@ public class RandomPaperAccessor extends ExamPaperAccessor {
     /**
      * 根据选题规则随机分页查询题目
      */
-    private Page<QuestionPo> findQuestions(QuestionRulePo rulePo, int total) {
+    private Page<QuestionPo> findPage(QuestionRulePo rulePo, int total) {
         QuestionPo questionPo = new QuestionPo();
         questionPo.setPoolId(rulePo.getPoolId());
         questionPo.setQuestionType(rulePo.getQuestionType());

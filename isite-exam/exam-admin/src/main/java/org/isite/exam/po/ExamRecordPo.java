@@ -2,7 +2,7 @@ package org.isite.exam.po;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.mybatis.data.Model;
+import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
 import java.util.Date;
@@ -13,7 +13,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "exam_record")
-public class ExamRecordPo extends Model<Long> {
+public class ExamRecordPo extends Po<Long> {
     /**
      * 考试名称
      */

@@ -3,8 +3,8 @@ package org.isite.exam.po;
 import lombok.Getter;
 import lombok.Setter;
 import org.isite.exam.data.enums.QuestionType;
-import org.isite.exam.data.enums.ScoreAlgorithmType;
-import org.isite.mybatis.data.Model;
+import org.isite.exam.data.enums.ScoreAlgorithm;
+import org.isite.mybatis.data.Po;
 import org.isite.mybatis.type.EnumTypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "score_rule")
-public class ScoreRulePo extends Model<Integer> {
+public class ScoreRulePo extends Po<Integer> {
     /**
      * 试卷ID
      */
@@ -35,5 +35,5 @@ public class ScoreRulePo extends Model<Integer> {
      * 考试分数算法类型
      */
     @ColumnType(typeHandler = EnumTypeHandler.class)
-    private ScoreAlgorithmType scoreAlgorithmType;
+    private ScoreAlgorithm scoreAlgorithm;
 }

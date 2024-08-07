@@ -21,7 +21,7 @@ import static org.isite.exam.data.constants.ExamConstants.EXAM_MODE_MANUALLY;
  */
 @Component
 @Key(values = EXAM_MODE_MANUALLY)
-public class ManualPaperAccessor extends ExamPaperAccessor {
+public class ManualAccessor extends ExamAccessor {
 
     private QuestionService questionService;
     private ExamQuestionService examQuestionService;

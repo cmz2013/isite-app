@@ -6,7 +6,7 @@ import org.isite.commons.lang.enums.Enumerable;
  * @Description 考试分数算法类型
  * @Author <font color='blue'>zhangcm</font>
  */
-public enum ScoreAlgorithmType implements Enumerable<Integer> {
+public enum ScoreAlgorithm implements Enumerable<Integer> {
 	/**
 	 * 人工判断考试得分，使用评分规则设置的每道题分数
 	 */
@@ -43,7 +43,7 @@ public enum ScoreAlgorithmType implements Enumerable<Integer> {
 
 	private final Integer code;
 
-	ScoreAlgorithmType(Integer code) {
+	ScoreAlgorithm(Integer code) {
 		this.code = code;
 	}
 

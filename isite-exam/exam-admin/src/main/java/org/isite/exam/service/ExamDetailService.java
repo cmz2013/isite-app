@@ -4,7 +4,7 @@ import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.UserAnswer;
 import org.isite.exam.mapper.ExamDetailMapper;
 import org.isite.exam.po.ExamDetailPo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,7 @@ import static tk.mybatis.mapper.weekend.Weekend.of;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Service
-public class ExamDetailService extends ModelService<ExamDetailPo, Long> {
+public class ExamDetailService extends PoService<ExamDetailPo, Long> {
 
     @Autowired
     public ExamDetailService(ExamDetailMapper examDetailMapper) {

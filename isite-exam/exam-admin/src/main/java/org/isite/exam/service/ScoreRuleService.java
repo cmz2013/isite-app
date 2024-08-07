@@ -2,17 +2,17 @@ package org.isite.exam.service;
 
 import org.isite.exam.mapper.ScoreRuleMapper;
 import org.isite.exam.po.ScoreRulePo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Service
-public class ScoreRuleService extends ModelService<ScoreRulePo, Integer> {
+public class ScoreRuleService extends PoService<ScoreRulePo, Integer> {
 
     @Autowired
     public ScoreRuleService(ScoreRuleMapper scoreRuleMapper) {

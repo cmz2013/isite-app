@@ -79,9 +79,10 @@ public class QuestionController extends BaseController {
      */
     @GetMapping("/question/list")
     public PageResult<Question> findQuestions(PageRequest<QuestionQuery> request) {
-        Page<QuestionPo> page = questionService.findPage(toPageQuery(request, QuestionPo::new));
-        return toPageResult(request, page.getResult().stream().map(po -> questionConverterFactory.get(
-                po.getQuestionType()).toQuestion(po)).collect(toList()), page.getTotal());
+        try (Page<QuestionPo> page = questionService.findPage(toPageQuery(request, QuestionPo::new))) {
+            return toPageResult(request, page.getResult().stream().map(po -> questionConverterFactory.get(
+                    po.getQuestionType()).toQuestion(po)).collect(toList()), page.getTotal());
+        }
     }
 
     /**

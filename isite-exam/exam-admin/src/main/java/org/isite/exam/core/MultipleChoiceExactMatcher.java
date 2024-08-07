@@ -16,7 +16,7 @@ import static org.isite.exam.data.constants.ExamConstants.QUESTION_MULTIPLE_CHOI
  */
 @Component
 @Key(values = QUESTION_MULTIPLE_CHOICE)
-public class MultipleChoiceExactMatcher implements AnswerExactMatcher<MultipleChoice> {
+public class MultipleChoiceExactMatcher implements ExactMatcher<MultipleChoice> {
 
     @Override
     public boolean match(MultipleChoice question, UserAnswer userAnswer) {

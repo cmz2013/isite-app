@@ -17,11 +17,4 @@ public interface ScoreCalculator {
 	 * @return 用户得分
 	 */
 	int getUserScore(ExamModule examModule, Map<Long, UserAnswer> userAnswers);
-
-	/**
-	 * @Description 计算总分
-	 * @param examModule 考卷组成元素
-	 * @return 总分
-	 */
-	int getTotalScore(ExamModule examModule);
 }

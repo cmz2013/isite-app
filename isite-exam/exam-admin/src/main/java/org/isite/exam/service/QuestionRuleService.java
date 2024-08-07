@@ -2,17 +2,17 @@ package org.isite.exam.service;
 
 import org.isite.exam.mapper.QuestionRuleMapper;
 import org.isite.exam.po.QuestionRulePo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Service
-public class QuestionRuleService extends ModelService<QuestionRulePo, Integer> {
+public class QuestionRuleService extends PoService<QuestionRulePo, Integer> {
 
     @Autowired
     public QuestionRuleService(QuestionRuleMapper questionRuleMapper) {

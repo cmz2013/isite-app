@@ -17,7 +17,7 @@ import static org.isite.exam.data.constants.ExamConstants.QUESTION_MULTIPLE_CHOI
  */
 @Component
 @Key(values = QUESTION_MULTIPLE_CHOICE)
-public class MultipleChoiceFuzzyMatcher implements AnswerFuzzyMatcher<MultipleChoice> {
+public class MultipleChoiceFuzzyMatcher implements FuzzyMatcher<MultipleChoice> {
 
     /**
      * 匹配用户多选题选项

@@ -2,7 +2,7 @@ package org.isite.bi.po;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.mybatis.data.Model;
+import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
 
@@ -12,5 +12,5 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "cost_subject")
-public class CostSubjectPo extends Model<Integer> {
+public class CostSubjectPo extends Po<Integer> {
 }

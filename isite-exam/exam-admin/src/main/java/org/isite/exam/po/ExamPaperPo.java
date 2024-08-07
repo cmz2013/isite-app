@@ -3,7 +3,7 @@ package org.isite.exam.po;
 import lombok.Getter;
 import lombok.Setter;
 import org.isite.exam.data.enums.QuestionMode;
-import org.isite.mybatis.data.Model;
+import org.isite.mybatis.data.Po;
 import org.isite.mybatis.type.EnumTypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Table(name = "exam_paper")
-public class ExamPaperPo extends Model<Integer> {
+public class ExamPaperPo extends Po<Integer> {
     /**
      * 试卷名称
      */

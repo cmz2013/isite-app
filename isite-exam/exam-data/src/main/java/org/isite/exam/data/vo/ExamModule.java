@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.isite.exam.data.enums.QuestionType;
-import org.isite.exam.data.enums.ScoreAlgorithmType;
+import org.isite.exam.data.enums.ScoreAlgorithm;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,7 +24,7 @@ public class ExamModule implements Serializable {
     /**
      * 考试分数算法类型
      */
-    private ScoreAlgorithmType scoreAlgorithmType;
+    private ScoreAlgorithm scoreAlgorithm;
     /**
      * 题型
      */
@@ -42,7 +42,7 @@ public class ExamModule implements Serializable {
     public ExamModule(ScoreRule scoreRule, List<Question> questions) {
         this.questionType = scoreRule.getQuestionType();
         this.score = scoreRule.getScore();
-        this.scoreAlgorithmType = scoreRule.getScoreAlgorithmType();
+        this.scoreAlgorithm = scoreRule.getScoreAlgorithm();
         this.questions = questions;
     }
 }

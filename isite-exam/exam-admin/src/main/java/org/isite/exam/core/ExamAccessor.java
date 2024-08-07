@@ -21,7 +21,7 @@ import static org.isite.commons.cloud.data.Converter.toMap;
  * @Description 组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
-public abstract class ExamPaperAccessor {
+public abstract class ExamAccessor {
 
     private ScoreRuleService scoreRuleService;
     private QuestionConverterFactory questionConverterFactory;

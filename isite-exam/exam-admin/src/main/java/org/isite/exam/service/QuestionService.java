@@ -3,15 +3,15 @@ package org.isite.exam.service;
 import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.mapper.QuestionMapper;
 import org.isite.exam.po.QuestionPo;
-import org.isite.mybatis.service.ModelService;
+import org.isite.mybatis.service.PoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Service
-public class QuestionService extends ModelService<QuestionPo, Long> {
+public class QuestionService extends PoService<QuestionPo, Long> {
 
     @Autowired
     public QuestionService(QuestionMapper questionMapper) {
