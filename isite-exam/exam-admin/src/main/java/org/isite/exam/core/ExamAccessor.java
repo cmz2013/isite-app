@@ -1,21 +1,21 @@
 package org.isite.exam.core;
 
 import org.isite.exam.converter.QuestionConverterFactory;
-import org.isite.exam.po.QuestionPo;
-import org.isite.exam.po.ScoreRulePo;
-import org.isite.exam.service.ScoreRuleService;
 import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.ScoreRule;
+import org.isite.exam.po.QuestionPo;
+import org.isite.exam.po.ScoreRulePo;
+import org.isite.exam.service.ScoreRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.isite.commons.cloud.data.Converter.convert;
-import static org.isite.commons.cloud.data.Converter.groupBy;
-import static org.isite.commons.cloud.data.Converter.toMap;
+import static org.isite.commons.web.data.Converter.convert;
+import static org.isite.commons.web.data.Converter.groupBy;
+import static org.isite.commons.web.data.Converter.toMap;
 
 /**
  * @Description 组卷接口

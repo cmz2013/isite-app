@@ -24,10 +24,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static java.util.stream.Collectors.toList;
-import static org.isite.commons.web.data.PageConverter.toPageQuery;
+import static org.isite.commons.web.data.Converter.toPageQuery;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @RestController
 public class QuestionController extends BaseController {

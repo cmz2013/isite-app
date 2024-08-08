@@ -1,9 +1,9 @@
 package org.isite.project;
 
-import org.isite.commons.file.client.FtpClient;
-import org.isite.commons.file.parse.Parser;
-import org.isite.commons.file.parse.XmlParser;
 import org.isite.commons.lang.data.Result;
+import org.isite.misc.file.FtpClient;
+import org.isite.misc.file.Parser;
+import org.isite.misc.file.XmlParser;
 import org.isite.project.api.DemoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,17 +11,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.concurrent.Executor;
 
 import static java.lang.Integer.parseInt;
-import static org.isite.commons.cloud.PropertyUtils.getProperty;
+import static java.lang.Thread.sleep;
+import static org.isite.commons.cloud.utils.PropertyUtils.getProperty;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
 
 @SpringBootTest(classes = ProjectApplication.class)
 public class ProjectAdminApplicationTest {
-
-    @Autowired
-    private Executor executor;
 
     @Autowired
     private DemoService demoService;
@@ -33,29 +30,28 @@ public class ProjectAdminApplicationTest {
                 getProperty("ftp.host"), parseInt(getProperty("ftp.port")),
                 getProperty("ftp.username"), getProperty("ftp.password"));
 
-        Parser parser = new XmlParser<Result<?>>(client) {
+        Parser<?> parser = new XmlParser<Result<?>>() {
             @Override
             protected boolean handle(Result<?> data) {
                 System.out.println("Result: " + toJsonString(data));
                 return true;
             }
         };
-        client.setExecutor(executor);
         client.setParser(parser);
 
-        System.out.println("uploadFile: " + client.upload(
+        System.out.println("uploadFile: " + client.upload(1,
                 "test中文上传下载.xml",
                 new FileInputStream("D:/Work/test中文上传下载.xml"),
                 "/test"));
 
         System.out.println("testFtpFile ------ end");
-        Thread.sleep(6000);
+        sleep(6000);
     }
 
     @Test
-    public void testCallback() throws InterruptedException {
+    void testCallback() throws InterruptedException {
         demoService.callback();
         //等待异步任务完成：发送告警邮件
-        Thread.sleep(60000);
+        sleep(60000);
     }
 }

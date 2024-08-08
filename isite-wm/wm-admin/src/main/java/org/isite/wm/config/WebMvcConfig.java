@@ -5,7 +5,7 @@ import org.isite.imports.EnableWeb;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Configuration
 @EnableWeb
