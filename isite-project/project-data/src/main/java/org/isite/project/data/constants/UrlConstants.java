@@ -1,4 +1,4 @@
-package org.isite.exam.data.constants;
+package org.isite.project.data.constants;
 
 /**
  * @Description URL常量类
@@ -10,5 +10,5 @@ public class UrlConstants {
     private UrlConstants() {
     }
 
-    public static final String URL_EXAM = "/exam";
+    public static final String URL_PROJECT = "/project";
 }

@@ -18,5 +18,5 @@ public class ExamRecordDto extends Dto<Long> {
      * 答题记录
      */
     @Valid
-    private List<UserAnswerDto> answerRecords;
+    private List<UserAnswerDto> userAnswers;
 }

@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import static java.util.stream.Collectors.toList;
 import static org.isite.commons.web.data.Converter.toPageQuery;
+import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
@@ -38,7 +39,7 @@ public class QuestionController extends BaseController {
     /**
      * 新增多选题目
      */
-    @PostMapping("/question/choice/multiple")
+    @PostMapping(URL_EXAM + "/question/choice/multiple")
     public Result<Integer> addMultipleChoice(
             @Validated(Add.class) @RequestBody MultipleChoiceDto questionDto) {
         return toResult(questionService.insert(questionConverterFactory.get(questionDto.getQuestionType())
@@ -48,7 +49,7 @@ public class QuestionController extends BaseController {
     /**
      * 更新多选题目
      */
-    @PutMapping("/question/choice/multiple")
+    @PutMapping(URL_EXAM + "/question/choice/multiple")
     public Result<Integer> updateMultipleChoice(
             @Validated(Update.class) @RequestBody MultipleChoiceDto questionDto) {
         return toResult(questionService.updateById(questionConverterFactory.get(questionDto.getQuestionType())
@@ -58,7 +59,7 @@ public class QuestionController extends BaseController {
     /**
      * 新增单选题和判断题
      */
-    @PostMapping("/question/choice/single")
+    @PostMapping(URL_EXAM + "/question/choice/single")
     public Result<Integer> addSingleChoice(@Validated(Add.class) @RequestBody SingleChoiceDto questionDto) {
         return toResult(questionService.insert(questionConverterFactory.get(
                 questionDto.getQuestionType()).toQuestionPo(questionDto)));
@@ -67,7 +68,7 @@ public class QuestionController extends BaseController {
     /**
      * 更新单选题和判断题
      */
-    @PutMapping("/question/choice/single")
+    @PutMapping(URL_EXAM + "/question/choice/single")
     public Result<Integer> updateSingleChoice(
             @Validated(Update.class) @RequestBody SingleChoiceDto questionDto) {
         return toResult(questionService.updateById(questionConverterFactory.get(
@@ -77,7 +78,7 @@ public class QuestionController extends BaseController {
     /**
      * 查询题目列表
      */
-    @GetMapping("/question/list")
+    @GetMapping(URL_EXAM + "/question/list")
     public PageResult<Question> findQuestions(PageRequest<QuestionQuery> request) {
         try (Page<QuestionPo> page = questionService.findPage(toPageQuery(request, QuestionPo::new))) {
             return toPageResult(request, page.getResult().stream().map(po -> questionConverterFactory.get(
@@ -88,7 +89,7 @@ public class QuestionController extends BaseController {
     /**
      * 根据ID查询题目
      */
-    @GetMapping("/question/{id}")
+    @GetMapping(URL_EXAM + "/question/{id}")
     public Result<Question> getQuestion(@PathVariable("id") Long id) {
         QuestionPo questionPo = questionService.get(id);
         return toResult(questionConverterFactory.get(questionPo.getQuestionType()).toQuestion(questionPo));

@@ -1,4 +1,4 @@
-package org.isite.project.api;
+package org.isite.project.service;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -7,8 +7,8 @@ import org.isite.project.data.dto.DemoDto;
 import org.isite.project.data.vo.DemoResult;
 import org.springframework.stereotype.Component;
 
-import static org.isite.commons.lang.data.ResultUtils.isOk;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
+import static org.isite.commons.lang.utils.ResultUtils.isOk;
 
 /**
  * @Author <font color='blue'>zhangcm</font>

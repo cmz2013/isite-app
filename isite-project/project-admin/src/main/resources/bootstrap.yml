@@ -28,8 +28,6 @@ spring:
           - group: ${spring.cloud.nacos.discovery.group}
             data-id: cloud.yml
           - group: ${spring.cloud.nacos.discovery.group}
-            data-id: security-oauth.yml
-          - group: ${spring.cloud.nacos.discovery.group}
             data-id: sentinel-web.yml
           - group: ${spring.cloud.nacos.discovery.group}
             data-id: mybatis.yml
@@ -57,8 +55,6 @@ spring:
         extension-configs:
           - group: ${spring.cloud.nacos.discovery.group}
             data-id: cloud.yml
-          - group: ${spring.cloud.nacos.discovery.group}
-            data-id: security-oauth.yml
           - group: ${spring.cloud.nacos.discovery.group}
             data-id: sentinel-web.yml
           - group: ${spring.cloud.nacos.discovery.group}
@@ -88,8 +84,6 @@ spring:
         extension-configs:
           - group: ${spring.cloud.nacos.discovery.group}
             data-id: cloud.yml
-          - group: ${spring.cloud.nacos.discovery.group}
-            data-id: security-oauth.yml
           - group: ${spring.cloud.nacos.discovery.group}
             data-id: sentinel-web.yml
           - group: ${spring.cloud.nacos.discovery.group}

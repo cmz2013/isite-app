@@ -4,7 +4,7 @@ import org.isite.commons.lang.data.Result;
 import org.isite.misc.file.FtpClient;
 import org.isite.misc.file.Parser;
 import org.isite.misc.file.XmlParser;
-import org.isite.project.api.DemoService;
+import org.isite.project.service.DemoService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,7 +18,7 @@ import static org.isite.commons.cloud.utils.PropertyUtils.getProperty;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
 
 @SpringBootTest(classes = ProjectApplication.class)
-public class ProjectAdminApplicationTest {
+public class ProjectApplicationTest {
 
     @Autowired
     private DemoService demoService;
@@ -39,7 +39,7 @@ public class ProjectAdminApplicationTest {
         };
         client.setParser(parser);
 
-        System.out.println("uploadFile: " + client.upload(1,
+        System.out.println("uploadFile: " + client.upload(
                 "test中文上传下载.xml",
                 new FileInputStream("D:/Work/test中文上传下载.xml"),
                 "/test"));

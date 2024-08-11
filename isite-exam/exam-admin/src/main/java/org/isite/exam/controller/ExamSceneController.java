@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.commons.web.data.Converter.convert;
+import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
 
 /**
  * @Description 考试场景 Controller
@@ -28,7 +29,7 @@ public class ExamSceneController extends BaseController {
     /**
      * 新增考试场景
      */
-    @PostMapping("/exam/scene")
+    @PostMapping(URL_EXAM + "/scene")
     public Result<Integer> addExamScene(@Validated(Add.class) @RequestBody ExamSceneDto sceneDto) {
         return toResult(examSceneService.insert(convert(sceneDto, ExamScenePo::new)));
     }
@@ -36,7 +37,7 @@ public class ExamSceneController extends BaseController {
     /**
      * 更新考试场景
      */
-    @PutMapping("/exam/scene")
+    @PutMapping(URL_EXAM + "/scene")
     public Result<Integer> updateExamScene(@Validated(Update.class) @RequestBody ExamSceneDto sceneDto) {
         return toResult(examSceneService.updateById(convert(sceneDto, ExamScenePo::new)));
     }

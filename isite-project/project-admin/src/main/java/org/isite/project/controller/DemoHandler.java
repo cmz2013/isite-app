@@ -1,4 +1,4 @@
-package org.isite.project.api;
+package org.isite.project.controller;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
