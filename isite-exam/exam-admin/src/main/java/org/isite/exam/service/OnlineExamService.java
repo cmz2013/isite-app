@@ -10,8 +10,8 @@ import org.isite.exam.po.ExamDetailPo;
 import org.isite.exam.po.ExamPaperPo;
 import org.isite.exam.po.ExamRecordPo;
 import org.isite.exam.po.ExamScenePo;
-import org.isite.security.support.oauth.OauthUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,11 +43,12 @@ public class OnlineExamService {
      * @Description 查询未结束的考试记录，不存在时创建考试记录，用于开始考试
      */
     @Transactional(rollbackFor = Exception.class)
-    public ExamRecord applyExam(ExamScenePo scenePo, OauthUser user) {
+    public ExamRecord applyExam(ExamScenePo scenePo, @Nullable Integer tenantId, Long userId) {
         ExamRecordPo examRecordPo;
         ExamDetailPo examDetailPo;
         if (TRUE.equals(scenePo.getContinues())) {
-            examRecordPo = examRecordService.findLastExamRecord(scenePo.getId(), scenePo.getPaperId(), user);
+            examRecordPo = examRecordService.findLastExamRecord(
+                    tenantId,  userId, scenePo.getId(), scenePo.getPaperId());
             if (null != examRecordPo && examRecordService.notFinished(examRecordPo)) {
                 examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordPo.getId());
                 return toExamRecord(examRecordPo, examDetailPo);
@@ -58,7 +59,7 @@ public class OnlineExamService {
         List<ExamModule> examModules = examAccessorFactory.get(paperPo.getQuestionMode())
                 .getExamModules(scenePo.getPaperId());
         notEmpty(examModules, "examModules is empty: " +  + scenePo.getPaperId());
-        examRecordPo = examRecordService.saveExamRecord(scenePo, paperPo, user);
+        examRecordPo = examRecordService.saveExamRecord(scenePo, paperPo, tenantId, userId);
         examDetailPo = examDetailService.saveExamDetail(examRecordPo.getId(), examModules);
         return toExamRecord(examRecordPo, examDetailPo);
     }

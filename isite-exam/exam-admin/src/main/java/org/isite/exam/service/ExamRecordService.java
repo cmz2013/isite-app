@@ -5,9 +5,8 @@ import org.isite.exam.po.ExamPaperPo;
 import org.isite.exam.po.ExamRecordPo;
 import org.isite.exam.po.ExamScenePo;
 import org.isite.mybatis.service.PoService;
-import org.isite.security.support.oauth.OauthEmployee;
-import org.isite.security.support.oauth.OauthUser;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,12 +30,9 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
     /**
      * @Description 查询最近一次的考试记录
      */
-    public ExamRecordPo findLastExamRecord(int sceneId, int paperId, OauthUser user) {
-        Integer tenantId = null;
-        if (user instanceof OauthEmployee) {
-            tenantId = ((OauthEmployee) user).getTenantId();
-        }
-        return ((ExamRecordMapper) getMapper()).selectLastExamRecord(sceneId, paperId, user.getUserId(), tenantId);
+    public ExamRecordPo findLastExamRecord(
+            @Nullable Integer tenantId, long userId, int sceneId, int paperId) {
+        return ((ExamRecordMapper) getMapper()).selectLastExamRecord(tenantId, userId, sceneId, paperId);
     }
 
     /**
@@ -62,20 +58,20 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
     }
 
     /**
-     * 保存考试记录
+     * 保存考试记录，租户ID可以为空
+     * 注解@Nullable用于标记一个方法、字段、参数或返回值可以为null。这个注解主要用于提高代码的可读性和可维护性
      */
     @Transactional(rollbackFor = Exception.class)
-    public ExamRecordPo saveExamRecord(ExamScenePo scenePo, ExamPaperPo paperPo, OauthUser user) {
+    public ExamRecordPo saveExamRecord(
+            ExamScenePo scenePo, ExamPaperPo paperPo, @Nullable Integer tenantId, long userId) {
         ExamRecordPo examRecordPo = new ExamRecordPo();
         examRecordPo.setPaperId(paperPo.getId());
         examRecordPo.setTitle(scenePo.getTitle());
         examRecordPo.setExamSecond(paperPo.getExamSecond());
         examRecordPo.setSceneId(scenePo.getId());
-        if (user instanceof OauthEmployee) {
-            examRecordPo.setTenantId(((OauthEmployee) user).getTenantId());
-        }
+        examRecordPo.setTenantId(tenantId);
         examRecordPo.setTotalScore(paperPo.getTotalScore());
-        examRecordPo.setUserId(user.getUserId());
+        examRecordPo.setUserId(userId);
         this.insert(examRecordPo);
         return examRecordPo;
     }

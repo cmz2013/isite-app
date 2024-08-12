@@ -1,10 +1,10 @@
 package org.isite.exam.core;
 
-import org.isite.exam.service.ExamQuestionService;
-import org.isite.exam.service.QuestionService;
 import org.isite.commons.lang.Key;
 import org.isite.exam.po.ExamQuestionPo;
 import org.isite.exam.po.QuestionPo;
+import org.isite.exam.service.ExamQuestionService;
+import org.isite.exam.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.commons.web.data.Converter.convert;
 import static org.isite.exam.data.constants.ExamConstants.EXAM_MODE_MANUALLY;
 
 /**

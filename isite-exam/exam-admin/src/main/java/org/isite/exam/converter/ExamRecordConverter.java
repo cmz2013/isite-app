@@ -4,7 +4,7 @@ import org.isite.exam.data.vo.ExamRecord;
 import org.isite.exam.po.ExamDetailPo;
 import org.isite.exam.po.ExamRecordPo;
 
-import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.commons.web.data.Converter.convert;
 import static org.isite.exam.converter.ExamDetailConverter.toExamDetail;
 
 /**

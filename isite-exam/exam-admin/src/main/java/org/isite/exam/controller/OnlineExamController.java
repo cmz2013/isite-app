@@ -22,9 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.isite.commons.lang.Assert.isTrue;
 import static org.isite.commons.web.config.WebMvcAdapter.URL_MY;
 import static org.isite.commons.web.data.Converter.convert;
+import static org.isite.commons.web.interceptor.TransmittableHeader.getTenantId;
+import static org.isite.commons.web.interceptor.TransmittableHeader.getUserId;
 import static org.isite.exam.converter.ExamSceneConverter.toExamScenePo;
 import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
-import static org.isite.security.support.utils.SecurityUtils.getOauthUser;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
@@ -42,7 +43,7 @@ public class OnlineExamController extends BaseController {
      */
     @PostMapping(URL_MY + URL_EXAM + "/scene/{sceneId}")
     public Result<ExamRecord> applyExam(@PathVariable("sceneId") Integer sceneId) {
-        return toResult(onlineExamService.applyExam(examSceneService.get(sceneId), getOauthUser()));
+        return toResult(onlineExamService.applyExam(examSceneService.get(sceneId), getTenantId(), getUserId()));
     }
 
     /**
@@ -52,8 +53,8 @@ public class OnlineExamController extends BaseController {
     @PostMapping(URL_MY + URL_EXAM + "/object/{objectType}/{objectValue}")
     public Result<ExamRecord> applyExam(
             @PathVariable("objectType") ObjectType objectType, @PathVariable("objectValue") String objectValue) {
-        return toResult(onlineExamService.applyExam(
-                examSceneService.findOne(toExamScenePo(objectType, objectValue)), getOauthUser()));
+        return toResult(onlineExamService.applyExam(examSceneService.findOne(
+                toExamScenePo(objectType, objectValue)), getTenantId(), getUserId()));
     }
 
     /**
@@ -61,8 +62,7 @@ public class OnlineExamController extends BaseController {
      */
     @PutMapping(URL_MY + URL_EXAM + "/submit")
     public Result<Integer> submitExam(@RequestBody @Validated(Update.class) ExamRecordDto examRecordDto) {
-        isTrue(examRecordService.get(examRecordDto.getId()).getUserId().equals(getOauthUser().getUserId()),
-                new OverstepAccessError());
+        isTrue(examRecordService.get(examRecordDto.getId()).getUserId().equals(getUserId()), new OverstepAccessError());
         return toResult(onlineExamService.submitExam(examRecordDto.getId(),
                 convert(examRecordDto.getUserAnswers(), UserAnswer::new)));
     }

@@ -1,9 +1,9 @@
 package org.isite.bi.cost;
 
-import org.isite.bi.po.CostRulePo;
-import org.isite.bi.po.ProjectCostPo;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.CostSubject;
+import org.isite.bi.po.CostRulePo;
+import org.isite.bi.po.ProjectCostPo;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.isite.commons.lang.data.Constants.ONE;
-import static org.isite.commons.lang.data.TreeUtils.get;
+import static org.isite.commons.lang.utils.TreeUtils.get;
 
 /**
  * @Description 费用算法接口
@@ -76,7 +76,7 @@ public abstract class CostArithmetic<S extends CostSubject, C> {
             int pLevel = level - ONE;
             for (Map<String, Object> layerNode : layerMap.get(level)) {
                 Integer rulePid = ((CostRule) layerNode.get(LAYER_NODE_RULE)).getPid();
-                CostRule pRule = get(rules, rulePid);
+                CostRule pRule = get(rulePid, rules);
                 C cost = sumBranchNode((C) layerNode.get(LAYER_NODE_COST), costMap.get(rulePid), pRule);
                 if (null == cost) {
                     if (!stopSummarize) {
