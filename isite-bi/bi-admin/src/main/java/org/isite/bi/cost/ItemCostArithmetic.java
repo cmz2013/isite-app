@@ -1,10 +1,10 @@
 package org.isite.bi.cost;
 
-import org.isite.bi.po.CostSubjectPo;
-import org.isite.bi.po.ProjectCostPo;
-import org.isite.bi.service.ItemCostRecordService;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.ItemCostSubject;
+import org.isite.bi.po.ItemCostRecordPo;
+import org.isite.bi.po.ProjectCostPo;
+import org.isite.bi.service.ItemCostRecordService;
 import org.isite.commons.lang.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,7 +20,7 @@ import static org.isite.bi.data.constants.BiConstants.COST_TYPE_ITEM;
  */
 @Component
 @Key(values = COST_TYPE_ITEM)
-public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, CostSubjectPo> {
+public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCostRecordPo> {
 
     private ItemCostRecordService costRecordService;
 
@@ -29,24 +29,31 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, CostSubj
         this.costRecordService = costRecordService;
     }
 
+    /**
+     * 查询项目的单项费用科目
+     */
     @Override
     public List<ItemCostSubject> findCostSubject(ProjectCostPo costPo) {
-        // TODO
         return null;
     }
 
     @Override
-    public void saveProjectCost(Collection<CostSubjectPo> subjectPos) {
-        costRecordService.addCostRecord(subjectPos);
+    public void saveCostRecord(Collection<ItemCostRecordPo> costRecordPos) {
+        costRecordService.addCostRecord(costRecordPos);
     }
 
     @Override
-    protected CostSubjectPo sumLeafNode(ItemCostSubject subject, CostSubjectPo cost, CostRule rule) {
+    protected ItemCostRecordPo sumLeafNode(ItemCostSubject subject, ItemCostRecordPo costData, CostRule rule) {
         return null;
     }
 
     @Override
-    protected CostSubjectPo sumBranchNode(CostSubjectPo sCost, CostSubjectPo pCost, CostRule pRule) {
+    protected ItemCostRecordPo sumLeafNode(ItemCostSubject subject, ItemCostRecordPo cost) {
+        return null;
+    }
+
+    @Override
+    protected ItemCostRecordPo sumBranchNode(ItemCostRecordPo sCost, ItemCostRecordPo pCost, CostRule pRule) {
         return null;
     }
 }

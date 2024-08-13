@@ -12,6 +12,8 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 public class ItemCostSubject extends CostSubject {
-
-    private BigDecimal total;
+    /**
+     * 金额
+     */
+    private BigDecimal amount;
 }

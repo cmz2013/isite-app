@@ -1,7 +1,7 @@
 package org.isite.bi.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.isite.bi.cost.CostRulePair;
+import org.isite.bi.cost.CostIndexPair;
 import org.isite.bi.data.enums.CostType;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.CostSubject;
@@ -19,7 +19,6 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.StringUtils.isNotBlank;
 import static org.isite.commons.lang.data.Constants.ONE;
 
@@ -43,8 +42,7 @@ public class CostRuleService extends TreePoService<CostRulePo, Integer> {
     @PostConstruct
     public void initScriptEngine() throws ScriptException {
         scriptEngine = new ScriptEngineManager().getEngineByName("javascript");
-        scriptEngine.eval(new InputStreamReader(
-                requireNonNull(this.getClass().getResourceAsStream("/js/ProjectCost.js"))));
+        scriptEngine.eval(new InputStreamReader(this.getClass().getResourceAsStream("/js/ProjectCost.js")));
     }
 
     public List<CostRulePo> findCostRules(CostType costType) {
@@ -56,26 +54,26 @@ public class CostRuleService extends TreePoService<CostRulePo, Integer> {
     /**
      * 匹配规则，过滤掉不需要参与计算的科目
      */
-    public List<CostRulePair> matches(List<? extends CostSubject> subjects, List<CostRule> rules) {
-        List<CostRulePair> costRulePairs = new ArrayList<>();
+    public List<CostIndexPair> matches(List<? extends CostSubject> subjects, List<CostRule> rules) {
+        List<CostIndexPair> costIndexPairs = new ArrayList<>();
         subjects.forEach(subject -> {
             //从规则树根节点到叶子节点逐层匹配
-            CostRulePair costRulePair = matches(ONE, subject, rules);
-            if (null != costRulePair) {
-                costRulePairs.add(costRulePair);
+            CostIndexPair costIndexPair = matches(ONE, subject, rules);
+            if (null != costIndexPair) {
+                costIndexPairs.add(costIndexPair);
             }
         });
-        return costRulePairs;
+        return costIndexPairs;
     }
 
     /**
      * 匹配规则树列表
      */
-    private CostRulePair matches(Integer level, CostSubject subject, List<CostRule> rules) {
+    private CostIndexPair matches(Integer level, CostSubject subject, List<CostRule> rules) {
         for (CostRule rule : rules) {
-            CostRulePair costRulePair = matches(level, subject, rule);
-            if (null != costRulePair) {
-                return costRulePair;
+            CostIndexPair costIndexPair = matches(level, subject, rule);
+            if (null != costIndexPair) {
+                return costIndexPair;
             }
         }
         return null;
@@ -84,14 +82,14 @@ public class CostRuleService extends TreePoService<CostRulePo, Integer> {
     /**
      * 从规则树父节点到叶子节点逐层匹配
      */
-    private CostRulePair matches(Integer level, CostSubject subject, CostRule rule) {
+    private CostIndexPair matches(Integer level, CostSubject subject, CostRule rule) {
         if (isNotBlank(rule.getExpressions()) && !parseExpression(subject, rule.getExpressions())) {
             return null;
         }
         if (null != rule.getChildren() && !rule.getChildren().isEmpty()) {
             return matches(++level, subject, rule.getChildren());
         }
-        return new CostRulePair(level, subject, rule);
+        return new CostIndexPair(level, subject, rule);
     }
 
     /**

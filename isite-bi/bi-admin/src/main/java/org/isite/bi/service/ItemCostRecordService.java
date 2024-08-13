@@ -23,7 +23,7 @@ public class ItemCostRecordService extends PoService<ItemCostRecordPo, Long> {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void addCostRecord(Collection<CostSubjectPo> subjectPos) {
+    public void addCostRecord(Collection<ItemCostRecordPo> costRecordPos) {
         //TODO
     }
 }

@@ -6,6 +6,7 @@ import org.isite.bi.data.enums.CostType;
 import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
  * @Description 费用记录
@@ -20,10 +21,6 @@ public class ItemCostRecordPo extends Po<Long> {
      */
     private Integer projectId;
     /**
-     * 费用类型
-     */
-    private CostType costType;
-    /**
      * 单项ID
      */
     private Integer itemId;
@@ -31,4 +28,12 @@ public class ItemCostRecordPo extends Po<Long> {
      * 造价阶段ID
      */
     private Integer stageId;
+    /**
+     * 金额
+     */
+    private BigDecimal amount;
+    /**
+     * 费用类型
+     */
+    private CostType costType;
 }

@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
+import static org.isite.commons.lang.utils.TypeUtils.cast;
 import static org.isite.commons.web.data.Converter.convert;
 import static org.isite.jpa.converter.TreeConverter.toTree;
 
@@ -36,20 +37,20 @@ public class CostCalculator {
         this.costArithmeticFactory = costArithmeticFactory;
     }
 
-    public void execute(ProjectCostPo costPo, CostType costType) {
-        CostArithmetic<? extends CostSubject, ?> costArithmetic = costArithmeticFactory.get(costType);
-        List<? extends CostSubject> subjects = costArithmetic.findCostSubject(costPo);
-        if (isEmpty(subjects)) {
+    public <S extends CostSubject> void execute(ProjectCostPo projectCostPo, CostType costType) {
+        CostArithmetic<S, ?> costArithmetic = cast(costArithmeticFactory.get(costType));
+        List<S> costSubjects = costArithmetic.findCostSubject(projectCostPo);
+        if (isEmpty(costSubjects)) {
             return;
         }
-        List<CostRulePo> rulePos = costRuleService.findCostRules(costType);
-        if (isEmpty(rulePos)) {
-            costArithmetic.sumCostSubject(subjects);
+        List<CostRulePo> costRulePos = costRuleService.findCostRules(costType);
+        if (isEmpty(costRulePos)) {
+            costArithmetic.sumCostSubjects(costSubjects);
         } else {
-            List<CostRule> rules = toTree(rulePos, po -> convert(po, CostRule::new));
-            List<CostRulePair> costRulePairs = costRuleService.matches(subjects, rules);
-            if(isNotEmpty(costRulePairs)) {
-                costArithmetic.sumCostPair(costRulePairs, rules);
+            List<CostRule> costRules = toTree(costRulePos, po -> convert(po, CostRule::new));
+            List<CostIndexPair> costIndexPairs = costRuleService.matches(costSubjects, costRules);
+            if(isNotEmpty(costIndexPairs)) {
+                costArithmetic.sumCostIndexPairs(costIndexPairs, costRules);
             }
         }
     }
