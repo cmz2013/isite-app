@@ -1,25 +1,24 @@
 package org.isite.bi.cost;
 
+import org.isite.bi.data.enums.CostType;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.ItemCostSubject;
 import org.isite.bi.po.ItemCostRecordPo;
 import org.isite.bi.po.ProjectCostPo;
 import org.isite.bi.service.ItemCostRecordService;
-import org.isite.commons.lang.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
 
-import static org.isite.bi.data.constants.BiConstants.COST_TYPE_ITEM;
+import static org.isite.bi.data.enums.CostType.ITEM;
 
 /**
  * @Description 单项费用算法
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = COST_TYPE_ITEM)
 public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCostRecordPo> {
 
     private ItemCostRecordService costRecordService;
@@ -55,5 +54,10 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCost
     @Override
     protected ItemCostRecordPo sumBranchNode(ItemCostRecordPo sCost, ItemCostRecordPo pCost, CostRule pRule) {
         return null;
+    }
+
+    @Override
+    public CostType[] getIdentities() {
+        return new CostType[] { ITEM };
     }
 }

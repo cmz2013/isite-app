@@ -1,6 +1,8 @@
 package org.isite.exam.core;
 
+import org.isite.commons.cloud.factory.Strategy;
 import org.isite.exam.converter.QuestionConverterFactory;
+import org.isite.exam.data.enums.QuestionMode;
 import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.ScoreRule;
@@ -21,7 +23,7 @@ import static org.isite.commons.web.data.Converter.toMap;
  * @Description 组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
-public abstract class ExamAccessor {
+public abstract class ExamAccessor implements Strategy<QuestionMode> {
 
     private ScoreRuleService scoreRuleService;
     private QuestionConverterFactory questionConverterFactory;

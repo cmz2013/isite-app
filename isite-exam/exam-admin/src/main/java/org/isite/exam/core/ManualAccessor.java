@@ -1,6 +1,6 @@
 package org.isite.exam.core;
 
-import org.isite.commons.lang.Key;
+import org.isite.exam.data.enums.QuestionMode;
 import org.isite.exam.po.ExamQuestionPo;
 import org.isite.exam.po.QuestionPo;
 import org.isite.exam.service.ExamQuestionService;
@@ -13,14 +13,13 @@ import java.util.List;
 import static java.util.Collections.emptyList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.isite.commons.web.data.Converter.convert;
-import static org.isite.exam.data.constants.ExamConstants.EXAM_MODE_MANUALLY;
+import static org.isite.exam.data.enums.QuestionMode.MANUALLY;
 
 /**
  * @Description 手动组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = EXAM_MODE_MANUALLY)
 public class ManualAccessor extends ExamAccessor {
 
     private QuestionService questionService;
@@ -43,5 +42,10 @@ public class ManualAccessor extends ExamAccessor {
     @Autowired
     public void setQuestionService(QuestionService questionService) {
         this.questionService = questionService;
+    }
+
+    @Override
+    public QuestionMode[] getIdentities() {
+        return new QuestionMode[] { MANUALLY };
     }
 }

@@ -7,7 +7,7 @@ import org.isite.exam.data.vo.SubjectiveQuestion;
 import static org.isite.commons.lang.Reflection.getGenericParameter;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 public abstract class SubjectiveQuestionConverter<V extends SubjectiveQuestion,
         D extends SubjectiveQuestionDto> extends QuestionConverter<V, D> {

@@ -1,7 +1,9 @@
 package org.isite.exam.converter;
 
 import lombok.SneakyThrows;
+import org.isite.commons.cloud.factory.Strategy;
 import org.isite.exam.data.dto.QuestionDto;
+import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.Question;
 import org.isite.exam.data.vo.QuestionStem;
 import org.isite.exam.po.QuestionPo;
@@ -14,12 +16,13 @@ import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.isite.commons.lang.Reflection.getGenericParameter;
 import static org.isite.commons.lang.json.Jackson.parseObject;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
+import static org.isite.commons.lang.utils.TypeUtils.cast;
 import static org.isite.commons.web.data.Converter.convert;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
-public abstract class QuestionConverter<V extends Question, D extends QuestionDto> {
+public abstract class QuestionConverter<V extends Question, D extends QuestionDto> implements Strategy<QuestionType> {
     /**
      * 根据题目类型转VO
      */
@@ -54,7 +57,7 @@ public abstract class QuestionConverter<V extends Question, D extends QuestionDt
     }
 
     protected Class<V> getQuestionVoClass() {
-        return (Class<V>) getGenericParameter(this.getClass(), QuestionConverter.class);
+        return cast(getGenericParameter(this.getClass(), QuestionConverter.class));
     }
 
     /**

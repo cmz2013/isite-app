@@ -1,6 +1,6 @@
 package org.isite.exam.core;
 
-import org.isite.commons.lang.Key;
+import org.isite.exam.data.enums.ScoreAlgorithm;
 import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.Question;
 import org.isite.exam.data.vo.UserAnswer;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 import static org.isite.commons.lang.data.Constants.ONE;
 import static org.isite.commons.lang.data.Constants.ZERO;
-import static org.isite.exam.data.constants.ExamConstants.SCORE_ALGORITHM_FUZZY;
+import static org.isite.exam.data.enums.ScoreAlgorithm.FUZZY;
 
 /**
  * @Description 模糊匹配正确答案，计算用户得分时使用评分规则设置的题目总分。
@@ -20,7 +20,6 @@ import static org.isite.exam.data.constants.ExamConstants.SCORE_ALGORITHM_FUZZY;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = SCORE_ALGORITHM_FUZZY)
 public class FuzzyCalculator implements ScoreCalculator {
 
 	private FuzzyMatcherFactory fuzzyMatcherFactory;
@@ -50,5 +49,10 @@ public class FuzzyCalculator implements ScoreCalculator {
 	@Autowired
 	public void setFuzzyMatcherFactory(FuzzyMatcherFactory fuzzyMatcherFactory) {
 		this.fuzzyMatcherFactory = fuzzyMatcherFactory;
+	}
+
+	@Override
+	public ScoreAlgorithm[] getIdentities() {
+		return new ScoreAlgorithm[] { FUZZY };
 	}
 }

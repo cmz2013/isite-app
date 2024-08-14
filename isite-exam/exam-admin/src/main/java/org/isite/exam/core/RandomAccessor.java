@@ -1,7 +1,7 @@
 package org.isite.exam.core;
 
 import com.github.pagehelper.Page;
-import org.isite.commons.lang.Key;
+import org.isite.exam.data.enums.QuestionMode;
 import org.isite.exam.po.QuestionPo;
 import org.isite.exam.po.QuestionRulePo;
 import org.isite.exam.service.QuestionRuleService;
@@ -23,14 +23,13 @@ import static org.isite.commons.lang.data.Constants.ONE;
 import static org.isite.commons.lang.data.Constants.TWO;
 import static org.isite.commons.lang.data.Constants.ZERO;
 import static org.isite.commons.lang.schedule.RandomScheduler.nextInt;
-import static org.isite.exam.data.constants.ExamConstants.EXAM_MODE_RANDOM;
+import static org.isite.exam.data.enums.QuestionMode.RANDOM;
 
 /**
  * @Description 随机组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = EXAM_MODE_RANDOM)
 public class RandomAccessor extends ExamAccessor {
     private QuestionRuleService questionRuleService;
     private QuestionService questionService;
@@ -106,5 +105,10 @@ public class RandomAccessor extends ExamAccessor {
     @Autowired
     public void setQuestionRuleService(QuestionRuleService questionRuleService) {
         this.questionRuleService = questionRuleService;
+    }
+
+    @Override
+    public QuestionMode[] getIdentities() {
+        return new QuestionMode[] { RANDOM };
     }
 }

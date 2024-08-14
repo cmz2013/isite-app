@@ -1,9 +1,9 @@
 package org.isite.exam.converter;
 
-import org.isite.commons.lang.Key;
-import org.isite.exam.po.QuestionPo;
 import org.isite.exam.data.dto.MultipleChoiceDto;
+import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.MultipleChoice;
+import org.isite.exam.po.QuestionPo;
 import org.springframework.stereotype.Component;
 
 import java.util.HashSet;
@@ -11,13 +11,12 @@ import java.util.Set;
 
 import static org.isite.commons.lang.json.Jackson.parseArray;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
-import static org.isite.exam.data.constants.ExamConstants.QUESTION_MULTIPLE_CHOICE;
+import static org.isite.exam.data.enums.QuestionType.MULTIPLE_CHOICE;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-@Key(values = QUESTION_MULTIPLE_CHOICE)
 public class MultipleChoiceConverter extends
         ObjectiveQuestionConverter<MultipleChoice, MultipleChoiceDto, Set<Integer>> {
 
@@ -32,5 +31,10 @@ public class MultipleChoiceConverter extends
     @Override
     protected String toRightAnswer(MultipleChoiceDto questionDto) {
         return toJsonString(questionDto.getRightAnswer());
+    }
+
+    @Override
+    public QuestionType[] getIdentities() {
+        return new QuestionType[] { MULTIPLE_CHOICE };
     }
 }

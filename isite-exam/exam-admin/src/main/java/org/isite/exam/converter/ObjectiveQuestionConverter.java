@@ -12,7 +12,7 @@ import static org.isite.commons.lang.utils.TypeUtils.cast;
 import static org.isite.commons.web.data.Converter.convert;
 
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 public abstract class ObjectiveQuestionConverter<V extends ObjectiveQuestion<T>,
         D extends ObjectiveQuestionDto, T> extends QuestionConverter<V, D> {

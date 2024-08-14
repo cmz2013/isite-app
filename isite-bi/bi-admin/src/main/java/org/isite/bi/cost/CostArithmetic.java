@@ -1,8 +1,10 @@
 package org.isite.bi.cost;
 
+import org.isite.bi.data.enums.CostType;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.CostSubject;
 import org.isite.bi.po.ProjectCostPo;
+import org.isite.commons.cloud.factory.Strategy;
 import org.isite.mybatis.data.Po;
 
 import java.util.Collection;
@@ -23,7 +25,7 @@ import static org.isite.commons.lang.utils.TypeUtils.cast;
  * @param <C> 费用汇总数据记录
  * @Author <font color='blue'>zhangcm</font>
  */
-public abstract class CostArithmetic<S extends CostSubject, C extends Po<?>> {
+public abstract class CostArithmetic<S extends CostSubject, C extends Po<?>> implements Strategy<CostType> {
     /**
      * 查询用于计算费用的参数
      */

@@ -1,6 +1,6 @@
 package org.isite.exam.core;
 
-import org.isite.commons.cloud.AbstractFactory;
+import org.isite.commons.cloud.factory.AbstractFactory;
 import org.isite.exam.data.enums.QuestionMode;
 import org.springframework.stereotype.Component;
 

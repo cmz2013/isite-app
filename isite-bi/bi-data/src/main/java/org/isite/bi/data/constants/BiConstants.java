@@ -9,8 +9,4 @@ public class BiConstants {
     private BiConstants() {
     }
 
-    /**
-     * 费用类型
-     */
-    public static final String COST_TYPE_ITEM = "ITEM";
 }

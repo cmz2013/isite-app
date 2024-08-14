@@ -1,5 +1,7 @@
 package org.isite.exam.core;
 
+import org.isite.commons.cloud.factory.Strategy;
+import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.Question;
 import org.isite.exam.data.vo.UserAnswer;
 
@@ -7,7 +9,7 @@ import org.isite.exam.data.vo.UserAnswer;
  * @Description 考题模糊匹配接口
  * @Author <font color='blue'>zhangcm</font>
  */
-public interface FuzzyMatcher<Q extends Question> {
+public interface FuzzyMatcher<Q extends Question> extends Strategy<QuestionType> {
     /**
      * 模糊匹配用户答案
      * @param question 题目
