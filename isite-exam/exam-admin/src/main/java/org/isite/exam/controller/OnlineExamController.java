@@ -1,8 +1,8 @@
 package org.isite.exam.controller;
 
+import org.isite.commons.cloud.data.op.Update;
 import org.isite.commons.lang.data.Result;
 import org.isite.commons.web.controller.BaseController;
-import org.isite.commons.web.data.op.Update;
 import org.isite.commons.web.exception.OverstepAccessError;
 import org.isite.exam.data.dto.ExamRecordDto;
 import org.isite.exam.data.vo.ExamRecord;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import static org.isite.commons.cloud.constants.UrlConstants.URL_MY;
+import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.commons.lang.Assert.isTrue;
-import static org.isite.commons.web.config.WebMvcAdapter.URL_MY;
-import static org.isite.commons.web.data.Converter.convert;
 import static org.isite.commons.web.interceptor.TransmittableHeader.getTenantId;
 import static org.isite.commons.web.interceptor.TransmittableHeader.getUserId;
 import static org.isite.exam.converter.ExamSceneConverter.toExamScenePo;

@@ -13,11 +13,11 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
+import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.commons.lang.Reflection.getGenericParameter;
 import static org.isite.commons.lang.json.Jackson.parseObject;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
 import static org.isite.commons.lang.utils.TypeUtils.cast;
-import static org.isite.commons.web.data.Converter.convert;
 
 /**
  * @Author <font color='blue'>zhangcm</font>

@@ -19,11 +19,11 @@ import java.util.List;
 import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
+import static org.isite.commons.cloud.data.Converter.toMap;
 import static org.isite.commons.lang.Assert.notEmpty;
 import static org.isite.commons.lang.Assert.notNull;
 import static org.isite.commons.lang.data.Constants.ZERO;
 import static org.isite.commons.lang.json.Jackson.parseArray;
-import static org.isite.commons.web.data.Converter.toMap;
 import static org.isite.exam.converter.ExamRecordConverter.toExamRecord;
 
 /**

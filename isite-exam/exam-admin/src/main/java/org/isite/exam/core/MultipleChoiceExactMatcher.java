@@ -25,6 +25,6 @@ public class MultipleChoiceExactMatcher implements ExactMatcher<MultipleChoice> 
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] { MULTIPLE_CHOICE };
+        return new QuestionType[] {MULTIPLE_CHOICE};
     }
 }

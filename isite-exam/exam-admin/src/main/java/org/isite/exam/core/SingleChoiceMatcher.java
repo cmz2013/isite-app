@@ -24,6 +24,6 @@ public class SingleChoiceMatcher implements ExactMatcher<SingleChoice> {
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] { SINGLE_CHOICE, JUDGMENT };
+        return new QuestionType[] {SINGLE_CHOICE, JUDGMENT};
     }
 }

@@ -14,6 +14,6 @@ import static org.isite.exam.data.enums.QuestionType.SHORT_ANSWER;
 public class ShortAnswerConverter extends SubjectiveQuestionConverter<ShortAnswer, ShortAnswerDto> {
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] { SHORT_ANSWER };
+        return new QuestionType[] {SHORT_ANSWER};
     }
 }

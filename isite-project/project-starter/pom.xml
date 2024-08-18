@@ -18,5 +18,11 @@
             <artifactId>project-data</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.isite</groupId>
+            <artifactId>commons-web</artifactId>
+            <version>${isite.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 </project>

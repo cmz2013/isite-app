@@ -14,12 +14,12 @@
     <dependencies>
         <dependency>
             <groupId>org.isite</groupId>
-            <artifactId>exam-data</artifactId>
-            <version>${isite.version}</version>
+            <artifactId>commons-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.isite</groupId>
-            <artifactId>sentinel-web-starter</artifactId>
+            <artifactId>exam-data</artifactId>
+            <version>${isite.version}</version>
         </dependency>
         <dependency>
             <groupId>com.alicp.jetcache</groupId>
@@ -36,6 +36,14 @@
         <dependency>
             <groupId>org.isite</groupId>
             <artifactId>mybatis-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.isite</groupId>
+            <artifactId>sentinel-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
         </dependency>
     </dependencies>
 </project>

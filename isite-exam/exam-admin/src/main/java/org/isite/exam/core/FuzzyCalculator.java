@@ -53,6 +53,6 @@ public class FuzzyCalculator implements ScoreCalculator {
 
 	@Override
 	public ScoreAlgorithm[] getIdentities() {
-		return new ScoreAlgorithm[] { FUZZY };
+		return new ScoreAlgorithm[] {FUZZY};
 	}
 }

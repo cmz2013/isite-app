@@ -43,6 +43,6 @@ public class ExactCalculator implements ScoreCalculator {
 
 	@Override
 	public ScoreAlgorithm[] getIdentities() {
-		return new ScoreAlgorithm[] { EXACT };
+		return new ScoreAlgorithm[] {EXACT};
 	}
 }

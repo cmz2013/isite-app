@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
-@Configuration
 @EnableWeb
+@Configuration
 public class WebMvcConfig extends WebMvcAdapter {
 }

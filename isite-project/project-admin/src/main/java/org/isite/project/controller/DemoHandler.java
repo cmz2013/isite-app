@@ -10,7 +10,7 @@ import org.isite.project.data.vo.DemoResult;
 import org.isite.project.data.vo.DemoVo;
 import org.springframework.stereotype.Component;
 
-import static org.isite.commons.web.data.Converter.convert;
+import static org.isite.commons.cloud.data.Converter.convert;
 import static org.springframework.http.HttpStatus.OK;
 
 /**

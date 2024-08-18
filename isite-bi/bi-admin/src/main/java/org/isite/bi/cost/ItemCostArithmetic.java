@@ -58,6 +58,6 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCost
 
     @Override
     public CostType[] getIdentities() {
-        return new CostType[] { ITEM };
+        return new CostType[] {ITEM};
     }
 }

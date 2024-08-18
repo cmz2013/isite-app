@@ -32,6 +32,6 @@ public class SingleChoiceConverter extends
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] { SINGLE_CHOICE, JUDGMENT };
+        return new QuestionType[] {SINGLE_CHOICE, JUDGMENT};
     }
 }

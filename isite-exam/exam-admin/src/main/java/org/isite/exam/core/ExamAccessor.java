@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.isite.commons.web.data.Converter.convert;
-import static org.isite.commons.web.data.Converter.groupBy;
-import static org.isite.commons.web.data.Converter.toMap;
+import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.commons.cloud.data.Converter.groupBy;
+import static org.isite.commons.cloud.data.Converter.toMap;
 
 /**
  * @Description 组卷接口

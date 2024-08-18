@@ -1,9 +1,9 @@
 package org.isite.exam.controller;
 
+import org.isite.commons.cloud.data.op.Add;
+import org.isite.commons.cloud.data.op.Update;
 import org.isite.commons.lang.data.Result;
 import org.isite.commons.web.controller.BaseController;
-import org.isite.commons.web.data.op.Add;
-import org.isite.commons.web.data.op.Update;
 import org.isite.exam.data.dto.ExamSceneDto;
 import org.isite.exam.po.ExamScenePo;
 import org.isite.exam.service.ExamSceneService;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.isite.commons.web.data.Converter.convert;
+import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
 
 /**

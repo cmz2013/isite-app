@@ -109,6 +109,6 @@ public class RandomAccessor extends ExamAccessor {
 
     @Override
     public QuestionMode[] getIdentities() {
-        return new QuestionMode[] { RANDOM };
+        return new QuestionMode[] {RANDOM};
     }
 }

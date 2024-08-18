@@ -56,6 +56,6 @@ public class MultipleChoiceFuzzyMatcher implements FuzzyMatcher<MultipleChoice> 
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] { MULTIPLE_CHOICE };
+        return new QuestionType[] {MULTIPLE_CHOICE};
     }
 }

@@ -35,6 +35,6 @@ public class MultipleChoiceConverter extends
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] { MULTIPLE_CHOICE };
+        return new QuestionType[] {MULTIPLE_CHOICE};
     }
 }

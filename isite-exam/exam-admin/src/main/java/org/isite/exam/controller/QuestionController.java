@@ -1,12 +1,12 @@
 package org.isite.exam.controller;
 
 import com.github.pagehelper.Page;
+import org.isite.commons.cloud.data.PageRequest;
+import org.isite.commons.cloud.data.PageResult;
+import org.isite.commons.cloud.data.op.Add;
+import org.isite.commons.cloud.data.op.Update;
 import org.isite.commons.lang.data.Result;
 import org.isite.commons.web.controller.BaseController;
-import org.isite.commons.web.data.PageRequest;
-import org.isite.commons.web.data.PageResult;
-import org.isite.commons.web.data.op.Add;
-import org.isite.commons.web.data.op.Update;
 import org.isite.exam.converter.QuestionConverterFactory;
 import org.isite.exam.data.dto.MultipleChoiceDto;
 import org.isite.exam.data.dto.QuestionQuery;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static java.util.stream.Collectors.toList;
-import static org.isite.commons.web.data.Converter.toPageQuery;
+import static org.isite.commons.cloud.data.Converter.toPageQuery;
 import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
 
 /**
