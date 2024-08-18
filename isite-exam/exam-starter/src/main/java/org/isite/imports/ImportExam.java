@@ -10,6 +10,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 //@EnableFeignClients(basePackages = {"org.isite.exam.client"})
-@ComponentScan(basePackages = {"org.isite.exam.client"})
+@ComponentScan(basePackages = {"org.isite.exam"})
 public class ImportExam {
 }
