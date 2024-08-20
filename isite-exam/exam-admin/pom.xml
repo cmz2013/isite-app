@@ -39,11 +39,7 @@
         </dependency>
         <dependency>
             <groupId>org.isite</groupId>
-            <artifactId>sentinel-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <artifactId>sentinel-web-starter</artifactId>
         </dependency>
     </dependencies>
 </project>

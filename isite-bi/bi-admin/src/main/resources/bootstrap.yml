@@ -19,7 +19,7 @@ spring:
         namespace: 00000001-0000-0000-0000-000000000000
         group: DEFAULT_GROUP
         metadata:
-          version: @project.version@
+          x-version: @project.version@
       config:
         namespace: ${spring.cloud.nacos.discovery.namespace}
         group: ${spring.cloud.nacos.discovery.group}
@@ -45,7 +45,7 @@ spring:
         namespace: 00000001-0000-0000-0000-000000000000
         group: DEFAULT_GROUP
         metadata:
-          version: @project.version@
+          x-version: @project.version@
       config:
         namespace: ${spring.cloud.nacos.discovery.namespace}
         group: ${spring.cloud.nacos.discovery.group}
@@ -72,7 +72,7 @@ spring:
         namespace: 00000001-0000-0000-0000-000000000000
         group: DEFAULT_GROUP
         metadata:
-          version: @project.version@
+          x-version: @project.version@
       config:
         namespace: ${spring.cloud.nacos.discovery.namespace}
         group: ${spring.cloud.nacos.discovery.group}

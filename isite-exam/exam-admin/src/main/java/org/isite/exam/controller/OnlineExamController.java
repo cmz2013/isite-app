@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.isite.commons.cloud.constants.UrlConstants.URL_MY;
 import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.commons.lang.Assert.isTrue;
-import static org.isite.commons.web.interceptor.TransmittableHeader.getTenantId;
-import static org.isite.commons.web.interceptor.TransmittableHeader.getUserId;
+import static org.isite.commons.web.interceptor.TransmittableHeaders.getTenantId;
+import static org.isite.commons.web.interceptor.TransmittableHeaders.getUserId;
 import static org.isite.exam.converter.ExamSceneConverter.toExamScenePo;
 import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
 
