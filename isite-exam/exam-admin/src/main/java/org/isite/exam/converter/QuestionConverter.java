@@ -15,6 +15,7 @@ import static java.util.Collections.emptyList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 import static org.isite.commons.cloud.data.Converter.convert;
 import static org.isite.commons.lang.Reflection.getGenericParameter;
+import static org.isite.commons.lang.data.Constants.BLANK_STRING;
 import static org.isite.commons.lang.json.Jackson.parseObject;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
 import static org.isite.commons.lang.utils.TypeUtils.cast;
@@ -70,15 +71,25 @@ public abstract class QuestionConverter<V extends Question, D extends QuestionDt
      */
     public QuestionPo toQuestionPo(D questionDto) {
         QuestionPo questionPo = new QuestionPo();
-        questionPo.setAnswerAnalysis(questionDto.getAnswerAnalysis());
-        questionPo.setDifficultyLevel(questionDto.getDifficultyLevel());
         questionPo.setId(questionDto.getId());
         questionPo.setMajorId(questionDto.getMajorId());
         questionPo.setQuestionType(questionDto.getQuestionType());
-        questionPo.setPoolId(questionDto.getPoolId());
-        questionPo.setRemark(questionDto.getRemark());
-        questionPo.setTags(questionDto.getTags());
         questionPo.setQuestionStem(toJsonString(convert(questionDto.getQuestionStems(), QuestionStem::new)));
+        questionPo.setPoolId(questionDto.getPoolId());
+        questionPo.setDifficultyLevel(questionDto.getDifficultyLevel());
+
+        questionPo.setTags(questionDto.getTags());
+        questionPo.setAnswerAnalysis(questionDto.getAnswerAnalysis());
+        questionPo.setRemark(questionDto.getRemark());
+        if (null == questionDto.getTags()) {
+            questionPo.setTags(BLANK_STRING);
+        }
+        if (null == questionDto.getAnswerAnalysis()) {
+            questionPo.setAnswerAnalysis(BLANK_STRING);
+        }
+        if (null == questionDto.getRemark()) {
+            questionPo.setRemark(BLANK_STRING);
+        }
         toQuestionPo(questionDto, questionPo);
         return questionPo;
     }

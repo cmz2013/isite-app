@@ -29,8 +29,18 @@ public class QuestionDto extends Dto<Long> {
     @NotNull(groups = {Add.class, Update.class})
     private QuestionType questionType;
     /**
+     * 标签
+     */
+    private String tags;
+    /**
+     * 题库ID
+     */
+    @NotNull
+    private Integer poolId;
+    /**
      * 难度
      */
+    @NotNull(groups = {Add.class, Update.class})
     private DifficultyLevel difficultyLevel;
     /**
      * 题干
@@ -43,16 +53,8 @@ public class QuestionDto extends Dto<Long> {
      */
     private String answerAnalysis;
     /**
-     * 标签
-     */
-    private String tags;
-    /**
      * 备注
      */
     private String remark;
-    /**
-     * 题库ID
-     */
-    @NotNull
-    private Integer poolId;
+
 }
