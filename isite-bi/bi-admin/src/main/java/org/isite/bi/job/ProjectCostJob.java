@@ -51,7 +51,7 @@ public class ProjectCostJob {
     }
 
     /**
-     * 根据shardIndex分片，查询一个项目的费用参数
+     * 查询一个项目的费用参数，项目ID除以shardTotal取余，如果余数为shardIndex，则返回该项目的费用参数
      */
     private List<CostElement> findCostElements(int shardIndex, int shardTotal,  int minId) {
         return null;
