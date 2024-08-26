@@ -53,7 +53,7 @@ public class ProjectCostJob {
     /**
      * 根据shardIndex分片，查询一个项目的费用参数
      */
-    private List<CostElement> findCostElements(int shardIndex, int minProjectId) {
+    private List<CostElement> findCostElements(int shardIndex, int minId) {
         return null;
     }
 
