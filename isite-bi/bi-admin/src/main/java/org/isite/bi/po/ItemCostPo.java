@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.isite.bi.data.enums.CostType;
 import org.isite.mybatis.data.Po;
+import org.isite.mybatis.type.EnumTypeHandler;
+import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Table;
 import java.math.BigDecimal;
@@ -14,8 +16,8 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@Table(name = "item_cost_record")
-public class ItemCostRecordPo extends Po<Long> {
+@Table(name = "item_cost")
+public class ItemCostPo extends Po<Long> {
     /**
      * 项目ID
      */
@@ -29,11 +31,12 @@ public class ItemCostRecordPo extends Po<Long> {
      */
     private Integer stageId;
     /**
+     * 费用类型
+     */
+    @ColumnType(typeHandler = EnumTypeHandler.class)
+    private CostType costType;
+    /**
      * 金额
      */
     private BigDecimal amount;
-    /**
-     * 费用类型
-     */
-    private CostType costType;
 }

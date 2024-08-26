@@ -1,9 +1,9 @@
 package org.isite.bi.cost;
 
 import org.isite.bi.data.enums.CostType;
+import org.isite.bi.data.vo.CostElement;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.CostSubject;
-import org.isite.bi.po.ProjectCostPo;
 import org.isite.commons.cloud.factory.Strategy;
 import org.isite.mybatis.data.Po;
 
@@ -27,10 +27,9 @@ import static org.isite.commons.lang.utils.TypeUtils.cast;
  */
 public abstract class CostArithmetic<S extends CostSubject, C extends Po<?>> implements Strategy<CostType> {
     /**
-     * 查询用于计算费用的参数
+     * @Description 查询费用科目。项目中的多个条目（item）以及每个条目中的多个阶段（stage）
      */
-    public abstract List<S> findCostSubject(ProjectCostPo costPo);
-
+    public abstract List<S> findCostSubject(CostElement costElement);
     /**
      * 汇总费用
      */

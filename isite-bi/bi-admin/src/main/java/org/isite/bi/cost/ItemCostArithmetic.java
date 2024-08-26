@@ -1,11 +1,11 @@
 package org.isite.bi.cost;
 
 import org.isite.bi.data.enums.CostType;
+import org.isite.bi.data.vo.CostElement;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.ItemCostSubject;
-import org.isite.bi.po.ItemCostRecordPo;
-import org.isite.bi.po.ProjectCostPo;
-import org.isite.bi.service.ItemCostRecordService;
+import org.isite.bi.po.ItemCostPo;
+import org.isite.bi.service.ItemCostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,12 +19,12 @@ import static org.isite.bi.data.enums.CostType.ITEM;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCostRecordPo> {
+public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCostPo> {
 
-    private ItemCostRecordService costRecordService;
+    private ItemCostService costRecordService;
 
     @Autowired
-    public void setCostRecordService(ItemCostRecordService costRecordService) {
+    public void setCostRecordService(ItemCostService costRecordService) {
         this.costRecordService = costRecordService;
     }
 
@@ -32,27 +32,27 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCost
      * 查询项目的单项费用科目
      */
     @Override
-    public List<ItemCostSubject> findCostSubject(ProjectCostPo costPo) {
+    public List<ItemCostSubject> findCostSubject(CostElement costElement) {
         return null;
     }
 
     @Override
-    public void saveCostRecord(Collection<ItemCostRecordPo> costRecordPos) {
+    public void saveCostRecord(Collection<ItemCostPo> costRecordPos) {
         costRecordService.addCostRecord(costRecordPos);
     }
 
     @Override
-    protected ItemCostRecordPo sumLeafNode(ItemCostSubject subject, ItemCostRecordPo costData, CostRule rule) {
+    protected ItemCostPo sumLeafNode(ItemCostSubject subject, ItemCostPo costData, CostRule rule) {
         return null;
     }
 
     @Override
-    protected ItemCostRecordPo sumLeafNode(ItemCostSubject subject, ItemCostRecordPo cost) {
+    protected ItemCostPo sumLeafNode(ItemCostSubject subject, ItemCostPo cost) {
         return null;
     }
 
     @Override
-    protected ItemCostRecordPo sumBranchNode(ItemCostRecordPo sCost, ItemCostRecordPo pCost, CostRule pRule) {
+    protected ItemCostPo sumBranchNode(ItemCostPo sCost, ItemCostPo pCost, CostRule pRule) {
         return null;
     }
 

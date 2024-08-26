@@ -1,6 +1,5 @@
 package org.isite.bi;
 
-import org.isite.bi.service.ProjectCostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

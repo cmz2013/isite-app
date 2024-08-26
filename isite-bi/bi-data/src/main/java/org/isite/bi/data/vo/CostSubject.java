@@ -10,19 +10,21 @@ import org.isite.bi.data.enums.CostType;
  */
 @Getter
 @Setter
-public class CostSubject {
-
-    private Integer projectId;
-
-    private Integer itemId;
-
-    private Integer stageId;
-
-    private String name;
-
-    private String code;
-
-    private String unit;
-
+public class CostSubject extends CostElement {
+    /**
+     * 费用类型
+     */
     private CostType costType;
+    /**
+     * 科目名称
+     */
+    private String name;
+    /**
+     * 科目代码
+     */
+    private String code;
+    /**
+     * 费用单位
+     */
+    private String unit;
 }

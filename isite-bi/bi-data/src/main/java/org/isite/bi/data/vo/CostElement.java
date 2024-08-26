@@ -1,19 +1,15 @@
-package org.isite.bi.po;
+package org.isite.bi.data.vo;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.mybatis.data.Po;
-
-import javax.persistence.Table;
 
 /**
- * @Description 项目费用参数，用于配置需要计算的项目费用
+ * @Description 项目费用参数
  * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter
-@Table(name = "project_cost")
-public class ProjectCostPo extends Po<Integer> {
+public class CostElement {
     /**
      * 项目ID
      */
@@ -26,4 +22,5 @@ public class ProjectCostPo extends Po<Integer> {
      * 造价阶段ID
      */
     private Integer stageId;
+
 }

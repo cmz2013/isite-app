@@ -2,9 +2,3 @@
 mybatis:
   #数据对象扫描路径
   type-aliases-package: org.isite.bi.po
-
-xxl:
-  job:
-    executor:
-      appname: ${spring.application.name}
-      port: 7121

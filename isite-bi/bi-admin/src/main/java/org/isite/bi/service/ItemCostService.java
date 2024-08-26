@@ -1,9 +1,8 @@
 package org.isite.bi.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.isite.bi.mapper.ItemCostRecordMapper;
-import org.isite.bi.po.CostSubjectPo;
-import org.isite.bi.po.ItemCostRecordPo;
+import org.isite.bi.mapper.ItemCostMapper;
+import org.isite.bi.po.ItemCostPo;
 import org.isite.mybatis.service.PoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,14 +15,14 @@ import java.util.Collection;
  */
 @Slf4j
 @Service
-public class ItemCostRecordService extends PoService<ItemCostRecordPo, Long> {
+public class ItemCostService extends PoService<ItemCostPo, Long> {
 
-    public ItemCostRecordService(ItemCostRecordMapper mapper) {
+    public ItemCostService(ItemCostMapper mapper) {
         super(mapper);
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void addCostRecord(Collection<ItemCostRecordPo> costRecordPos) {
+    public void addCostRecord(Collection<ItemCostPo> costRecordPos) {
         //TODO
     }
 }

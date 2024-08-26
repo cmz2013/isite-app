@@ -1,10 +1,10 @@
 package org.isite.bi.cost;
 
 import org.isite.bi.data.enums.CostType;
+import org.isite.bi.data.vo.CostElement;
 import org.isite.bi.data.vo.CostRule;
 import org.isite.bi.data.vo.CostSubject;
 import org.isite.bi.po.CostRulePo;
-import org.isite.bi.po.ProjectCostPo;
 import org.isite.bi.service.CostRuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,9 +37,10 @@ public class CostCalculator {
         this.costArithmeticFactory = costArithmeticFactory;
     }
 
-    public <S extends CostSubject> void execute(ProjectCostPo projectCostPo, CostType costType) {
+    public <S extends CostSubject> void execute(
+            CostType costType, CostElement costElement) {
         CostArithmetic<S, ?> costArithmetic = cast(costArithmeticFactory.get(costType));
-        List<S> costSubjects = costArithmetic.findCostSubject(projectCostPo);
+        List<S> costSubjects = costArithmetic.findCostSubject(costElement);
         if (isEmpty(costSubjects)) {
             return;
         }

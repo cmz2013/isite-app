@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import static org.isite.commons.cloud.utils.PropertyUtils.getApplicationName;
+import static org.isite.commons.cloud.utils.PropertyUtils.getPort;
+
 /**
  * @Description XXL-JOB执行器组件配置
  * @Author <font color='blue'>zhangcm</font>
@@ -19,18 +22,12 @@ public class XxlJobConfig {
     @Value("${xxl.job.accessToken}")
     private String accessToken;
 
-    @Value("${xxl.job.executor.appname}")
-    private String appname;
-
-    @Value("${xxl.job.executor.port}")
-    private Integer port;
-
     @Bean
     public XxlJobSpringExecutor xxlJobExecutor() {
         XxlJobSpringExecutor xxlJobSpringExecutor = new XxlJobSpringExecutor();
+        xxlJobSpringExecutor.setAppname(getApplicationName());
         xxlJobSpringExecutor.setAdminAddresses(adminAddresses);
-        xxlJobSpringExecutor.setAppname(appname);
-        xxlJobSpringExecutor.setPort(port);
+        xxlJobSpringExecutor.setPort(getPort());
         xxlJobSpringExecutor.setAccessToken(accessToken);
         return xxlJobSpringExecutor;
     }

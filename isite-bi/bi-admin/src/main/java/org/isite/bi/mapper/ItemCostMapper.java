@@ -1,6 +1,6 @@
 package org.isite.bi.mapper;
 
-import org.isite.bi.po.ProjectCostPo;
+import org.isite.bi.po.ItemCostPo;
 import org.isite.mybatis.mapper.PoMapper;
 import org.springframework.stereotype.Repository;
 
@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Repository
-public interface ProjectCostMapper extends PoMapper<ProjectCostPo, Integer> {
+public interface ItemCostMapper extends PoMapper<ItemCostPo, Long> {
 }
