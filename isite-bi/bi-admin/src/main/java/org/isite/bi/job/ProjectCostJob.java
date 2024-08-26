@@ -42,10 +42,10 @@ public class ProjectCostJob {
 
         //按CostType中order从小到大的顺序返回
         List<CostType> costTypes = stream(values()).sorted(comparingInt(CostType::getOrder)).collect(toList());
-        List<CostElement> costElements = findCostElements(shardIndex, ZERO);
+        List<CostElement> costElements = findCostElements(shardIndex, shardTotal, ZERO);
         while (isNotEmpty(costElements)) {
             costElements.forEach(costElement -> costTypes.forEach(costType -> costCalculator.execute(costType, costElement)));
-            costElements = findCostElements(shardIndex, costElements.get(ZERO).getProjectId());
+            costElements = findCostElements(shardIndex, shardTotal, costElements.get(ZERO).getProjectId());
         }
         return SUCCESS;
     }
@@ -53,7 +53,7 @@ public class ProjectCostJob {
     /**
      * 根据shardIndex分片，查询一个项目的费用参数
      */
-    private List<CostElement> findCostElements(int shardIndex, int minId) {
+    private List<CostElement> findCostElements(int shardIndex, int shardTotal,  int minId) {
         return null;
     }
 
