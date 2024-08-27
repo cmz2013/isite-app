@@ -1,8 +1,8 @@
-package org.isite.bi.cost;
+package org.isite.bi.service.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.bi.data.vo.CostRule;
+import org.isite.bi.data.vo.project.CostRule;
 import org.isite.mybatis.data.Po;
 
 /**

@@ -1,8 +1,8 @@
-package org.isite.bi.po;
+package org.isite.bi.po.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.bi.data.enums.CostType;
+import org.isite.bi.data.enums.project.CostType;
 import org.isite.mybatis.data.Po;
 import org.isite.mybatis.type.EnumTypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-@Table(name = "item_cost")
+@Table(name = "project_item_cost")
 public class ItemCostPo extends Po<Long> {
     /**
      * 项目ID

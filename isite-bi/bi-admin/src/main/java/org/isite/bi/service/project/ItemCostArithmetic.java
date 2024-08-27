@@ -1,25 +1,24 @@
-package org.isite.bi.cost;
+package org.isite.bi.service.project;
 
-import org.isite.bi.data.enums.CostType;
-import org.isite.bi.data.vo.CostElement;
-import org.isite.bi.data.vo.CostRule;
-import org.isite.bi.data.vo.ItemCostSubject;
-import org.isite.bi.po.ItemCostPo;
-import org.isite.bi.service.ItemCostService;
+import org.isite.bi.data.enums.project.CostType;
+import org.isite.bi.data.vo.project.CostElement;
+import org.isite.bi.data.vo.project.CostRule;
+import org.isite.bi.data.vo.project.ItemSubject;
+import org.isite.bi.po.project.ItemCostPo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
 
-import static org.isite.bi.data.enums.CostType.ITEM;
+import static org.isite.bi.data.enums.project.CostType.ITEM;
 
 /**
  * @Description 单项费用算法
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCostPo> {
+public class ItemCostArithmetic extends CostArithmetic<ItemSubject, ItemCostPo> {
 
     private ItemCostService costRecordService;
 
@@ -32,7 +31,7 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCost
      * 查询项目的单项费用科目
      */
     @Override
-    public List<ItemCostSubject> findCostSubject(CostElement costElement) {
+    public List<ItemSubject> findCostSubject(CostElement costElement) {
         return null;
     }
 
@@ -42,12 +41,12 @@ public class ItemCostArithmetic extends CostArithmetic<ItemCostSubject, ItemCost
     }
 
     @Override
-    protected ItemCostPo sumLeafNode(ItemCostSubject subject, ItemCostPo costData, CostRule rule) {
+    protected ItemCostPo sumLeafNode(ItemSubject subject, ItemCostPo costData, CostRule rule) {
         return null;
     }
 
     @Override
-    protected ItemCostPo sumLeafNode(ItemCostSubject subject, ItemCostPo cost) {
+    protected ItemCostPo sumLeafNode(ItemSubject subject, ItemCostPo cost) {
         return null;
     }
 

@@ -1,4 +1,4 @@
-package org.isite.bi.data.enums;
+package org.isite.bi.data.enums.project;
 
 import lombok.Getter;
 import org.isite.commons.lang.enums.Enumerable;

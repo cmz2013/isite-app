@@ -1,7 +1,7 @@
-package org.isite.bi.cost;
+package org.isite.bi.service.project;
 
-import org.isite.bi.data.enums.CostType;
-import org.isite.bi.data.vo.CostSubject;
+import org.isite.bi.data.enums.project.CostType;
+import org.isite.bi.data.vo.project.CostSubject;
 import org.isite.commons.cloud.factory.AbstractFactory;
 import org.springframework.stereotype.Component;
 

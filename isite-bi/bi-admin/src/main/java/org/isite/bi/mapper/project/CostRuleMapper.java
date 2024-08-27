@@ -1,6 +1,6 @@
-package org.isite.bi.mapper;
+package org.isite.bi.mapper.project;
 
-import org.isite.bi.po.CostRulePo;
+import org.isite.bi.po.project.CostRulePo;
 import org.isite.mybatis.mapper.TreePoMapper;
 import org.springframework.stereotype.Repository;
 

@@ -1,6 +1,6 @@
-package org.isite.bi.mapper;
+package org.isite.bi.mapper.project;
 
-import org.isite.bi.po.ItemCostPo;
+import org.isite.bi.po.project.ItemCostPo;
 import org.isite.mybatis.mapper.PoMapper;
 import org.springframework.stereotype.Repository;
 

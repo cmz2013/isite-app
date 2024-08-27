@@ -1,8 +1,8 @@
-package org.isite.bi.po;
+package org.isite.bi.po.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.bi.data.enums.CostType;
+import org.isite.bi.data.enums.project.CostType;
 import org.isite.mybatis.data.TreePo;
 
 import javax.persistence.Table;
@@ -13,7 +13,7 @@ import javax.persistence.Table;
  */
 @Getter
 @Setter
-@Table(name = "cost_rule")
+@Table(name = "project_cost_rule")
 public class CostRulePo extends TreePo<Integer> {
     /**
      * 费用类型

@@ -1,4 +1,4 @@
-package org.isite.bi.data.vo;
+package org.isite.bi.data.vo.project;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  */
 @Getter
 @Setter
-public class ItemCostSubject extends CostSubject {
+public class ItemSubject extends CostSubject {
     /**
      * 金额
      */

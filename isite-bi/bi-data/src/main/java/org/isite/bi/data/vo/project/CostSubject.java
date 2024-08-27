@@ -1,8 +1,8 @@
-package org.isite.bi.data.vo;
+package org.isite.bi.data.vo.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.bi.data.enums.CostType;
+import org.isite.bi.data.enums.project.CostType;
 
 /**
  * @Description 项目费用科目
@@ -16,10 +16,6 @@ public class CostSubject extends CostElement {
      */
     private CostType costType;
     /**
-     * 科目名称
-     */
-    private String name;
-    /**
      * 科目代码
      */
     private String code;
@@ -27,4 +23,8 @@ public class CostSubject extends CostElement {
      * 费用单位
      */
     private String unit;
+    /**
+     * 科目名称
+     */
+    private String subjectName;
 }

@@ -1,0 +1,16 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.isite.bi.mapper.operation.InviteRecordMapper">
+
+    <select id="selectInviteRank" resultType="org.isite.bi.data.vo.operation.InviteRank">
+        SELECT
+            u.id AS user_id, u.user_name, r.invite_count
+        FROM
+            (SELECT inviter_id, count(user_id) AS invite_count
+             FROM operation_invite_record r
+             WHERE activity_id = #{activityId}
+             GROUP BY inviter_id
+             ORDER BY count(user_id) DESC
+             LIMIT 100) r
+        INNER JOIN USER u ON r.inviter_id = u.id
+    </select>
+</mapper>
