@@ -2,7 +2,7 @@ package org.isite.bi.controller.operation;
 
 import org.isite.bi.cache.operation.InviteRankCache;
 import org.isite.bi.data.vo.operation.InviteRank;
-import org.isite.commons.lang.data.Result;
+import org.isite.commons.cloud.data.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

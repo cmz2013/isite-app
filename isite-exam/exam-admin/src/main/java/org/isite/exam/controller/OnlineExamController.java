@@ -1,7 +1,6 @@
 package org.isite.exam.controller;
 
-import org.isite.commons.cloud.data.op.Update;
-import org.isite.commons.lang.data.Result;
+import org.isite.commons.cloud.data.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.isite.commons.web.exception.OverstepAccessError;
 import org.isite.exam.data.dto.ExamRecordDto;
@@ -61,7 +60,7 @@ public class OnlineExamController extends BaseController {
      * 提交考卷
      */
     @PutMapping(URL_MY + URL_EXAM + "/submit")
-    public Result<Integer> submitExam(@RequestBody @Validated(Update.class) ExamRecordDto examRecordDto) {
+    public Result<Integer> submitExam(@RequestBody @Validated ExamRecordDto examRecordDto) {
         isTrue(examRecordService.get(examRecordDto.getId()).getUserId().equals(getUserId()), new OverstepAccessError());
         return toResult(onlineExamService.submitExam(examRecordDto.getId(),
                 convert(examRecordDto.getUserAnswers(), UserAnswer::new)));

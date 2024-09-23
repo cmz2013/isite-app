@@ -37,9 +37,7 @@ public class DemoHandler extends JsonHandler<DemoDto, DemoVo> {
      */
     @SneakyThrows
     @Synchronized(locks = {
-            @Lock(name = "demon:body:${body}:${arg0}",
-                    keys = {"#demoDto", "#demoDto.keys"}, reentry = 2)
-    })
+            @Lock(name = "LOCK:DEMON:${demoDto.key}:${demoDto.body}", keys = "#demoDto", reentry = 2)})
     public String handle(DemoDto demoDto) {
         return handle(getDataApi("1"), demoDto);
     }

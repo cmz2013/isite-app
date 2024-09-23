@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Date;
 
 import static java.lang.System.currentTimeMillis;
-import static org.isite.commons.lang.data.Constants.THOUSAND;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.THOUSAND;
+import static org.isite.commons.lang.Constants.ZERO;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
@@ -77,10 +77,10 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
     }
 
     /**
-     * 更新用户分数
+     * 保存用户分数
      */
     @Transactional(rollbackFor = Exception.class)
-    public void updateUserScore(Long examRecordId, Integer userScore) {
+    public void saveUserScore(Long examRecordId, Integer userScore) {
         ExamRecordPo examRecordPo = new ExamRecordPo();
         examRecordPo.setId(examRecordId);
         examRecordPo.setUserScore(userScore);

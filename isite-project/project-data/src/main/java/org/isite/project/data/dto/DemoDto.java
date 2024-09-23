@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.isite.commons.cloud.data.Dto;
 
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
@@ -17,8 +17,8 @@ import javax.validation.constraints.NotEmpty;
 @NoArgsConstructor
 public class DemoDto extends Dto<Integer> {
 
-    private String body;
+    @NotBlank
+    private String key;
 
-    @NotEmpty
-    private String[] keys;
+    private String body;
 }

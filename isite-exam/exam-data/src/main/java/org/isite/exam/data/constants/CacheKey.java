@@ -9,4 +9,6 @@ public class CacheKey {
     private CacheKey() {
     }
 
+    public static final String LOCK_EXAM_SUBMIT = "LOCK:EXAM:${examRecordId}:SUBMIT";
+
 }

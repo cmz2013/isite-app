@@ -40,10 +40,10 @@ public class ExamDetailService extends PoService<ExamDetailPo, Long> {
     }
 
     /**
-     * 更新用户答案
+     * 保存用户答案
      */
     @Transactional(rollbackFor = Exception.class)
-    public void updateUserAnswers(Long examRecordId, Collection<UserAnswer> userAnswers) {
+    public void saveUserAnswers(Long examRecordId, Collection<UserAnswer> userAnswers) {
         ExamDetailPo examDetailPo = new ExamDetailPo();
         examDetailPo.setUserAnswers(toJsonString(userAnswers));
         Weekend<ExamDetailPo> weekend = of(ExamDetailPo.class);

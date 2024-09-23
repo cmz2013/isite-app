@@ -2,7 +2,6 @@ package org.isite.exam.data.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.commons.cloud.data.op.Update;
 
 import javax.validation.constraints.NotNull;
 
@@ -16,7 +15,7 @@ public class UserAnswerDto {
     /**
      * 题目ID
      */
-    @NotNull(groups = Update.class)
+    @NotNull
     private Long questionId;
     /**
      * 用户答案

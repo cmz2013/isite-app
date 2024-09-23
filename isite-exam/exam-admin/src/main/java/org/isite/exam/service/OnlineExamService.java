@@ -1,5 +1,7 @@
 package org.isite.exam.service;
 
+import org.isite.commons.web.sync.Lock;
+import org.isite.commons.web.sync.Synchronized;
 import org.isite.exam.core.ExamAccessorFactory;
 import org.isite.exam.core.ScoreCalculator;
 import org.isite.exam.core.ScoreCalculatorFactory;
@@ -20,11 +22,13 @@ import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
 import static org.isite.commons.cloud.data.Converter.toMap;
+import static org.isite.commons.lang.Assert.isNull;
 import static org.isite.commons.lang.Assert.notEmpty;
 import static org.isite.commons.lang.Assert.notNull;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.ZERO;
 import static org.isite.commons.lang.json.Jackson.parseArray;
 import static org.isite.exam.converter.ExamRecordConverter.toExamRecord;
+import static org.isite.exam.data.constants.CacheKey.LOCK_EXAM_SUBMIT;
 
 /**
  * @Description 线上考试 Service
@@ -69,7 +73,9 @@ public class OnlineExamService {
      * @param userAnswers 用户答题记录
      */
     @Transactional(rollbackFor = Exception.class)
+    @Synchronized(locks = @Lock(name = LOCK_EXAM_SUBMIT, keys = "#examRecordId"))
     public int submitExam(long examRecordId, List<UserAnswer> userAnswers) {
+        isNull(examRecordService.get(examRecordId).getSubmitTime(), "It's already been submitted");
         ExamDetailPo examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordId);
         List<ExamModule> examModules = parseArray(examDetailPo.getExamModules(), ExamModule.class);
         int userScore = ZERO;
@@ -80,8 +86,8 @@ public class OnlineExamService {
                 userScore += calculator.getUserScore(examModule, answerMap);
             }
         }
-        examRecordService.updateUserScore(examRecordId, userScore);
-        examDetailService.updateUserAnswers(examRecordId, userAnswers);
+        examRecordService.saveUserScore(examRecordId, userScore);
+        examDetailService.saveUserAnswers(examRecordId, userAnswers);
         return userScore;
     }
 
