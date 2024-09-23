@@ -1,6 +1,6 @@
 package org.isite.project.controller;
 
-import org.isite.commons.web.sign.Signature;
+import org.isite.commons.web.sign.Signed;
 import org.isite.project.data.dto.DemoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +19,7 @@ public class DemoController {
 
     private DemoHandler demoHandler;
 
-    @Signature
+    @Signed
     @PostMapping(URL_API + URL_PROJECT + "/demo")
     public String demo(@RequestBody DemoDto demoDto) {
         return demoHandler.handle(demoDto);

@@ -13,11 +13,8 @@ public class DemoService {
 
     private DemoCallback demoCallback;
 
-    /**
-     * 传多个3，测试可重入次数2
-     */
     public void callback() {
-        demoCallback.call(new DemoDto("SYN", new String[] {"1", "2", "3", "3", "3"}));
+        demoCallback.call(new DemoDto("1", "2"));
     }
 
     @Autowired

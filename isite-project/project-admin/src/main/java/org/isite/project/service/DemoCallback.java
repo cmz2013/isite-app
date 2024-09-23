@@ -7,8 +7,8 @@ import org.isite.project.data.dto.DemoDto;
 import org.isite.project.data.vo.DemoResult;
 import org.springframework.stereotype.Component;
 
+import static org.isite.commons.cloud.utils.ResultUtils.isOk;
 import static org.isite.commons.lang.json.Jackson.toJsonString;
-import static org.isite.commons.lang.utils.ResultUtils.isOk;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
