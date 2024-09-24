@@ -19,9 +19,9 @@ import static java.util.Collections.shuffle;
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.isite.commons.lang.data.Constants.ONE;
-import static org.isite.commons.lang.data.Constants.TWO;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.ONE;
+import static org.isite.commons.lang.Constants.THREE;
+import static org.isite.commons.lang.Constants.ZERO;
 import static org.isite.commons.lang.schedule.RandomScheduler.nextInt;
 import static org.isite.exam.data.enums.QuestionMode.RANDOM;
 
@@ -31,6 +31,7 @@ import static org.isite.exam.data.enums.QuestionMode.RANDOM;
  */
 @Component
 public class RandomAccessor extends ExamAccessor {
+
     private QuestionRuleService questionRuleService;
     private QuestionService questionService;
 
@@ -43,7 +44,7 @@ public class RandomAccessor extends ExamAccessor {
         for (QuestionRulePo questionRule : sortQuestionRules(questionRules, questionTotals)) {
             //如果选取的题目数量小于当前选题规则设置的题数时，就把未选的题数累加到下一个选题规则的题数上，继续选题
             int number = offset + questionRule.getNumber();
-            questionRule.setNumber(number + questionRule.getNumber() / TWO);
+            questionRule.setNumber(number + questionRule.getNumber() / THREE);
             try (Page<QuestionPo> page = findPage(questionRule, questionTotals.get(questionRule.getId()))) {
                 if (isNotEmpty(page.getResult())) {
                     offset = number - page.size();
@@ -89,9 +90,13 @@ public class RandomAccessor extends ExamAccessor {
         QuestionPo questionPo = new QuestionPo();
         questionPo.setPoolId(rulePo.getPoolId());
         questionPo.setQuestionType(rulePo.getQuestionType());
-        PageQuery<QuestionPo> pageQuery = new PageQuery<>();
-        int offset = total - rulePo.getNumber();
-        pageQuery.setOffset(offset > ZERO ? nextInt(offset + ONE) : ZERO);
+        int bound = total - rulePo.getNumber();
+        PageQuery<QuestionPo> pageQuery = new PageQuery<>() {
+            @Override
+            public int getOffset() {
+                return bound > ZERO ? nextInt(bound + ONE) : ZERO;
+            }
+        };
         pageQuery.setPageSize(rulePo.getNumber());
         pageQuery.setPo(questionPo);
         return questionService.findPage(pageQuery);

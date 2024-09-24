@@ -2,7 +2,7 @@ package org.isite.bi.data.vo.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.commons.lang.data.Tree;
+import org.isite.commons.cloud.data.vo.Tree;
 
 /**
  * @Description 费用科目规则树

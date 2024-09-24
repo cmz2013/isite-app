@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import static org.isite.commons.cloud.constants.UrlConstants.URL_API;
+import static org.isite.commons.cloud.data.constants.UrlConstants.URL_API;
 import static org.isite.project.data.constants.UrlConstants.URL_PROJECT;
 
 /**

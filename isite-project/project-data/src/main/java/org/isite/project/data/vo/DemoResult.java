@@ -1,6 +1,6 @@
 package org.isite.project.data.vo;
 
-import org.isite.commons.cloud.data.Result;
+import org.isite.commons.cloud.data.vo.Result;
 
 /**
  * @Description 定义Result子类：

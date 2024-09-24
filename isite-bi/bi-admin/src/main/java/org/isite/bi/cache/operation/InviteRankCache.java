@@ -10,8 +10,8 @@ import java.util.List;
 
 import static java.time.Duration.ofDays;
 import static org.isite.bi.data.constants.CacheKey.OPERATION_INVITE_RANK_PREFIX;
-import static org.isite.commons.lang.data.Constants.THREE;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.THREE;
+import static org.isite.commons.lang.Constants.ZERO;
 
 /**
  * @Author <font color='blue'>zhangcm</font>

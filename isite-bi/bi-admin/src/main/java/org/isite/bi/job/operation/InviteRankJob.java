@@ -11,7 +11,7 @@ import static com.xxl.job.core.biz.model.ReturnT.SUCCESS;
 import static com.xxl.job.core.context.XxlJobHelper.getShardIndex;
 import static com.xxl.job.core.context.XxlJobHelper.getShardTotal;
 import static com.xxl.job.core.context.XxlJobHelper.log;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.ZERO;
 
 /**
  * @Description 计算项目费用JOB

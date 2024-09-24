@@ -2,8 +2,8 @@ package org.isite.exam.data.enums;
 
 import org.isite.commons.lang.enums.Enumerable;
 
-import static org.isite.commons.lang.data.Constants.ONE;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.ONE;
+import static org.isite.commons.lang.Constants.ZERO;
 
 /**
  * @Description 选题方式

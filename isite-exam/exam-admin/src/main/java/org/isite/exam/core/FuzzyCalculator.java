@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
-import static org.isite.commons.lang.data.Constants.ONE;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.ONE;
+import static org.isite.commons.lang.Constants.ZERO;
 import static org.isite.exam.data.enums.ScoreAlgorithm.FUZZY;
 
 /**

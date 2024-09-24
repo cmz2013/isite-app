@@ -2,7 +2,7 @@ package org.isite.project.data.vo;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.commons.cloud.data.Vo;
+import org.isite.commons.cloud.data.vo.Vo;
 
 /**
  * @Description VO数据示例

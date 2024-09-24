@@ -5,7 +5,7 @@ import org.isite.exam.data.vo.ObjectiveQuestion;
 import org.isite.exam.data.vo.Option;
 import org.isite.exam.po.QuestionPo;
 
-import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.commons.cloud.converter.DataConverter.convert;
 import static org.isite.commons.lang.Reflection.getGenericParameter;
 import static org.isite.commons.lang.json.Jackson.parseArray;
 import static org.isite.commons.lang.json.Jackson.toJsonString;

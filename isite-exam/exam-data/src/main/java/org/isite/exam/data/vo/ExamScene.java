@@ -2,7 +2,7 @@ package org.isite.exam.data.vo;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.commons.lang.data.Vo;
+import org.isite.commons.cloud.data.vo.Vo;
 import org.isite.misc.data.enums.ObjectType;
 
 /**

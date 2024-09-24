@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.lang.Boolean.TRUE;
-import static org.isite.commons.cloud.data.Converter.toMap;
+import static org.isite.commons.cloud.converter.MapConverter.toMap;
 import static org.isite.commons.lang.Assert.isNull;
 import static org.isite.commons.lang.Assert.notEmpty;
 import static org.isite.commons.lang.Assert.notNull;
@@ -79,7 +79,7 @@ public class OnlineExamService {
         ExamDetailPo examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordId);
         List<ExamModule> examModules = parseArray(examDetailPo.getExamModules(), ExamModule.class);
         int userScore = ZERO;
-        Map<Long, UserAnswer> answerMap = toMap(userAnswers, UserAnswer::getQuestionId);
+        Map<Long, UserAnswer> answerMap = toMap(UserAnswer::getQuestionId, userAnswers);
         for (ExamModule examModule : examModules) {
             ScoreCalculator calculator = scoreCalculatorFactory.get(examModule.getScoreAlgorithm());
             if (null != calculator) {

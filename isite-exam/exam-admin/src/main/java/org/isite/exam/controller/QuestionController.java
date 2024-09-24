@@ -1,15 +1,15 @@
 package org.isite.exam.controller;
 
 import com.github.pagehelper.Page;
-import org.isite.commons.cloud.data.PageRequest;
-import org.isite.commons.cloud.data.PageResult;
-import org.isite.commons.cloud.data.Result;
+import org.isite.commons.cloud.data.dto.PageRequest;
 import org.isite.commons.cloud.data.op.Add;
 import org.isite.commons.cloud.data.op.Update;
+import org.isite.commons.cloud.data.vo.PageResult;
+import org.isite.commons.cloud.data.vo.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.isite.exam.converter.QuestionConverterFactory;
 import org.isite.exam.data.dto.MultipleChoiceDto;
-import org.isite.exam.data.dto.QuestionQuery;
+import org.isite.exam.data.dto.QuestionGetDto;
 import org.isite.exam.data.dto.SingleChoiceDto;
 import org.isite.exam.data.vo.Question;
 import org.isite.exam.po.QuestionPo;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import static java.util.stream.Collectors.toList;
-import static org.isite.commons.cloud.data.Converter.toPageQuery;
+import static org.isite.commons.cloud.converter.PageQueryConverter.toPageQuery;
 import static org.isite.exam.data.constants.UrlConstants.URL_EXAM;
 
 /**
@@ -79,7 +79,7 @@ public class QuestionController extends BaseController {
      * 查询题目列表
      */
     @GetMapping(URL_EXAM + "/question/list")
-    public PageResult<Question> findQuestions(PageRequest<QuestionQuery> request) {
+    public PageResult<Question> findQuestions(PageRequest<QuestionGetDto> request) {
         try (Page<QuestionPo> page = questionService.findPage(toPageQuery(request, QuestionPo::new))) {
             return toPageResult(request, page.getResult().stream().map(po -> questionConverterFactory.get(
                     po.getQuestionType()).toQuestion(po)).collect(toList()), page.getTotal());

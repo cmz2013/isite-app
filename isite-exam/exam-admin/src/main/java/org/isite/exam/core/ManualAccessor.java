@@ -12,7 +12,7 @@ import java.util.List;
 
 import static java.util.Collections.emptyList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.isite.commons.cloud.data.Converter.convert;
+import static org.isite.commons.cloud.converter.DataConverter.convert;
 import static org.isite.exam.data.enums.QuestionMode.MANUALLY;
 
 /**

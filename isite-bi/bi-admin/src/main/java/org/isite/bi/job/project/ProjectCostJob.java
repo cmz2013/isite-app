@@ -2,9 +2,9 @@ package org.isite.bi.job.project;
 
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import org.isite.bi.service.project.CostCalculator;
 import org.isite.bi.data.enums.project.CostType;
 import org.isite.bi.data.vo.project.CostElement;
+import org.isite.bi.service.project.CostCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
 import static org.isite.bi.data.enums.project.CostType.values;
-import static org.isite.commons.lang.data.Constants.ZERO;
+import static org.isite.commons.lang.Constants.ZERO;
 
 /**
  * @Description 计算项目费用JOB

@@ -2,7 +2,7 @@ package org.isite.exam.data.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.commons.cloud.data.Dto;
+import org.isite.commons.cloud.data.dto.Dto;
 import org.isite.exam.data.enums.QuestionType;
 
 /**
@@ -10,7 +10,7 @@ import org.isite.exam.data.enums.QuestionType;
  */
 @Getter
 @Setter
-public class QuestionQuery extends Dto<Long> {
+public class QuestionGetDto extends Dto<Long> {
     /**
      * 专业ID
      */

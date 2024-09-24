@@ -15,8 +15,8 @@ import java.util.Map;
 
 import static java.util.Collections.singletonList;
 import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.isite.commons.lang.data.Constants.ONE;
-import static org.isite.commons.lang.utils.TreeUtils.get;
+import static org.isite.commons.cloud.utils.VoUtils.get;
+import static org.isite.commons.lang.Constants.ONE;
 import static org.isite.commons.lang.utils.TypeUtils.cast;
 
 /**

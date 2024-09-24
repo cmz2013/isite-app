@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static org.isite.commons.cloud.data.Converter.convert;
-import static org.isite.commons.cloud.data.Converter.groupBy;
-import static org.isite.commons.cloud.data.Converter.toMap;
+import static org.isite.commons.cloud.converter.DataConverter.convert;
+import static org.isite.commons.cloud.converter.MapConverter.groupBy;
+import static org.isite.commons.cloud.converter.MapConverter.toMap;
 
 /**
  * @Description 组卷接口
@@ -34,9 +34,9 @@ public abstract class ExamAccessor implements Strategy<QuestionMode> {
      */
     public List<ExamModule> getExamModules(int paperId) {
         Map<QuestionType, List<QuestionPo>> questions =
-                groupBy(findQuestions(paperId), QuestionPo::getQuestionType);
+                groupBy(QuestionPo::getQuestionType, findQuestions(paperId));
         Map<QuestionType, ScoreRulePo> scoreRules =
-                toMap(scoreRuleService.findByPaperId(paperId), ScoreRulePo::getQuestionType);
+                toMap(ScoreRulePo::getQuestionType, scoreRuleService.findByPaperId(paperId));
 
         List<ExamModule> examModules = new ArrayList<>();
         questions.forEach((questionType, questionPos) -> examModules.add(new ExamModule(

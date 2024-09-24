@@ -2,7 +2,7 @@ package org.isite.bi.controller.operation;
 
 import org.isite.bi.cache.operation.InviteRankCache;
 import org.isite.bi.data.vo.operation.InviteRank;
-import org.isite.commons.cloud.data.Result;
+import org.isite.commons.cloud.data.vo.Result;
 import org.isite.commons.web.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static org.isite.bi.data.constants.BiConstants.URL_BI;
-import static org.isite.commons.cloud.constants.UrlConstants.URL_API;
+import static org.isite.commons.cloud.data.constants.UrlConstants.URL_API;
 
 /**
  * @Author <font color='blue'>zhangcm</font>

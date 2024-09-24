@@ -1,6 +1,6 @@
 package org.isite.project;
 
-import org.isite.commons.cloud.data.Result;
+import org.isite.commons.cloud.data.vo.Result;
 import org.isite.commons.web.ftp.FtpClient;
 import org.isite.misc.data.vo.FileRecord;
 import org.isite.misc.file.FtpFileHandler;

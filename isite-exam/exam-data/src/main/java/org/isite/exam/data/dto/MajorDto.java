@@ -2,7 +2,7 @@ package org.isite.exam.data.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.commons.cloud.data.TreeDto;
+import org.isite.commons.cloud.data.dto.TreeDto;
 
 import javax.validation.constraints.NotBlank;
 
