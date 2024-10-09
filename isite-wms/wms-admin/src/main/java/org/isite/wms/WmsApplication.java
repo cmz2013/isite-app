@@ -10,18 +10,18 @@ import tk.mybatis.spring.annotation.MapperScan;
 import static org.springframework.boot.SpringApplication.run;
 
 /**
- * @Description 如果没有使用@MapperScan注解，就需要在接口上增加@Mapper注解，否则MyBatis无法判断扫描哪些接口。
+ * @Description 如果没有使用@MapperScan注解，就需要在接口上增加 @Mapper 注解，否则 MyBatis 无法判断扫描哪些接口。
  * @Author <font color='blue'>zhangcm</font>
  */
 @EnableFeignClients
 @EnableDiscoveryClient
-@EnableMethodCache(basePackages = "org.isite.oa")
+@EnableMethodCache(basePackages = "org.isite.wms")
 @EnableTransactionManagement
-@MapperScan(basePackages = {"org.isite.oa.mapper"})
+@MapperScan(basePackages = {"org.isite.wms.mapper"})
 @SpringBootApplication
-public class OaApplication {
+public class WmsApplication {
 
     public static void main(String[] args) {
-        run(OaApplication.class, args);
+        run(WmsApplication.class, args);
     }
 }
