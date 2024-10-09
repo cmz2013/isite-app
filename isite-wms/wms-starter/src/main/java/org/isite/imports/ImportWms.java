@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
-//@EnableFeignClients(basePackages = {"org.isite.wm.client"})
+//@EnableFeignClients(basePackages = {"org.isite.wms.client"})
 @ComponentScan(basePackages = {"org.isite.wms"})
-public class ImportWm {
+public class ImportWms {
 }
