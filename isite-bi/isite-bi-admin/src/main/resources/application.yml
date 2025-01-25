@@ -2,3 +2,8 @@
 mybatis:
   #数据对象扫描路径
   type-aliases-package: org.isite.bi.po
+
+#对通用Mapper进行配置
+mapper:
+  #取回主键的方式，配置数据库类型：MYSQL、DB2等
+  identity: MYSQL

@@ -27,7 +27,7 @@ public class InviteRankJob {
      * @Description 分片任务：统计活动邀请排行榜单（缓存3天，每天0点更新一次）
      * 10个执行器的集群来处理10w条数据，每台机器只需要处理1w条数据，耗时降低10倍
      */
-    @XxlJob("inviteRankJobHandler")
+    @XxlJob("inviteRankJob")
     public ReturnT<String> execute(String params) {
         int shardIndex = getShardIndex();
         int shardTotal = getShardTotal();

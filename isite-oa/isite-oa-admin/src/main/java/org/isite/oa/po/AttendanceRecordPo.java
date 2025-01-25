@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import java.util.Date;
 
 /**
- * @Description 员工考勤记录
+ * @Description 员工异常考勤记录
  * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
