@@ -20,7 +20,7 @@ public class ExamQuestionPo extends Po<Integer> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 题型
      */

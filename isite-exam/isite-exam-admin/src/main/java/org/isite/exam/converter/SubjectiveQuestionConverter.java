@@ -1,11 +1,10 @@
 package org.isite.exam.converter;
 
-import org.isite.exam.po.QuestionPo;
+import org.isite.commons.lang.Reflection;
+import org.isite.commons.lang.utils.TypeUtils;
 import org.isite.exam.data.dto.SubjectiveQuestionDto;
 import org.isite.exam.data.vo.SubjectiveQuestion;
-
-import static org.isite.commons.lang.Reflection.getGenericParameter;
-
+import org.isite.exam.po.QuestionPo;
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -20,7 +19,7 @@ public abstract class SubjectiveQuestionConverter<V extends SubjectiveQuestion,
 
     @Override
     protected Class<V> getQuestionVoClass() {
-        return (Class<V>) getGenericParameter(this.getClass(), ObjectiveQuestionConverter.class);
+        return TypeUtils.cast(Reflection.getGenericParameter(this.getClass(), ObjectiveQuestionConverter.class));
     }
 
     /**

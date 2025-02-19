@@ -1,5 +1,4 @@
 package org.isite.exam.data.constants;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -11,6 +10,6 @@ public class ExamConstants {
     /**
      * 服务ID
      */
-    public static final String SERVICE_ID = "exam-admin";
+    public static final String SERVICE_ID = "isite-exam-admin";
 
 }

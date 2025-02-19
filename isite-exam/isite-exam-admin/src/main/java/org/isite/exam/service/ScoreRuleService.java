@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -22,9 +21,9 @@ public class ScoreRuleService extends PoService<ScoreRulePo, Integer> {
     /**
      * 根据试卷ID查询评分规则
      */
-    public List<ScoreRulePo> findByPaperId(Integer paperId) {
+    public List<ScoreRulePo> findByExamPaperId(Integer examPaperId) {
         ScoreRulePo query = new ScoreRulePo();
-        query.setPaperId(paperId);
+        query.setExamPaperId(examPaperId);
         return findList(query);
     }
 }

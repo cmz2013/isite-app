@@ -27,7 +27,7 @@ public class ExamScene extends Vo<Integer>  {
     /**
      * 试卷ID。考试场景关联试卷
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 是否支持需考
      */

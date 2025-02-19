@@ -1,16 +1,14 @@
-package org.isite.bi.service.project;
+package org.isite.bi.data.vo.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.bi.data.vo.project.CostRule;
-import org.isite.mybatis.data.Po;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter
-public class CostRecordPair<C extends Po<?>> {
+public class CostSummary<C> {
     /**
      * 费用科目规则
      */
@@ -20,7 +18,7 @@ public class CostRecordPair<C extends Po<?>> {
      */
     private C costRecord;
 
-    public CostRecordPair(CostRule costRule, C costRecord) {
+    public CostSummary(CostRule costRule, C costRecord) {
         this.costRule = costRule;
         this.costRecord = costRecord;
     }

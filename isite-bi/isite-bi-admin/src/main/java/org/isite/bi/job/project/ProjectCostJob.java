@@ -1,34 +1,29 @@
 package org.isite.bi.job.project;
 
 import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import org.apache.commons.collections4.CollectionUtils;
 import org.isite.bi.data.enums.project.CostType;
-import org.isite.bi.data.vo.project.CostElement;
+import org.isite.bi.data.vo.project.ProjectCost;
 import org.isite.bi.service.project.CostCalculator;
+import org.isite.bi.service.project.ProjectCostService;
+import org.isite.commons.lang.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
-
-import static com.xxl.job.core.biz.model.ReturnT.SUCCESS;
-import static com.xxl.job.core.context.XxlJobHelper.getShardIndex;
-import static com.xxl.job.core.context.XxlJobHelper.getShardTotal;
-import static com.xxl.job.core.context.XxlJobHelper.log;
-import static java.util.Arrays.stream;
-import static java.util.Comparator.comparingInt;
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.isite.bi.data.enums.project.CostType.values;
-import static org.isite.commons.lang.Constants.ZERO;
-
+import java.util.stream.Collectors;
 /**
  * @Description 计算项目费用JOB
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 public class ProjectCostJob {
-
     private CostCalculator costCalculator;
+    private ProjectCostService projectCostService;
 
     /**
      * @Description 分片任务：计算项目费用
@@ -36,25 +31,21 @@ public class ProjectCostJob {
      */
     @XxlJob("projectCostJob")
     public ReturnT<String> execute(String params) {
-        int shardIndex = getShardIndex();
-        int shardTotal = getShardTotal();
-        log("项目费用计算任务：当前分片序号(分片序号从0开始) = {}, 总分片数 = {}", shardIndex, shardTotal);
-
+        int shardIndex = XxlJobHelper.getShardIndex();
+        int shardTotal = XxlJobHelper.getShardTotal();
+        XxlJobHelper.log("项目费用计算任务：" +
+                "当前分片序号(分片序号从0开始) = {}, 总分片数 = {}", shardIndex, shardTotal);
+        long index = Constants.ZERO;
         //按CostType中order从小到大的顺序返回
-        List<CostType> costTypes = stream(values()).sorted(comparingInt(CostType::getOrder)).collect(toList());
-        List<CostElement> costElements = findCostElements(shardIndex, shardTotal, ZERO);
-        while (isNotEmpty(costElements)) {
-            costElements.forEach(costElement -> costTypes.forEach(costType -> costCalculator.execute(costType, costElement)));
-            costElements = findCostElements(shardIndex, shardTotal, costElements.get(ZERO).getProjectId());
+        List<CostType> costTypes = Arrays.stream(CostType.values())
+                .sorted(Comparator.comparingInt(CostType::getOrder)).collect(Collectors.toList());
+        List<ProjectCost> projectCosts = projectCostService.findList(shardIndex, shardTotal, Constants.ZERO);
+        while (CollectionUtils.isNotEmpty(projectCosts)) {
+            projectCosts.forEach(projectCost -> costTypes.forEach(costType -> costCalculator.execute(costType, projectCost)));
+            projectCosts = projectCosts.size() == Constants.HUNDRED ?
+                    projectCostService.findList(shardIndex, shardTotal, ++index * Constants.HUNDRED) : null;
         }
-        return SUCCESS;
-    }
-
-    /**
-     * 查询一个项目的费用参数，项目ID除以shardTotal取余，如果余数为shardIndex，则返回该项目的费用参数
-     */
-    private List<CostElement> findCostElements(int shardIndex, int shardTotal,  int minId) {
-        return null;
+        return ReturnT.SUCCESS;
     }
 
     @Autowired
@@ -62,4 +53,8 @@ public class ProjectCostJob {
         this.costCalculator = costCalculator;
     }
 
+    @Autowired
+    public void setProjectCostService(ProjectCostService projectCostService) {
+        this.projectCostService = projectCostService;
+    }
 }

@@ -5,8 +5,7 @@ import lombok.Setter;
 import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
-import java.util.Date;
-
+import java.time.LocalDateTime;
 /**
  * @Description 员工发薪记录
  * @Author <font color='blue'>zhangcm</font>
@@ -18,43 +17,43 @@ public class PayrollRecordPo extends Po<Long> {
     /**
      * 员工ID
      */
-    private Integer employeeId;
+    private Long employeeId;
     /**
-     * 薪资周期
+     * 薪资周期 yyyyMM
      */
-    private Date payPeriod;
+    private Integer payPeriod;
     /**
      * 基本工资(分)
      */
-    private Integer basicSalary;
+    private Long basicSalary;
     /**
      * 津贴（分），如交通津贴、住房津贴等
      */
-    private Integer allowances;
+    private Long allowances;
     /**
      * 加班费(分)
      */
-    private Integer overtimePay;
+    private Long overtimePay;
     /**
      * 奖金(分)
      */
-    private Integer bonuses;
+    private Long bonuses;
     /**
      * 应发工资(分)=基本工资 + 津贴 + 奖金 + 加班费
      */
-    private Integer grossSalary;
+    private Long grossSalary;
     /**
      * 扣除项(分)
      */
-    private Integer deductions;
+    private Long deductions;
     /**
      * 实发工资(分)=应发工资 - 扣款
      */
-    private Integer netSalary;
+    private Long netSalary;
     /**
-     * 发薪日期
+     * 发薪时间
      */
-    private Date paymentDate;
+    private LocalDateTime paymentTime;
     /**
      * 备注
      */

@@ -32,7 +32,7 @@ public class ExamSceneDto extends Dto<Integer> {
      * 试卷ID。考试场景关联试卷
      */
     @NotNull(groups = {Add.class, Update.class})
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 是否支持需考
      */

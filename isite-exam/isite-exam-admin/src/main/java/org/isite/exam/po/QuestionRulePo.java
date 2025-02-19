@@ -20,7 +20,7 @@ public class QuestionRulePo extends Po<Integer> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 题库ID
      */

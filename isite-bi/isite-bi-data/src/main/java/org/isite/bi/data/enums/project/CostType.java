@@ -1,8 +1,8 @@
 package org.isite.bi.data.enums.project;
 
 import lombok.Getter;
+import org.isite.commons.lang.Constants;
 import org.isite.commons.lang.enums.Enumerable;
-
 /**
  * @Description 费用类型
  * @Author <font color='blue'>zhangcm</font>
@@ -11,7 +11,7 @@ public enum CostType implements Enumerable<String> {
     /**
      * 单项费用
      */
-    ITEM("item", 0);
+    ITEM_COST("item-cost", Constants.ZERO);
 
     /**
      * 算法标识

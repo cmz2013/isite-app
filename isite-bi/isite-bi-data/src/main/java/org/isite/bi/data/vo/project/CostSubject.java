@@ -10,7 +10,7 @@ import org.isite.bi.data.enums.project.CostType;
  */
 @Getter
 @Setter
-public class CostSubject extends CostElement {
+public class CostSubject extends ProjectCost {
     /**
      * 费用类型
      */

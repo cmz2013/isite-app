@@ -1,7 +1,13 @@
 package org.isite.exam.converter;
 
 import lombok.SneakyThrows;
+import org.apache.commons.collections4.CollectionUtils;
+import org.isite.commons.cloud.converter.DataConverter;
 import org.isite.commons.cloud.factory.Strategy;
+import org.isite.commons.lang.Constants;
+import org.isite.commons.lang.Reflection;
+import org.isite.commons.lang.json.Jackson;
+import org.isite.commons.lang.utils.TypeUtils;
 import org.isite.exam.data.dto.QuestionDto;
 import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.Question;
@@ -9,17 +15,8 @@ import org.isite.exam.data.vo.QuestionStem;
 import org.isite.exam.po.QuestionPo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.isite.commons.cloud.converter.DataConverter.convert;
-import static org.isite.commons.lang.Constants.BLANK_STR;
-import static org.isite.commons.lang.Reflection.getGenericParameter;
-import static org.isite.commons.lang.json.Jackson.parseObject;
-import static org.isite.commons.lang.json.Jackson.toJsonString;
-import static org.isite.commons.lang.utils.TypeUtils.cast;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -28,8 +25,8 @@ public abstract class QuestionConverter<V extends Question, D extends QuestionDt
      * 根据题目类型转VO
      */
     public List<V> toQuestions(List<QuestionPo> questionPos) {
-        if (isEmpty(questionPos)) {
-            return emptyList();
+        if (CollectionUtils.isEmpty(questionPos)) {
+            return Collections.emptyList();
         }
         List<V> questionVos = new ArrayList<>(questionPos.size());
         questionPos.forEach(questionPo -> questionVos.add(toQuestion(questionPo)));
@@ -52,13 +49,13 @@ public abstract class QuestionConverter<V extends Question, D extends QuestionDt
         question.setRemark(questionPo.getRemark());
         question.setTags(questionPo.getTags());
         question.setUpdateTime(questionPo.getUpdateTime());
-        question.setQuestionStem(parseObject(questionPo.getQuestionStem(), QuestionStem.class));
+        question.setQuestionStem(Jackson.parseObject(questionPo.getQuestionStem(), QuestionStem.class));
         toQuestionVo(questionPo, question);
         return question;
     }
 
     protected Class<V> getQuestionVoClass() {
-        return cast(getGenericParameter(this.getClass(), QuestionConverter.class));
+        return TypeUtils.cast(Reflection.getGenericParameter(this.getClass(), QuestionConverter.class));
     }
 
     /**
@@ -74,21 +71,20 @@ public abstract class QuestionConverter<V extends Question, D extends QuestionDt
         questionPo.setId(questionDto.getId());
         questionPo.setMajorId(questionDto.getMajorId());
         questionPo.setQuestionType(questionDto.getQuestionType());
-        questionPo.setQuestionStem(toJsonString(convert(questionDto.getQuestionStems(), QuestionStem::new)));
+        questionPo.setQuestionStem(Jackson.toJsonString(DataConverter.convert(questionDto.getQuestionStems(), QuestionStem::new)));
         questionPo.setPoolId(questionDto.getPoolId());
         questionPo.setDifficultyLevel(questionDto.getDifficultyLevel());
-
         questionPo.setTags(questionDto.getTags());
         questionPo.setAnswerAnalysis(questionDto.getAnswerAnalysis());
         questionPo.setRemark(questionDto.getRemark());
         if (null == questionDto.getTags()) {
-            questionPo.setTags(BLANK_STR);
+            questionPo.setTags(Constants.BLANK_STR);
         }
         if (null == questionDto.getAnswerAnalysis()) {
-            questionPo.setAnswerAnalysis(BLANK_STR);
+            questionPo.setAnswerAnalysis(Constants.BLANK_STR);
         }
         if (null == questionDto.getRemark()) {
-            questionPo.setRemark(BLANK_STR);
+            questionPo.setRemark(Constants.BLANK_STR);
         }
         toQuestionPo(questionDto, questionPo);
         return questionPo;

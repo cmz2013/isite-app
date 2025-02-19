@@ -15,7 +15,7 @@ public class QuestionRule extends Vo<Integer> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 题库ID
      */

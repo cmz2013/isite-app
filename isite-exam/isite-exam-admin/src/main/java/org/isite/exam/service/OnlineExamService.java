@@ -1,10 +1,16 @@
 package org.isite.exam.service;
 
+import org.isite.commons.cloud.converter.MapConverter;
+import org.isite.commons.lang.Assert;
+import org.isite.commons.lang.Constants;
+import org.isite.commons.lang.json.Jackson;
 import org.isite.commons.web.sync.Lock;
 import org.isite.commons.web.sync.Synchronized;
+import org.isite.exam.converter.ExamRecordConverter;
 import org.isite.exam.core.ExamAccessorFactory;
 import org.isite.exam.core.ScoreCalculator;
 import org.isite.exam.core.ScoreCalculatorFactory;
+import org.isite.exam.data.constants.CacheKeys;
 import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.ExamRecord;
 import org.isite.exam.data.vo.UserAnswer;
@@ -19,24 +25,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
-
-import static java.lang.Boolean.TRUE;
-import static org.isite.commons.cloud.converter.MapConverter.toMap;
-import static org.isite.commons.lang.Assert.isNull;
-import static org.isite.commons.lang.Assert.notEmpty;
-import static org.isite.commons.lang.Assert.notNull;
-import static org.isite.commons.lang.Constants.ZERO;
-import static org.isite.commons.lang.json.Jackson.parseArray;
-import static org.isite.exam.converter.ExamRecordConverter.toExamRecord;
-import static org.isite.exam.data.constants.CacheKey.LOCK_EXAM_SUBMIT;
-
 /**
  * @Description 线上考试 Service
  * @Author <font color='blue'>zhangcm</font>
  */
 @Service
 public class OnlineExamService {
-
     private ScoreCalculatorFactory scoreCalculatorFactory;
     private ExamPaperService examPaperService;
     private ExamDetailService examDetailService;
@@ -47,25 +41,25 @@ public class OnlineExamService {
      * @Description 查询未结束的考试记录，不存在时创建考试记录，用于开始考试
      */
     @Transactional(rollbackFor = Exception.class)
-    public ExamRecord applyExam(ExamScenePo scenePo, @Nullable Integer tenantId, Long userId) {
+    public ExamRecord applyExam(ExamScenePo examScenePo, @Nullable Integer tenantId, Long userId) {
         ExamRecordPo examRecordPo;
         ExamDetailPo examDetailPo;
-        if (TRUE.equals(scenePo.getContinues())) {
+        if (Boolean.TRUE.equals(examScenePo.getContinues())) {
             examRecordPo = examRecordService.findLastExamRecord(
-                    tenantId,  userId, scenePo.getId(), scenePo.getPaperId());
+                    tenantId,  userId, examScenePo.getId(), examScenePo.getExamPaperId());
             if (null != examRecordPo && examRecordService.notFinished(examRecordPo)) {
                 examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordPo.getId());
-                return toExamRecord(examRecordPo, examDetailPo);
+                return ExamRecordConverter.toExamRecord(examRecordPo, examDetailPo);
             }
         }
-        ExamPaperPo paperPo = examPaperService.get(scenePo.getPaperId());
-        notNull(paperPo, "examPaper not found: " + scenePo.getPaperId());
-        List<ExamModule> examModules = examAccessorFactory.get(paperPo.getQuestionMode())
-                .getExamModules(scenePo.getPaperId());
-        notEmpty(examModules, "examModules is empty: " +  + scenePo.getPaperId());
-        examRecordPo = examRecordService.saveExamRecord(scenePo, paperPo, tenantId, userId);
+        ExamPaperPo examPaperPo = examPaperService.get(examScenePo.getExamPaperId());
+        Assert.notNull(examPaperPo, "examPaper not found: " + examScenePo.getExamPaperId());
+        List<ExamModule> examModules = examAccessorFactory.get(examPaperPo.getQuestionMode())
+                .getExamModules(examScenePo.getExamPaperId());
+        Assert.notEmpty(examModules, "examModules is empty: " +  + examScenePo.getExamPaperId());
+        examRecordPo = examRecordService.saveExamRecord(examScenePo, examPaperPo, tenantId, userId);
         examDetailPo = examDetailService.saveExamDetail(examRecordPo.getId(), examModules);
-        return toExamRecord(examRecordPo, examDetailPo);
+        return ExamRecordConverter.toExamRecord(examRecordPo, examDetailPo);
     }
 
     /**
@@ -73,13 +67,13 @@ public class OnlineExamService {
      * @param userAnswers 用户答题记录
      */
     @Transactional(rollbackFor = Exception.class)
-    @Synchronized(locks = @Lock(name = LOCK_EXAM_SUBMIT, keys = "#examRecordId"))
+    @Synchronized(locks = @Lock(name = CacheKeys.LOCK_EXAM_SUBMIT, keys = "#examRecordId"))
     public int submitExam(long examRecordId, List<UserAnswer> userAnswers) {
-        isNull(examRecordService.get(examRecordId).getSubmitTime(), "It's already been submitted");
+        Assert.isNull(examRecordService.get(examRecordId).getSubmitTime(), "it's already been submitted");
         ExamDetailPo examDetailPo = examDetailService.findOne(ExamDetailPo::getExamRecordId, examRecordId);
-        List<ExamModule> examModules = parseArray(examDetailPo.getExamModules(), ExamModule.class);
-        int userScore = ZERO;
-        Map<Long, UserAnswer> answerMap = toMap(UserAnswer::getQuestionId, userAnswers);
+        List<ExamModule> examModules = Jackson.parseArray(examDetailPo.getExamModules(), ExamModule.class);
+        int userScore = Constants.ZERO;
+        Map<Long, UserAnswer> answerMap = MapConverter.toMap(UserAnswer::getQuestionId, userAnswers);
         for (ExamModule examModule : examModules) {
             ScoreCalculator calculator = scoreCalculatorFactory.get(examModule.getScoreAlgorithm());
             if (null != calculator) {

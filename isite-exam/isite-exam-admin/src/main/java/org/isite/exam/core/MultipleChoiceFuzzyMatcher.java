@@ -1,23 +1,19 @@
 package org.isite.exam.core;
 
+import org.apache.commons.lang3.StringUtils;
+import org.isite.commons.lang.Constants;
+import org.isite.commons.lang.json.Jackson;
 import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.MultipleChoice;
 import org.isite.exam.data.vo.UserAnswer;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-
-import static org.apache.commons.lang3.StringUtils.isBlank;
-import static org.isite.commons.lang.Constants.ZERO;
-import static org.isite.commons.lang.json.Jackson.parseArray;
-import static org.isite.exam.data.enums.QuestionType.MULTIPLE_CHOICE;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 public class MultipleChoiceFuzzyMatcher implements FuzzyMatcher<MultipleChoice> {
-
     /**
      * 匹配用户多选题选项
      * @param question 多选题
@@ -26,8 +22,8 @@ public class MultipleChoiceFuzzyMatcher implements FuzzyMatcher<MultipleChoice> 
      */
     @Override
     public int match(MultipleChoice question, UserAnswer userAnswer) {
-        return null == userAnswer || isBlank(userAnswer.getAnswer()) ? ZERO : match(
-                question.getRightAnswer(), parseArray(userAnswer.getAnswer(), Integer.class));
+        return null == userAnswer || StringUtils.isBlank(userAnswer.getAnswer()) ? Constants.ZERO : match(
+                question.getRightAnswer(), Jackson.parseArray(userAnswer.getAnswer(), Integer.class));
     }
 
     /**
@@ -43,12 +39,12 @@ public class MultipleChoiceFuzzyMatcher implements FuzzyMatcher<MultipleChoice> 
      * @return 选对选项数
      */
     private int match(Collection<Integer> rightAnswers, Collection<Integer> userAnswers) {
-        int rightCount = ZERO;
+        int rightCount = Constants.ZERO;
         for (int userAnswer : userAnswers) {
             if (rightAnswers.contains(userAnswer)) {
                 rightCount++;
             } else {
-                return ZERO;
+                return Constants.ZERO;
             }
         }
         return rightCount;
@@ -56,6 +52,6 @@ public class MultipleChoiceFuzzyMatcher implements FuzzyMatcher<MultipleChoice> 
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] {MULTIPLE_CHOICE};
+        return new QuestionType[] {QuestionType.MULTIPLE_CHOICE};
     }
 }

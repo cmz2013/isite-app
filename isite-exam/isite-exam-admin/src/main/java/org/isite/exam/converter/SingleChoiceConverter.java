@@ -5,11 +5,6 @@ import org.isite.exam.data.enums.QuestionType;
 import org.isite.exam.data.vo.SingleChoice;
 import org.isite.exam.po.QuestionPo;
 import org.springframework.stereotype.Component;
-
-import static java.lang.Integer.parseInt;
-import static org.isite.exam.data.enums.QuestionType.JUDGMENT;
-import static org.isite.exam.data.enums.QuestionType.SINGLE_CHOICE;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -19,7 +14,7 @@ public class SingleChoiceConverter extends
 
     @Override
     protected Integer toRightAnswer(QuestionPo questionPo) {
-        return parseInt(questionPo.getRightAnswer());
+        return Integer.parseInt(questionPo.getRightAnswer());
     }
 
     /**
@@ -32,6 +27,6 @@ public class SingleChoiceConverter extends
 
     @Override
     public QuestionType[] getIdentities() {
-        return new QuestionType[] {SINGLE_CHOICE, JUDGMENT};
+        return new QuestionType[] {QuestionType.SINGLE_CHOICE, QuestionType.JUDGMENT};
     }
 }

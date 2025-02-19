@@ -2,6 +2,8 @@ package org.isite.project.controller;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.isite.commons.cloud.converter.DataConverter;
+import org.isite.commons.lang.enums.ResultStatus;
 import org.isite.commons.web.sync.Lock;
 import org.isite.commons.web.sync.Synchronized;
 import org.isite.data.handler.JsonHandler;
@@ -9,10 +11,6 @@ import org.isite.project.data.dto.DemoDto;
 import org.isite.project.data.vo.DemoResult;
 import org.isite.project.data.vo.DemoVo;
 import org.springframework.stereotype.Component;
-
-import static org.isite.commons.cloud.converter.DataConverter.convert;
-import static org.isite.commons.lang.enums.ResultStatus.OK;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -23,8 +21,8 @@ public class DemoHandler extends JsonHandler<DemoDto, DemoVo> {
     public DemoHandler() {
         super(reqData -> {
             DemoResult result = new DemoResult();
-            result.setData(convert(reqData, DemoVo::new));
-            result.setCode(OK.getCode());
+            result.setData(DataConverter.convert(reqData, DemoVo::new));
+            result.setCode(ResultStatus.OK.getCode());
             return result;
         });
     }

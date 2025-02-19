@@ -8,7 +8,6 @@ import org.isite.oa.data.enums.BonusType;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * @Description 奖金记录
@@ -21,11 +20,11 @@ public class BonusRecordPo extends Po<Long> {
     /**
      * 员工ID
      */
-    private Integer employeeId;
+    private Long employeeId;
     /**
      * 薪资周期
      */
-    private Date payPeriod;
+    private Integer payPeriod;
     /**
      * 奖金类型
      */

@@ -4,6 +4,8 @@ import org.isite.bi.mapper.operation.ActivityMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -17,7 +19,10 @@ public class ActivityService {
         this.activityMapper = activityMapper;
     }
 
-    public Integer getOngoingActivityId(int shardIndex, int shardTotal, int minId) {
-        return activityMapper.selectOngoingActivityId(shardIndex, shardTotal, minId);
+    /**
+     * 批量（100条）查询进行中的活动ID，活动ID除以shardTotal取余，如果余数为shardIndex，则返回该活动ID
+     */
+    public List<Integer> findIds(int shardIndex, int shardTotal, long minId) {
+        return activityMapper.selectOngoingActivityIds(shardIndex, shardTotal, minId);
     }
 }

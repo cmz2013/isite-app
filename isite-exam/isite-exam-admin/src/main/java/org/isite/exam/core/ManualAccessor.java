@@ -1,5 +1,7 @@
 package org.isite.exam.core;
 
+import org.apache.commons.collections4.CollectionUtils;
+import org.isite.commons.cloud.converter.DataConverter;
 import org.isite.exam.data.enums.QuestionMode;
 import org.isite.exam.po.ExamQuestionPo;
 import org.isite.exam.po.QuestionPo;
@@ -8,29 +10,23 @@ import org.isite.exam.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Collections.emptyList;
-import static org.apache.commons.collections4.CollectionUtils.isEmpty;
-import static org.isite.commons.cloud.converter.DataConverter.convert;
-import static org.isite.exam.data.enums.QuestionMode.MANUALLY;
-
 /**
  * @Description 手动组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 public class ManualAccessor extends ExamAccessor {
-
     private QuestionService questionService;
     private ExamQuestionService examQuestionService;
 
     @Override
-    protected List<QuestionPo> findQuestions(int paperId) {
+    protected List<QuestionPo> findQuestions(int examPaperId) {
         ExamQuestionPo query = new ExamQuestionPo();
-        query.setPaperId(paperId);
-        List<Integer> questionIds = convert(examQuestionService.findList(query), ExamQuestionPo::getQuestionId);
-        return isEmpty(questionIds) ? emptyList() :
+        query.setExamPaperId(examPaperId);
+        List<Integer> questionIds = DataConverter.convert(examQuestionService.findList(query), ExamQuestionPo::getQuestionId);
+        return CollectionUtils.isEmpty(questionIds) ? Collections.emptyList() :
                 questionService.findIn(QuestionPo::getId, questionIds);
     }
 
@@ -46,6 +42,6 @@ public class ManualAccessor extends ExamAccessor {
 
     @Override
     public QuestionMode[] getIdentities() {
-        return new QuestionMode[] {MANUALLY};
+        return new QuestionMode[] {QuestionMode.MANUALLY_SELECT};
     }
 }

@@ -1,6 +1,9 @@
 package org.isite.exam.core;
 
 import com.github.pagehelper.Page;
+import org.apache.commons.collections4.CollectionUtils;
+import org.isite.commons.lang.Constants;
+import org.isite.commons.lang.schedule.RandomScheduler;
 import org.isite.exam.data.enums.QuestionMode;
 import org.isite.exam.po.QuestionPo;
 import org.isite.exam.po.QuestionRulePo;
@@ -11,45 +14,36 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Collections.shuffle;
-import static java.util.Comparator.comparingInt;
-import static java.util.stream.Collectors.toList;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.isite.commons.lang.Constants.ONE;
-import static org.isite.commons.lang.Constants.THREE;
-import static org.isite.commons.lang.Constants.ZERO;
-import static org.isite.commons.lang.schedule.RandomScheduler.nextInt;
-import static org.isite.exam.data.enums.QuestionMode.RANDOM;
-
+import java.util.stream.Collectors;
 /**
  * @Description 随机组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 public class RandomAccessor extends ExamAccessor {
-
-    private QuestionRuleService questionRuleService;
     private QuestionService questionService;
+    private QuestionRuleService questionRuleService;
 
     @Override
-    protected List<QuestionPo> findQuestions(int paperId) {
-        int offset = ZERO;
-        List<QuestionRulePo> questionRules = questionRuleService.findByPaperId(paperId);
+    protected List<QuestionPo> findQuestions(int examPaperId) {
+        int offset = Constants.ZERO;
+        List<QuestionRulePo> questionRules = questionRuleService.findByPaperId(examPaperId);
         Map<Integer, Integer> questionTotals = countQuestionTotals(questionRules);
         List<QuestionPo> questionPos = new ArrayList<>();
         for (QuestionRulePo questionRule : sortQuestionRules(questionRules, questionTotals)) {
             //如果选取的题目数量小于当前选题规则设置的题数时，就把未选的题数累加到下一个选题规则的题数上，继续选题
             int number = offset + questionRule.getNumber();
-            questionRule.setNumber(number + questionRule.getNumber() / THREE);
+            questionRule.setNumber(number + questionRule.getNumber() / Constants.THREE);
             try (Page<QuestionPo> page = findPage(questionRule, questionTotals.get(questionRule.getId()))) {
-                if (isNotEmpty(page.getResult())) {
+                if (CollectionUtils.isNotEmpty(page.getResult())) {
                     offset = number - page.size();
-                    while (offset < ZERO) {
-                        page.remove(nextInt(page.getResult().size()));
+                    while (offset < Constants.ZERO) {
+                        page.remove(RandomScheduler.nextInt(page.getResult().size()));
                         offset++;
                     }
                     questionPos.addAll(page.getResult());
@@ -58,7 +52,7 @@ public class RandomAccessor extends ExamAccessor {
                 }
             }
         }
-        shuffle(questionPos);
+        Collections.shuffle(questionPos);
         return questionPos;
     }
 
@@ -68,8 +62,8 @@ public class RandomAccessor extends ExamAccessor {
     private List<QuestionRulePo> sortQuestionRules(
             List<QuestionRulePo> questionRules, Map<Integer, Integer> questionTotals) {
         //comparingInt将QuestionRulePo转换为: 题目总数-选题个数，选题规则基于这个值进行排序
-        return questionRules.stream().sorted(comparingInt(o ->
-                (questionTotals.get(o.getId()) - o.getNumber()))).collect(toList());
+        return questionRules.stream().sorted(Comparator.comparingInt(o ->
+                (questionTotals.get(o.getId()) - o.getNumber()))).collect(Collectors.toList());
     }
 
     /**
@@ -94,7 +88,7 @@ public class RandomAccessor extends ExamAccessor {
         PageQuery<QuestionPo> pageQuery = new PageQuery<>() {
             @Override
             public int getOffset() {
-                return bound > ZERO ? nextInt(bound + ONE) : ZERO;
+                return bound > Constants.ZERO ? RandomScheduler.nextInt(bound + Constants.ONE) : Constants.ZERO;
             }
         };
         pageQuery.setPageSize(rulePo.getNumber());
@@ -114,6 +108,6 @@ public class RandomAccessor extends ExamAccessor {
 
     @Override
     public QuestionMode[] getIdentities() {
-        return new QuestionMode[] {RANDOM};
+        return new QuestionMode[] {QuestionMode.RANDOM_SELECT};
     }
 }

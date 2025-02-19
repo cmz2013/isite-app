@@ -1,24 +1,24 @@
 package org.isite.bi.service.project;
 
+import org.apache.commons.collections4.CollectionUtils;
 import org.isite.bi.data.enums.project.CostType;
-import org.isite.bi.data.vo.project.CostElement;
+import org.isite.bi.data.vo.project.CostIndex;
 import org.isite.bi.data.vo.project.CostRule;
 import org.isite.bi.data.vo.project.CostSubject;
+import org.isite.bi.data.vo.project.CostSummary;
+import org.isite.bi.data.vo.project.ProjectCost;
 import org.isite.commons.cloud.factory.Strategy;
+import org.isite.commons.cloud.utils.VoUtils;
+import org.isite.commons.lang.Constants;
+import org.isite.commons.lang.utils.TypeUtils;
 import org.isite.mybatis.data.Po;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Collections.singletonList;
-import static org.apache.commons.collections4.CollectionUtils.isNotEmpty;
-import static org.isite.commons.cloud.utils.VoUtils.get;
-import static org.isite.commons.lang.Constants.ONE;
-import static org.isite.commons.lang.utils.TypeUtils.cast;
-
 /**
  * @Description 费用算法接口
  * @param <S> 费用科目
@@ -29,7 +29,7 @@ public abstract class CostArithmetic<S extends CostSubject, C extends Po<?>> imp
     /**
      * @Description 查询费用科目。项目中的多个条目（item）以及每个条目中的多个阶段（stage）
      */
-    public abstract List<S> findCostSubject(CostElement costElement);
+    public abstract List<S> findCostSubject(ProjectCost projectCost);
     /**
      * 汇总费用
      */
@@ -41,46 +41,43 @@ public abstract class CostArithmetic<S extends CostSubject, C extends Po<?>> imp
                 return;
             }
         }
-        saveCostRecord(singletonList(costRecord));
+        saveCostRecord(Collections.singletonList(costRecord));
     }
 
     /**
      * 从规则树叶子节点到根节点逐层汇总费用
      */
-    public void sumCostIndexPairs(List<CostIndexPair> costIndexPairs, List<CostRule> costRules) {
+    public void sumCostIndexPairs(List<CostIndex> costIndices, List<CostRule> costRules) {
         //key: 规则ID, value: 费用数据
         Map<Integer, C> ruleCostRecord = new HashMap<>();
         //key: 层级, value: 层节点Map
-        Map<Integer, List<CostRecordPair<C>>> layerCostRecordPair = new HashMap<>();
-        int level = ONE;
-
-        for (CostIndexPair costIndexPair : costIndexPairs) {
+        Map<Integer, List<CostSummary<C>>> layerCostRecordPair = new HashMap<>();
+        int level = Constants.ONE;
+        for (CostIndex costIndex : costIndices) {
             //汇总费用科目到规则树的叶子节点
-            C cost = sumLeafNode(cast(costIndexPair.getCostSubject()),
-                    ruleCostRecord.get(costIndexPair.getCostRule().getId()), costIndexPair.getCostRule());
-
+            C cost = sumLeafNode(TypeUtils.cast(costIndex.getCostSubject()),
+                    ruleCostRecord.get(costIndex.getCostRule().getId()), costIndex.getCostRule());
             if (null == cost) {
                 return;
             }
-            ruleCostRecord.put(costIndexPair.getCostRule().getId(), cost);
+            ruleCostRecord.put(costIndex.getCostRule().getId(), cost);
             //封装叶子层的汇总数据
-            initLayerNode(costIndexPair.getLevel(), costIndexPair.getCostRule(), ruleCostRecord, layerCostRecordPair);
-            if (level < costIndexPair.getLevel()) {
-                level = costIndexPair.getLevel();
+            initLayerNode(costIndex.getLevel(), costIndex.getCostRule(), ruleCostRecord, layerCostRecordPair);
+            if (level < costIndex.getLevel()) {
+                level = costIndex.getLevel();
             }
         }
-
         boolean stopSummarize = false;
         //向根节点逐层汇总数据
-        while (level > ONE) {
-            int pLevel = level - ONE;
-            for (CostRecordPair<C> costRecordPair : layerCostRecordPair.get(level)) {
-                Integer rulePid = costRecordPair.getCostRule().getPid();
-                CostRule pRule = get(rulePid, costRules);
-                C cost = sumBranchNode(costRecordPair.getCostRecord(), ruleCostRecord.get(rulePid), pRule);
+        while (level > Constants.ONE) {
+            int pLevel = level - Constants.ONE;
+            for (CostSummary<C> costSummary : layerCostRecordPair.get(level)) {
+                Integer rulePid = costSummary.getCostRule().getPid();
+                CostRule pRule = VoUtils.get(costRules, rulePid);
+                C cost = sumBranchNode(costSummary.getCostRecord(), ruleCostRecord.get(rulePid), pRule);
                 if (null == cost) {
                     if (!stopSummarize) {
-                        stopSummarize = true;
+                        stopSummarize = Boolean.TRUE;
                     }
                 } else {
                     ruleCostRecord.put(rulePid, cost);
@@ -103,20 +100,19 @@ public abstract class CostArithmetic<S extends CostSubject, C extends Po<?>> imp
      * @param layerCostRecordPair 层汇总数据
      */
     private void initLayerNode(int level, CostRule rule, Map<Integer, C> ruleCostRecord,
-                               Map<Integer, List<CostRecordPair<C>>> layerCostRecordPair) {
-
-        if (ONE == level) {
+                               Map<Integer, List<CostSummary<C>>> layerCostRecordPair) {
+        if (Constants.ONE == level) {
             return;
         }
-        if (isNotEmpty(layerCostRecordPair.computeIfAbsent(level, key -> new LinkedList<>()))) {
-            for (CostRecordPair<C> costRecordPair : layerCostRecordPair.get(level)) {
-                if (rule.getId().equals(costRecordPair.getCostRule().getId())) {
-                    costRecordPair.setCostRecord(ruleCostRecord.get(rule.getId()));
+        if (CollectionUtils.isNotEmpty(layerCostRecordPair.computeIfAbsent(level, key -> new LinkedList<>()))) {
+            for (CostSummary<C> costSummary : layerCostRecordPair.get(level)) {
+                if (rule.getId().equals(costSummary.getCostRule().getId())) {
+                    costSummary.setCostRecord(ruleCostRecord.get(rule.getId()));
                     return;
                 }
             }
         }
-        layerCostRecordPair.get(level).add(new CostRecordPair<>(rule, ruleCostRecord.get(rule.getId())));
+        layerCostRecordPair.get(level).add(new CostSummary<>(rule, ruleCostRecord.get(rule.getId())));
     }
 
     /**

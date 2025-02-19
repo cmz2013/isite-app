@@ -17,7 +17,7 @@ public class BankAccountPo extends Po<Integer> {
     /**
      * 员工ID
      */
-    private Integer employeeId;
+    private Long employeeId;
     /**
      * 账户持有人姓名（录入时负责人检查，要求必须和员工真实姓名一致）
      */

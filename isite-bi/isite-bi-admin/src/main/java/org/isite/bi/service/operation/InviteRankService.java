@@ -20,7 +20,7 @@ public class InviteRankService {
         this.inviteRecordMapper = inviteRecordMapper;
     }
 
-    public List<InviteRank> getInviteRank(int activityId) {
+    public List<InviteRank> findInviteRanks(int activityId) {
         return inviteRecordMapper.selectInviteRank(activityId);
     }
 }

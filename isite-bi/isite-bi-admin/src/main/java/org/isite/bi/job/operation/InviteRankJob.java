@@ -1,25 +1,22 @@
 package org.isite.bi.job.operation;
 
 import com.xxl.job.core.biz.model.ReturnT;
+import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
+import org.apache.commons.collections4.CollectionUtils;
 import org.isite.bi.cache.operation.InviteRankCache;
 import org.isite.bi.service.operation.ActivityService;
+import org.isite.commons.lang.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import static com.xxl.job.core.biz.model.ReturnT.SUCCESS;
-import static com.xxl.job.core.context.XxlJobHelper.getShardIndex;
-import static com.xxl.job.core.context.XxlJobHelper.getShardTotal;
-import static com.xxl.job.core.context.XxlJobHelper.log;
-import static org.isite.commons.lang.Constants.ZERO;
-
+import java.util.List;
 /**
  * @Description 计算项目费用JOB
  * @Author <font color='blue'>zhangcm</font>
  */
 @Component
 public class InviteRankJob {
-
     private ActivityService activityService;
     private InviteRankCache inviteRankCache;
 
@@ -29,23 +26,18 @@ public class InviteRankJob {
      */
     @XxlJob("inviteRankJob")
     public ReturnT<String> execute(String params) {
-        int shardIndex = getShardIndex();
-        int shardTotal = getShardTotal();
-        log("统计活动邀请排行榜单计算任务：当前分片序号(分片序号从0开始) = {}, 总分片数 = {}", shardIndex, shardTotal);
-
-        Integer activityId = getOngoingActivityId(shardIndex, shardTotal, ZERO);
-        while (null != activityId) {
-            inviteRankCache.updateInviteRank(activityId);
-            activityId = getOngoingActivityId(shardIndex, shardTotal, activityId);
+        int shardIndex = XxlJobHelper.getShardIndex();
+        int shardTotal = XxlJobHelper.getShardTotal();
+        XxlJobHelper.log("统计活动邀请排行榜单计算任务：" +
+                "当前分片序号(分片序号从0开始) = {}, 总分片数 = {}", shardIndex, shardTotal);
+        long index = Constants.ZERO;
+        List<Integer> activityIds = activityService.findIds(shardIndex, shardTotal, Constants.ZERO);
+        while (CollectionUtils.isNotEmpty(activityIds)) {
+            activityIds.forEach(activityId -> inviteRankCache.updateInviteRank(activityId));
+            activityIds = activityIds.size() == Constants.HUNDRED ?
+                    activityService.findIds(shardIndex, shardTotal, ++index * Constants.HUNDRED) : null;
         }
-        return SUCCESS;
-    }
-
-    /**
-     * 查询一个进行中的活动ID，活动ID除以shardTotal取余，如果余数为shardIndex，则返回该活动ID
-     */
-    private Integer getOngoingActivityId(int shardIndex, int shardTotal, int minId) {
-        return activityService.getOngoingActivityId(shardIndex, shardTotal, minId);
+        return ReturnT.SUCCESS;
     }
 
     @Autowired

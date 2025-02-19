@@ -1,16 +1,13 @@
 package org.isite.exam.converter;
 
+import org.isite.commons.cloud.converter.DataConverter;
+import org.isite.commons.lang.Reflection;
+import org.isite.commons.lang.json.Jackson;
+import org.isite.commons.lang.utils.TypeUtils;
 import org.isite.exam.data.dto.ObjectiveQuestionDto;
 import org.isite.exam.data.vo.ObjectiveQuestion;
 import org.isite.exam.data.vo.Option;
 import org.isite.exam.po.QuestionPo;
-
-import static org.isite.commons.cloud.converter.DataConverter.convert;
-import static org.isite.commons.lang.Reflection.getGenericParameter;
-import static org.isite.commons.lang.json.Jackson.parseArray;
-import static org.isite.commons.lang.json.Jackson.toJsonString;
-import static org.isite.commons.lang.utils.TypeUtils.cast;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -21,13 +18,13 @@ public abstract class ObjectiveQuestionConverter<V extends ObjectiveQuestion<T>,
      */
     @Override
     protected void toQuestionVo(QuestionPo questionPo, V question) {
-        question.setOptions(parseArray(questionPo.getOptions(), Option.class));
+        question.setOptions(Jackson.parseArray(questionPo.getOptions(), Option.class));
         question.setRightAnswer(toRightAnswer(questionPo));
     }
 
     @Override
     protected Class<V> getQuestionVoClass() {
-        return cast(getGenericParameter(this.getClass(), ObjectiveQuestionConverter.class));
+        return TypeUtils.cast(Reflection.getGenericParameter(this.getClass(), ObjectiveQuestionConverter.class));
     }
 
     /**
@@ -40,7 +37,7 @@ public abstract class ObjectiveQuestionConverter<V extends ObjectiveQuestion<T>,
      */
     @Override
     protected void toQuestionPo(D questionDto, QuestionPo questionPo) {
-        questionPo.setOptions(toJsonString(convert(questionDto.getOptions(), Option::new)));
+        questionPo.setOptions(Jackson.toJsonString(DataConverter.convert(questionDto.getOptions(), Option::new)));
         questionPo.setRightAnswer(toRightAnswer(questionDto));
     }
 

@@ -2,14 +2,12 @@ package org.isite.project.service;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.isite.commons.cloud.utils.ResultUtils;
+import org.isite.commons.lang.json.Jackson;
 import org.isite.data.callback.JsonCallback;
 import org.isite.project.data.dto.DemoDto;
 import org.isite.project.data.vo.DemoResult;
 import org.springframework.stereotype.Component;
-
-import static org.isite.commons.cloud.utils.ResultUtils.isOk;
-import static org.isite.commons.lang.json.Jackson.toJsonString;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -19,8 +17,8 @@ public class DemoCallback extends JsonCallback<DemoDto, DemoResult> {
 
     public DemoCallback() {
         super(result -> {
-            log.info("DemoCallback: " + toJsonString(result));
-            return isOk(result);
+            log.info("DemoCallback: " + Jackson.toJsonString(result));
+            return ResultUtils.isOk(result);
         });
     }
 

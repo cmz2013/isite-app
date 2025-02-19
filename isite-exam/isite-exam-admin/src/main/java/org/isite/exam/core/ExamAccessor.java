@@ -1,5 +1,7 @@
 package org.isite.exam.core;
 
+import org.isite.commons.cloud.converter.DataConverter;
+import org.isite.commons.cloud.converter.MapConverter;
 import org.isite.commons.cloud.factory.Strategy;
 import org.isite.exam.converter.QuestionConverterFactory;
 import org.isite.exam.data.enums.QuestionMode;
@@ -14,33 +16,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import static org.isite.commons.cloud.converter.DataConverter.convert;
-import static org.isite.commons.cloud.converter.MapConverter.groupBy;
-import static org.isite.commons.cloud.converter.MapConverter.toMap;
-
 /**
  * @Description 组卷接口
  * @Author <font color='blue'>zhangcm</font>
  */
 public abstract class ExamAccessor implements Strategy<QuestionMode> {
-
     private ScoreRuleService scoreRuleService;
     private QuestionConverterFactory questionConverterFactory;
 
     /**
      * @Description 获取试卷组成模块
-     * @param paperId 试卷ID
+     * @param examPaperId 试卷ID
      */
-    public List<ExamModule> getExamModules(int paperId) {
+    public List<ExamModule> getExamModules(int examPaperId) {
         Map<QuestionType, List<QuestionPo>> questions =
-                groupBy(QuestionPo::getQuestionType, findQuestions(paperId));
+                MapConverter.groupBy(QuestionPo::getQuestionType, findQuestions(examPaperId));
         Map<QuestionType, ScoreRulePo> scoreRules =
-                toMap(ScoreRulePo::getQuestionType, scoreRuleService.findByPaperId(paperId));
-
+                MapConverter.toMap(ScoreRulePo::getQuestionType, scoreRuleService.findByExamPaperId(examPaperId));
         List<ExamModule> examModules = new ArrayList<>();
         questions.forEach((questionType, questionPos) -> examModules.add(new ExamModule(
-                convert(scoreRules.get(questionType), ScoreRule::new),
+                DataConverter.convert(scoreRules.get(questionType), ScoreRule::new),
                 questionConverterFactory.get(questionType).toQuestions(questionPos))));
         return examModules;
 
@@ -48,10 +43,10 @@ public abstract class ExamAccessor implements Strategy<QuestionMode> {
 
     /**
      * 查询试卷题目
-     * @param paperId 试卷ID
+     * @param examPaperId 试卷ID
      * @return 题目列表
      */
-    protected abstract List<QuestionPo> findQuestions(int paperId);
+    protected abstract List<QuestionPo> findQuestions(int examPaperId);
 
     @Autowired
     public void setQuestionConverterFactory(QuestionConverterFactory questionConverterFactory) {

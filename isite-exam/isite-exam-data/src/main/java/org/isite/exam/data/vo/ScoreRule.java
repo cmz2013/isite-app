@@ -16,7 +16,7 @@ public class ScoreRule extends Vo<Integer> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 题型
      */

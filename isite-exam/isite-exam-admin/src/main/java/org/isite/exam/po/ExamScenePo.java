@@ -8,7 +8,6 @@ import org.isite.mybatis.type.EnumTypeHandler;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Table;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -32,7 +31,7 @@ public class ExamScenePo extends Po<Integer> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 是否支持需考
      */

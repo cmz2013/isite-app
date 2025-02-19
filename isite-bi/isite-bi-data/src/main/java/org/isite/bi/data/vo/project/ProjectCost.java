@@ -9,7 +9,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CostElement {
+public class ProjectCost {
     /**
      * 项目ID
      */

@@ -4,11 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.isite.mybatis.data.Po;
 import org.isite.mybatis.type.EnumTypeHandler;
-import org.isite.oa.data.enums.DeductionType;
+import org.isite.oa.data.enums.DeductionSubject;
 import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * @Description 扣款记录，通常用于支付税款、社保、医保等
@@ -21,20 +20,20 @@ public class DeductionRecordPo extends Po<Long> {
     /**
      * 员工ID
      */
-    private Integer employeeId;
+    private Long employeeId;
     /**
      * 薪资周期
      */
-    private Date payPeriod;
+    private Integer payPeriod;
     /**
      * 扣除类型
      */
     @ColumnType(typeHandler = EnumTypeHandler.class)
-    private DeductionType deductionType;
+    private DeductionSubject deductionSubject;
     /**
      * 扣除金额(分)
      */
-    private Integer amount;
+    private Long amount;
     /**
      * 备注
      */

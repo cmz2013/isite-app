@@ -1,14 +1,12 @@
-package org.isite.exam.data.constants;
+package org.isite.wms.data.constants;
 
 /**
  * @Description URL常量类
  * url常量命名规则约定：API_/MY_/PUBLIC_ + HTTP Method + 资源Path
  * @Author <font color='blue'>zhangcm</font>
  */
-public class UrlConstants {
+public class WmsUrls {
 
-    private UrlConstants() {
+    private WmsUrls() {
     }
-
-    public static final String URL_EXAM = "/exam";
 }

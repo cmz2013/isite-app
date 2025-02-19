@@ -1,5 +1,6 @@
 package org.isite.exam.service;
 
+import org.isite.commons.lang.Constants;
 import org.isite.exam.mapper.ExamRecordMapper;
 import org.isite.exam.po.ExamPaperPo;
 import org.isite.exam.po.ExamRecordPo;
@@ -10,12 +11,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
-
-import static java.lang.System.currentTimeMillis;
-import static org.isite.commons.lang.Constants.THOUSAND;
-import static org.isite.commons.lang.Constants.ZERO;
-
+import java.time.LocalDateTime;
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -31,8 +27,8 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
      * @Description 查询最近一次的考试记录
      */
     public ExamRecordPo findLastExamRecord(
-            @Nullable Integer tenantId, long userId, int sceneId, int paperId) {
-        return ((ExamRecordMapper) getMapper()).selectLastExamRecord(tenantId, userId, sceneId, paperId);
+            @Nullable Integer tenantId, long userId, int sceneId, int examPaperId) {
+        return ((ExamRecordMapper) getMapper()).selectLastExamRecord(tenantId, userId, sceneId, examPaperId);
     }
 
     /**
@@ -47,14 +43,14 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
      */
     public boolean isFinished(ExamRecordPo examRecordPo) {
         if (null != examRecordPo.getSubmitTime()) {
-            return true;
+            return Boolean.TRUE;
         }
         //不限制考试时间
-        if (null == examRecordPo.getExamSecond() || ZERO == examRecordPo.getExamSecond()) {
-            return false;
+        if (null == examRecordPo.getExamSecond() || Constants.ZERO == examRecordPo.getExamSecond()) {
+            return Boolean.FALSE;
         }
-        long time = currentTimeMillis() - examRecordPo.getCreateTime().getTime();
-        return (time / THOUSAND) >= examRecordPo.getExamSecond();
+        long time = System.currentTimeMillis() / Constants.THOUSAND - examRecordPo.getCreateTime().getSecond();
+        return time >= examRecordPo.getExamSecond();
     }
 
     /**
@@ -63,14 +59,14 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
      */
     @Transactional(rollbackFor = Exception.class)
     public ExamRecordPo saveExamRecord(
-            ExamScenePo scenePo, ExamPaperPo paperPo, @Nullable Integer tenantId, long userId) {
+            ExamScenePo scenePo, ExamPaperPo examPaperPo, @Nullable Integer tenantId, long userId) {
         ExamRecordPo examRecordPo = new ExamRecordPo();
-        examRecordPo.setPaperId(paperPo.getId());
+        examRecordPo.setExamPaperId(examPaperPo.getId());
         examRecordPo.setTitle(scenePo.getTitle());
-        examRecordPo.setExamSecond(paperPo.getExamSecond());
+        examRecordPo.setExamSecond(examPaperPo.getExamSecond());
         examRecordPo.setSceneId(scenePo.getId());
         examRecordPo.setTenantId(tenantId);
-        examRecordPo.setTotalScore(paperPo.getTotalScore());
+        examRecordPo.setTotalScore(examPaperPo.getTotalScore());
         examRecordPo.setUserId(userId);
         this.insert(examRecordPo);
         return examRecordPo;
@@ -84,7 +80,7 @@ public class ExamRecordService extends PoService<ExamRecordPo, Long> {
         ExamRecordPo examRecordPo = new ExamRecordPo();
         examRecordPo.setId(examRecordId);
         examRecordPo.setUserScore(userScore);
-        examRecordPo.setSubmitTime(new Date(currentTimeMillis()));
+        examRecordPo.setSubmitTime(LocalDateTime.now());
         this.updateSelectiveById(examRecordPo);
     }
 }

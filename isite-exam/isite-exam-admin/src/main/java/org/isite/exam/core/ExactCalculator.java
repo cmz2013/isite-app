@@ -1,5 +1,6 @@
 package org.isite.exam.core;
 
+import org.isite.commons.lang.Constants;
 import org.isite.exam.data.enums.ScoreAlgorithm;
 import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.Question;
@@ -8,10 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
-
-import static org.isite.commons.lang.Constants.ZERO;
-import static org.isite.exam.data.enums.ScoreAlgorithm.EXACT;
-
 /**
  * @Description 精确匹配正确答案，计算用户得分时使用评分规则设置的题目总分。
  * 考题得分 = 答对题数 × 题目总分 ÷ 题目总数
@@ -21,12 +18,11 @@ import static org.isite.exam.data.enums.ScoreAlgorithm.EXACT;
  */
 @Component
 public class ExactCalculator implements ScoreCalculator {
-
 	private ExactMatcherFactory exactMatcherFactory;
 
 	@Override
 	public int getUserScore(ExamModule examModule, Map<Long, UserAnswer> userAnswers) {
-		int rightCount = ZERO;
+		int rightCount = Constants.ZERO;
 		ExactMatcher<Question> matcher = exactMatcherFactory.get(examModule.getQuestionType());
 		for (Question question : examModule.getQuestions()) {
 			if (matcher.match(question, userAnswers.get(question.getId()))) {
@@ -43,6 +39,6 @@ public class ExactCalculator implements ScoreCalculator {
 
 	@Override
 	public ScoreAlgorithm[] getIdentities() {
-		return new ScoreAlgorithm[] {EXACT};
+		return new ScoreAlgorithm[] {ScoreAlgorithm.EXACT_MATCH};
 	}
 }

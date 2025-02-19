@@ -3,15 +3,11 @@ package org.isite.oa.po;
 import lombok.Getter;
 import lombok.Setter;
 import org.isite.mybatis.data.Po;
-import org.isite.mybatis.type.EnumTypeHandler;
-import org.isite.oa.data.enums.AbsenceReason;
-import tk.mybatis.mapper.annotation.ColumnType;
 
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
- * @Description 员工异常考勤记录
+ * @Description 员工考勤记录
  * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
@@ -21,28 +17,55 @@ public class AttendanceRecordPo extends Po<Long> {
     /**
      * 员工ID
      */
-    private Integer employeeId;
+    private Long employeeId;
     /**
-     * 考勤日期
+     * 考勤月份
      */
-    private Date attendanceDate;
+    private Integer attendancePeriod;
     /**
-     * 签到时间
+     * 应出勤天数
      */
-    private Date checkInTime;
+    private Integer shouldDays;
     /**
-     * 签退时间
+     * 正常出勤天数
      */
-    private Date checkOutTime;
+    private Integer normalDays;
     /**
-     * 缺勤原因(年假、事假、旷工)
+     * 异常出勤天数
      */
-    @ColumnType(typeHandler = EnumTypeHandler.class)
-    private AbsenceReason absenceReason;
+    private Integer abnormalDays;
     /**
-     * 加班时间
+     * 旷工天数
      */
-    private Integer overtimeHours;
+    private Integer absentDays;
+    /**
+     * 应出勤时长（分钟）
+     */
+    private Integer shouldMinutes;
+    /**
+     * 实际出勤时长（分钟）
+     */
+    private Integer actualMinutes;
+    /**
+     * 迟到次数
+     */
+    private Integer lateTimes;
+    /**
+     * 迟到时长（分钟）
+     */
+    private Integer lateMinutes;
+    /**
+     * 早退次数
+     */
+    private Integer earlyTimes;
+    /**
+     * 早退时长（分钟）
+     */
+    private Integer earlyMinutes;
+    /**
+     * 加班时长（分钟）
+     */
+    private Integer overtimeMinutes;
     /**
      * 备注
      */

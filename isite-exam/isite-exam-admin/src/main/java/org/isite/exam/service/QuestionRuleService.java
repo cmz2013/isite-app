@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -22,9 +21,9 @@ public class QuestionRuleService extends PoService<QuestionRulePo, Integer> {
     /**
      * 根据试卷ID查询随机选题规则
      */
-    public List<QuestionRulePo> findByPaperId(Integer paperId) {
+    public List<QuestionRulePo> findByPaperId(Integer examPaperId) {
         QuestionRulePo query = new QuestionRulePo();
-        query.setPaperId(paperId);
+        query.setExamPaperId(examPaperId);
         return findList(query);
     }
 }

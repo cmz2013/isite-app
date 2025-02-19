@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.isite.mybatis.data.Po;
 
 import javax.persistence.Table;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
@@ -25,7 +25,7 @@ public class ExamRecordPo extends Po<Long> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 总分
      */
@@ -45,7 +45,7 @@ public class ExamRecordPo extends Po<Long> {
     /**
      * 提交时间
      */
-    private Date submitTime;
+    private LocalDateTime submitTime;
     /**
      * 租户ID
      */

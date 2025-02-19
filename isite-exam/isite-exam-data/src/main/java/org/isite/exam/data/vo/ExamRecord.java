@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.isite.commons.cloud.data.vo.Vo;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Author <font color='blue'>zhangcm</font>
@@ -23,7 +23,7 @@ public class ExamRecord extends Vo<Long> {
     /**
      * 试卷ID
      */
-    private Integer paperId;
+    private Integer examPaperId;
     /**
      * 总分
      */
@@ -43,7 +43,7 @@ public class ExamRecord extends Vo<Long> {
     /**
      * 交卷时间
      */
-    private Date submitTime;
+    private LocalDateTime submitTime;
     /**
      * 考试详情
      */

@@ -1,23 +1,20 @@
 package org.isite.exam.data.enums;
 
+import org.isite.commons.lang.Constants;
 import org.isite.commons.lang.enums.Enumerable;
-
-import static org.isite.commons.lang.Constants.ONE;
-import static org.isite.commons.lang.Constants.ZERO;
-
 /**
  * @Description 选题方式
  * @Author <font color='blue'>zhangcm</font>
  */
 public enum QuestionMode implements Enumerable<Integer> {
     /**
-     * 手动组卷
+     * 手动选题
      */
-    MANUALLY(ZERO),
+    MANUALLY_SELECT(Constants.ZERO),
     /**
-     * 随机组卷
+     * 随机选题
      */
-    RANDOM(ONE);
+    RANDOM_SELECT(Constants.ONE);
 
     private final Integer code;
 

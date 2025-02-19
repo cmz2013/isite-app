@@ -2,9 +2,8 @@ package org.isite.exam.converter;
 
 import org.isite.exam.po.ExamScenePo;
 import org.isite.misc.data.enums.ObjectType;
-
 /**
- * @author <font color='blue'>zhangcm</font>
+ * @Author <font color='blue'>zhangcm</font>
  */
 public class ExamSceneConverter {
 

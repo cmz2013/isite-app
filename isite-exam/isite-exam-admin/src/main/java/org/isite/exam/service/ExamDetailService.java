@@ -1,5 +1,6 @@
 package org.isite.exam.service;
 
+import org.isite.commons.lang.json.Jackson;
 import org.isite.exam.data.vo.ExamModule;
 import org.isite.exam.data.vo.UserAnswer;
 import org.isite.exam.mapper.ExamDetailMapper;
@@ -12,10 +13,6 @@ import tk.mybatis.mapper.weekend.Weekend;
 
 import java.util.Collection;
 import java.util.List;
-
-import static org.isite.commons.lang.json.Jackson.toJsonString;
-import static tk.mybatis.mapper.weekend.Weekend.of;
-
 /**
  * @Author <font color='blue'>zhangcm</font>
  */
@@ -34,7 +31,7 @@ public class ExamDetailService extends PoService<ExamDetailPo, Long> {
     public ExamDetailPo saveExamDetail(Long examRecordId, List<ExamModule> examModules) {
         ExamDetailPo examDetailPo = new ExamDetailPo();
         examDetailPo.setExamRecordId(examRecordId);
-        examDetailPo.setExamModules(toJsonString(examModules));
+        examDetailPo.setExamModules(Jackson.toJsonString(examModules));
         this.insert(examDetailPo);
         return examDetailPo;
     }
@@ -45,8 +42,8 @@ public class ExamDetailService extends PoService<ExamDetailPo, Long> {
     @Transactional(rollbackFor = Exception.class)
     public void saveUserAnswers(Long examRecordId, Collection<UserAnswer> userAnswers) {
         ExamDetailPo examDetailPo = new ExamDetailPo();
-        examDetailPo.setUserAnswers(toJsonString(userAnswers));
-        Weekend<ExamDetailPo> weekend = of(ExamDetailPo.class);
+        examDetailPo.setUserAnswers(Jackson.toJsonString(userAnswers));
+        Weekend<ExamDetailPo> weekend = Weekend.of(ExamDetailPo.class);
         weekend.weekendCriteria().andEqualTo(ExamDetailPo::getExamRecordId, examRecordId);
         getMapper().updateByExampleSelective(examDetailPo, weekend);
     }

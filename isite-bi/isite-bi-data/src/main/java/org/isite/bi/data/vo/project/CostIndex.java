@@ -1,16 +1,15 @@
-package org.isite.bi.service.project;
+package org.isite.bi.data.vo.project;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.isite.bi.data.vo.project.CostRule;
-import org.isite.bi.data.vo.project.CostSubject;
 
 /**
+ * @Description 费用指标
  * @Author <font color='blue'>zhangcm</font>
  */
 @Getter
 @Setter
-public class CostIndexPair {
+public class CostIndex {
     /**
      * 费用科目规则树层级
      */
@@ -20,11 +19,11 @@ public class CostIndexPair {
      */
     private CostSubject costSubject;
     /**
-     * 匹配到的费用指标
+     * 匹配到的费用指标规则
      */
     private CostRule costRule;
 
-    public CostIndexPair(Integer level, CostSubject costSubject, CostRule costRule) {
+    public CostIndex(Integer level, CostSubject costSubject, CostRule costRule) {
         this.level = level;
         this.costSubject = costSubject;
         this.costRule = costRule;
